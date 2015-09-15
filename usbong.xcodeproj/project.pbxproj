@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF3085731BA7CB2F00CBD8CF /* CommunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		CF3085751BA7CB4F00CBD8CF /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CFC97E4B1BA7CA6A0090F14F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC97E4A1BA7CA6A0090F14F /* AppDelegate.swift */; };
-		CFC97E4D1BA7CA6A0090F14F /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC97E4C1BA7CA6A0090F14F /* FirstViewController.swift */; };
-		CFC97E4F1BA7CA6A0090F14F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC97E4E1BA7CA6A0090F14F /* SecondViewController.swift */; };
 		CFC97E521BA7CA6A0090F14F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFC97E501BA7CA6A0090F14F /* Main.storyboard */; };
 		CFC97E541BA7CA6A0090F14F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFC97E531BA7CA6A0090F14F /* Assets.xcassets */; };
 		CFC97E571BA7CA6A0090F14F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFC97E551BA7CA6A0090F14F /* LaunchScreen.storyboard */; };
 		CFC97E621BA7CA6A0090F14F /* usbongTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC97E611BA7CA6A0090F14F /* usbongTests.swift */; };
 		CFC97E6D1BA7CA6A0090F14F /* usbongUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC97E6C1BA7CA6A0090F14F /* usbongUITests.swift */; };
+		CFC97E7B1BA7CAC10090F14F /* UsbongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC97E7A1BA7CAC10090F14F /* UsbongTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,10 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityTableViewController.swift; sourceTree = "<group>"; };
+		CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		CFC97E471BA7CA6A0090F14F /* usbong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = usbong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFC97E4A1BA7CA6A0090F14F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CFC97E4C1BA7CA6A0090F14F /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		CFC97E4E1BA7CA6A0090F14F /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		CFC97E511BA7CA6A0090F14F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CFC97E531BA7CA6A0090F14F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CFC97E561BA7CA6A0090F14F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 		CFC97E681BA7CA6A0090F14F /* usbongUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = usbongUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFC97E6C1BA7CA6A0090F14F /* usbongUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = usbongUITests.swift; sourceTree = "<group>"; };
 		CFC97E6E1BA7CA6A0090F14F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CFC97E7A1BA7CAC10090F14F /* UsbongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsbongTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,8 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				CFC97E4A1BA7CA6A0090F14F /* AppDelegate.swift */,
-				CFC97E4C1BA7CA6A0090F14F /* FirstViewController.swift */,
-				CFC97E4E1BA7CA6A0090F14F /* SecondViewController.swift */,
+				CFC97E7A1BA7CAC10090F14F /* UsbongTableViewController.swift */,
+				CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */,
+				CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */,
 				CFC97E501BA7CA6A0090F14F /* Main.storyboard */,
 				CFC97E531BA7CA6A0090F14F /* Assets.xcassets */,
 				CFC97E551BA7CA6A0090F14F /* LaunchScreen.storyboard */,
@@ -258,9 +261,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFC97E4F1BA7CA6A0090F14F /* SecondViewController.swift in Sources */,
+				CF3085731BA7CB2F00CBD8CF /* CommunityTableViewController.swift in Sources */,
+				CF3085751BA7CB4F00CBD8CF /* SettingsTableViewController.swift in Sources */,
 				CFC97E4B1BA7CA6A0090F14F /* AppDelegate.swift in Sources */,
-				CFC97E4D1BA7CA6A0090F14F /* FirstViewController.swift in Sources */,
+				CFC97E7B1BA7CAC10090F14F /* UsbongTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +491,7 @@
 				CFC97E731BA7CA6A0090F14F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CFC97E741BA7CA6A0090F14F /* Build configuration list for PBXNativeTarget "usbongTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +500,7 @@
 				CFC97E761BA7CA6A0090F14F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CFC97E771BA7CA6A0090F14F /* Build configuration list for PBXNativeTarget "usbongUITests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +509,7 @@
 				CFC97E791BA7CA6A0090F14F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
