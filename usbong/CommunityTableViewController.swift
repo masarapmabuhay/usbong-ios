@@ -12,28 +12,39 @@ class CommunityTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        if let refreshControl = self.refreshControl {
+            refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Actions
+    
+    func refresh(sender: AnyObject) {
+        print("Start refreshing...")
+        if let refreshControl = sender as? UIRefreshControl {
+            if refreshControl.refreshing {
+                print("Control is refreshing")
+                
+                // Use this methods for completion of refresh
+                tableView.reloadData()
+                refreshControl.endRefreshing()
+            }
+        }
+    }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 0
     }
 
