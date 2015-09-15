@@ -51,7 +51,7 @@ class CommunityTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
-        cell.textLabel?.text = "Community \(indexPath.row)"
+        cell.textLabel?.text = "Community Tree \(indexPath.row)"
         
         return cell
     }

@@ -38,7 +38,7 @@ class UsbongTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
-        cell.textLabel?.text = "Usbong \(indexPath.row)"
+        cell.textLabel?.text = "Tree \(indexPath.row)"
         
         return cell
     }
