@@ -108,16 +108,9 @@
 			isa = PBXGroup;
 			children = (
 				CFC97E4A1BA7CA6A0090F14F /* AppDelegate.swift */,
-				DF60E85B1BA7F6EB0060BFF6 /* TreeViewController.swift */,
-				CFC97E7A1BA7CAC10090F14F /* UsbongTableViewController.swift */,
-				CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */,
-				CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */,
-				CF6744D71BA8109100971B3F /* CommunityTableViewCell.swift */,
-				CF6744D81BA8109100971B3F /* CommunityTableViewCell.xib */,
-				CFC97E501BA7CA6A0090F14F /* Main.storyboard */,
-				CFC97E531BA7CA6A0090F14F /* Assets.xcassets */,
-				CFC97E551BA7CA6A0090F14F /* LaunchScreen.storyboard */,
-				CFC97E581BA7CA6A0090F14F /* Info.plist */,
+				DFABED681BA824AA000101A5 /* ViewControllers */,
+				DFABED691BA824B2000101A5 /* TableVIewCells */,
+				DFABED6B1BA824C7000101A5 /* Resources */,
 			);
 			path = usbong;
 			sourceTree = "<group>";
@@ -138,6 +131,45 @@
 				CFC97E6E1BA7CA6A0090F14F /* Info.plist */,
 			);
 			path = usbongUITests;
+			sourceTree = "<group>";
+		};
+		DFABED681BA824AA000101A5 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CFC97E7A1BA7CAC10090F14F /* UsbongTableViewController.swift */,
+				CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */,
+				CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */,
+				DF60E85B1BA7F6EB0060BFF6 /* TreeViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DFABED691BA824B2000101A5 /* TableVIewCells */ = {
+			isa = PBXGroup;
+			children = (
+				DFABED6A1BA824BD000101A5 /* CommunityTableViewCell */,
+			);
+			name = TableVIewCells;
+			sourceTree = "<group>";
+		};
+		DFABED6A1BA824BD000101A5 /* CommunityTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				CF6744D71BA8109100971B3F /* CommunityTableViewCell.swift */,
+				CF6744D81BA8109100971B3F /* CommunityTableViewCell.xib */,
+			);
+			name = CommunityTableViewCell;
+			sourceTree = "<group>";
+		};
+		DFABED6B1BA824C7000101A5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				CFC97E501BA7CA6A0090F14F /* Main.storyboard */,
+				CFC97E531BA7CA6A0090F14F /* Assets.xcassets */,
+				CFC97E551BA7CA6A0090F14F /* LaunchScreen.storyboard */,
+				CFC97E581BA7CA6A0090F14F /* Info.plist */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
