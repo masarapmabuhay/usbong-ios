@@ -40,7 +40,7 @@ class CommunityTableViewController: UITableViewController {
             if refreshControl.refreshing {
                 print("Control is refreshing")
                 
-                // Use this methods for completion of refresh
+                // Use these methods for completion of refresh
                 tableView.reloadData()
                 refreshControl.endRefreshing()
             }
