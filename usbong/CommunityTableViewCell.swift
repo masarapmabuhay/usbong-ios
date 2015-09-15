@@ -25,10 +25,4 @@ class CommunityTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
-    // MARK: - Convenience UI
-    
-    func setDownloadCountToCount(count: Int) {
-        downloadCountLabel.text = "Downloads: \(count)"
-    }
 }

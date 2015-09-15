@@ -62,7 +62,7 @@ class CommunityTableViewController: UITableViewController {
         
         cell.titleLabel.text = "Community Tree \(indexPath.row)"
         cell.authorLabel.text = "author.user\(indexPath.row)"
-        cell.setDownloadCountToCount(indexPath.row)
+        cell.downloadCountLabel.text = "Downloads: \(indexPath.row)"
         
         return cell
     }
