@@ -16,6 +16,15 @@ class CommunityTableViewController: UITableViewController {
         if let refreshControl = self.refreshControl {
             refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
         }
+        
+        // Register required nibs
+        let communityNib = UINib(nibName: "CommunityTableViewCell", bundle: NSBundle.mainBundle())
+        
+        tableView.registerNib(communityNib, forCellReuseIdentifier: "CommunityCell")
+        
+        // Self-sizing row height
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 102
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,9 +58,11 @@ class CommunityTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("CommunityCell", forIndexPath: indexPath) as! CommunityTableViewCell
         
-        cell.textLabel?.text = "Community Tree \(indexPath.row)"
+        cell.titleLabel.text = "Community Tree \(indexPath.row)"
+        cell.authorLabel.text = "author.user\(indexPath.row)"
+        cell.setDownloadCountToCount(indexPath.row)
         
         return cell
     }

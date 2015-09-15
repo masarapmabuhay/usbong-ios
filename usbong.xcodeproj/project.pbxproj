@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CF3085731BA7CB2F00CBD8CF /* CommunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CF3085751BA7CB4F00CBD8CF /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		CF6744D91BA8109100971B3F /* CommunityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6744D71BA8109100971B3F /* CommunityTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		CF6744DA1BA8109100971B3F /* CommunityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF6744D81BA8109100971B3F /* CommunityTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		CFC97E4B1BA7CA6A0090F14F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC97E4A1BA7CA6A0090F14F /* AppDelegate.swift */; };
 		CFC97E521BA7CA6A0090F14F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFC97E501BA7CA6A0090F14F /* Main.storyboard */; };
 		CFC97E541BA7CA6A0090F14F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFC97E531BA7CA6A0090F14F /* Assets.xcassets */; };
@@ -39,6 +41,8 @@
 /* Begin PBXFileReference section */
 		CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityTableViewController.swift; sourceTree = "<group>"; };
 		CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		CF6744D71BA8109100971B3F /* CommunityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityTableViewCell.swift; sourceTree = "<group>"; };
+		CF6744D81BA8109100971B3F /* CommunityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunityTableViewCell.xib; sourceTree = "<group>"; };
 		CFC97E471BA7CA6A0090F14F /* usbong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = usbong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFC97E4A1BA7CA6A0090F14F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFC97E511BA7CA6A0090F14F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -108,6 +112,8 @@
 				CFC97E7A1BA7CAC10090F14F /* UsbongTableViewController.swift */,
 				CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */,
 				CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */,
+				CF6744D71BA8109100971B3F /* CommunityTableViewCell.swift */,
+				CF6744D81BA8109100971B3F /* CommunityTableViewCell.xib */,
 				CFC97E501BA7CA6A0090F14F /* Main.storyboard */,
 				CFC97E531BA7CA6A0090F14F /* Assets.xcassets */,
 				CFC97E551BA7CA6A0090F14F /* LaunchScreen.storyboard */,
@@ -240,6 +246,7 @@
 				CFC97E571BA7CA6A0090F14F /* LaunchScreen.storyboard in Resources */,
 				CFC97E541BA7CA6A0090F14F /* Assets.xcassets in Resources */,
 				CFC97E521BA7CA6A0090F14F /* Main.storyboard in Resources */,
+				CF6744DA1BA8109100971B3F /* CommunityTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +274,7 @@
 				CF3085731BA7CB2F00CBD8CF /* CommunityTableViewController.swift in Sources */,
 				CF3085751BA7CB4F00CBD8CF /* SettingsTableViewController.swift in Sources */,
 				DF60E85C1BA7F6EB0060BFF6 /* TreeViewController.swift in Sources */,
+				CF6744D91BA8109100971B3F /* CommunityTableViewCell.swift in Sources */,
 				CFC97E4B1BA7CA6A0090F14F /* AppDelegate.swift in Sources */,
 				CFC97E7B1BA7CAC10090F14F /* UsbongTableViewController.swift in Sources */,
 			);
