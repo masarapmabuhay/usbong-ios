@@ -16,6 +16,7 @@
 		CFC97E621BA7CA6A0090F14F /* usbongTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC97E611BA7CA6A0090F14F /* usbongTests.swift */; };
 		CFC97E6D1BA7CA6A0090F14F /* usbongUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC97E6C1BA7CA6A0090F14F /* usbongUITests.swift */; };
 		CFC97E7B1BA7CAC10090F14F /* UsbongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC97E7A1BA7CAC10090F14F /* UsbongTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF60E85C1BA7F6EB0060BFF6 /* TreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF60E85B1BA7F6EB0060BFF6 /* TreeViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		CFC97E6C1BA7CA6A0090F14F /* usbongUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = usbongUITests.swift; sourceTree = "<group>"; };
 		CFC97E6E1BA7CA6A0090F14F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CFC97E7A1BA7CAC10090F14F /* UsbongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsbongTableViewController.swift; sourceTree = "<group>"; };
+		DF60E85B1BA7F6EB0060BFF6 /* TreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				CFC97E4A1BA7CA6A0090F14F /* AppDelegate.swift */,
+				DF60E85B1BA7F6EB0060BFF6 /* TreeViewController.swift */,
 				CFC97E7A1BA7CAC10090F14F /* UsbongTableViewController.swift */,
 				CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */,
 				CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */,
@@ -263,6 +266,7 @@
 			files = (
 				CF3085731BA7CB2F00CBD8CF /* CommunityTableViewController.swift in Sources */,
 				CF3085751BA7CB4F00CBD8CF /* SettingsTableViewController.swift in Sources */,
+				DF60E85C1BA7F6EB0060BFF6 /* TreeViewController.swift in Sources */,
 				CFC97E4B1BA7CA6A0090F14F /* AppDelegate.swift in Sources */,
 				CFC97E7B1BA7CAC10090F14F /* UsbongTableViewController.swift in Sources */,
 			);
