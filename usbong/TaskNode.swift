@@ -8,9 +8,10 @@
 
 import Foundation
 
-// TODO: Make it modular as much as possible
+// TODO: Make usage of classes efficient and easy
 class TaskNode {
     class var type: String { return "" }
     
+    var name = ""
     var transitionNodesAndNames: [String: String] = [String : String]()
 }

@@ -11,5 +11,17 @@ import Foundation
 class TextImageDisplayNode: ImageDisplayNode {
     override class var type: String { return "textImageDisplay" }
     
-    var text = ""
+    override var imageFileName: String {
+        return name.componentsSeparatedByString("~")[1]
+    }
+    
+    var text: String {
+        var components = name.componentsSeparatedByString("~")
+        
+        // Remove node type string
+        components.removeFirst()
+        components.removeFirst()
+        
+        return components.joinWithSeparator("~")
+    }
 }

@@ -11,5 +11,12 @@ import Foundation
 class TextDisplayNode: TaskNode {
     override class var type: String { return "textDisplay" }
     
-    var text = ""
+    var text: String {
+        var components = name.componentsSeparatedByString("~")
+        
+        // Remove node type string
+        components.removeFirst()
+        
+        return components.joinWithSeparator("~")
+    }
 }

@@ -11,5 +11,12 @@ import Foundation
 class ImageDisplayNode: TaskNode {
     override class var type: String { return "imageDisplay" }
     
-    var imageFileName = ""
+    var imageFileName: String {
+        var components = name.componentsSeparatedByString("~")
+        
+        // Remove node type string
+        components.removeFirst()
+        
+        return components.joinWithSeparator("~")
+    }
 }
