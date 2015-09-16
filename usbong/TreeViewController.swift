@@ -19,7 +19,7 @@ class TreeViewController: UIViewController {
         super.viewDidLoad()
 
         // Test TextDisplayViewController
-        let viewController = TextDisplayViewController(nibName: "TextDisplayViewController", bundle: NSBundle.mainBundle())
+        let viewController = TextDisplayNodeViewController(nibName: "TextDisplayNodeViewController", bundle: NSBundle.mainBundle())
         addChildViewController(viewController)
         containerView.addSubview(viewController.view)
         

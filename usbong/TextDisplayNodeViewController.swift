@@ -1,5 +1,5 @@
 //
-//  TextDisplayViewController.swift
+//  TextDisplayNodeViewController.swift
 //  usbong
 //
 //  Created by Joe Amanse on 16/09/2015.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TextDisplayViewController: UIViewController {
+class TextDisplayNodeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
