@@ -1,29 +1,19 @@
 //
-//  TreeViewController.swift
+//  TextDisplayViewController.swift
 //  usbong
 //
-//  Created by Chris Amanse on 9/15/15.
+//  Created by Joe Amanse on 16/09/2015.
 //  Copyright © 2015 Joe Christopher Paul Amanse. All rights reserved.
 //
 
 import UIKit
 
-// Root view controller for Tree (Page-based)
-class TreeViewController: UIViewController {
+class TextDisplayViewController: UIViewController {
 
-    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-    
-    @IBOutlet weak var containerView: UIView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Test TextDisplayViewController
-        let viewController = TextDisplayViewController(nibName: "TextDisplayViewController", bundle: NSBundle.mainBundle())
-        addChildViewController(viewController)
-        containerView.addSubview(viewController.view)
-        
-        viewController.view.frame = containerView.bounds
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

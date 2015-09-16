@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF0898571BA98B53007BFE80 /* TextDisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF0898551BA98B53007BFE80 /* TextDisplayViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		CF0898581BA98B53007BFE80 /* TextDisplayViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF0898561BA98B53007BFE80 /* TextDisplayViewController.xib */; settings = {ASSET_TAGS = (); }; };
 		CF3085731BA7CB2F00CBD8CF /* CommunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CF3085751BA7CB4F00CBD8CF /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CF62899C1BA8EAAB005EC006 /* TaskNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF62899B1BA8EAAB005EC006 /* TaskNode.swift */; settings = {ASSET_TAGS = (); }; };
@@ -43,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CF0898551BA98B53007BFE80 /* TextDisplayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDisplayViewController.swift; sourceTree = "<group>"; };
+		CF0898561BA98B53007BFE80 /* TextDisplayViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextDisplayViewController.xib; sourceTree = "<group>"; };
 		CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityTableViewController.swift; sourceTree = "<group>"; };
 		CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		CF62899B1BA8EAAB005EC006 /* TaskNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskNode.swift; sourceTree = "<group>"; };
@@ -92,6 +96,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF0898541BA98B16007BFE80 /* TaskNodeViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CF0898591BA98B57007BFE80 /* TextDisplayViewController */,
+			);
+			name = TaskNodeViewControllers;
+			sourceTree = "<group>";
+		};
+		CF0898591BA98B57007BFE80 /* TextDisplayViewController */ = {
+			isa = PBXGroup;
+			children = (
+				CF0898551BA98B53007BFE80 /* TextDisplayViewController.swift */,
+				CF0898561BA98B53007BFE80 /* TextDisplayViewController.xib */,
+			);
+			name = TextDisplayViewController;
+			sourceTree = "<group>";
+		};
 		CF6289981BA8E75B005EC006 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +189,7 @@
 				CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */,
 				CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */,
 				DF60E85B1BA7F6EB0060BFF6 /* TreeViewController.swift */,
+				CF0898541BA98B16007BFE80 /* TaskNodeViewControllers */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -304,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CFC97E571BA7CA6A0090F14F /* LaunchScreen.storyboard in Resources */,
+				CF0898581BA98B53007BFE80 /* TextDisplayViewController.xib in Resources */,
 				CFC97E541BA7CA6A0090F14F /* Assets.xcassets in Resources */,
 				CFC97E521BA7CA6A0090F14F /* Main.storyboard in Resources */,
 				CF6744DA1BA8109100971B3F /* CommunityTableViewCell.xib in Resources */,
@@ -337,6 +360,7 @@
 				CF6744D91BA8109100971B3F /* CommunityTableViewCell.swift in Sources */,
 				CFC97E4B1BA7CA6A0090F14F /* AppDelegate.swift in Sources */,
 				CF6289A11BA8ED19005EC006 /* ImageDisplayNode.swift in Sources */,
+				CF0898571BA98B53007BFE80 /* TextDisplayViewController.swift in Sources */,
 				CF62899C1BA8EAAB005EC006 /* TaskNode.swift in Sources */,
 				CFC97E7B1BA7CAC10090F14F /* UsbongTableViewController.swift in Sources */,
 				CF62899F1BA8EC87005EC006 /* TextDisplayNode.swift in Sources */,
