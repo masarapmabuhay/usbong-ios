@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A279b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImageDisplayNodeViewController" customModule="usbong" customModuleProvider="target">
+            <connections>
+                <outlet property="imageView" destination="hRF-Tk-24x" id="t3c-8s-PSt"/>
+                <outlet property="imageViewHeightConstraint" destination="8BT-8V-XVT" id="VOX-Oo-Waa"/>
+                <outlet property="scrollView" destination="U6B-zh-Kbo" id="HZ4-34-l1b"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U6B-zh-Kbo">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ship" translatesAutoresizingMaskIntoConstraints="NO" id="hRF-Tk-24x">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <animations/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="600" id="8BT-8V-XVT"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <animations/>
+                    <constraints>
+                        <constraint firstItem="hRF-Tk-24x" firstAttribute="leading" secondItem="U6B-zh-Kbo" secondAttribute="leading" id="Gk2-jR-fMN"/>
+                        <constraint firstItem="hRF-Tk-24x" firstAttribute="width" secondItem="U6B-zh-Kbo" secondAttribute="width" id="Pz8-IO-TiK"/>
+                        <constraint firstItem="hRF-Tk-24x" firstAttribute="top" secondItem="U6B-zh-Kbo" secondAttribute="top" id="TwR-0y-xZj"/>
+                        <constraint firstAttribute="bottom" secondItem="hRF-Tk-24x" secondAttribute="bottom" id="VfZ-Ll-A12"/>
+                        <constraint firstAttribute="trailing" secondItem="hRF-Tk-24x" secondAttribute="trailing" id="r0s-PL-nRx"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="U6B-zh-Kbo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="KBd-oV-ffG"/>
+                <constraint firstAttribute="bottom" secondItem="U6B-zh-Kbo" secondAttribute="bottom" id="UxI-cN-ubb"/>
+                <constraint firstItem="U6B-zh-Kbo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="agN-mv-97j"/>
+                <constraint firstAttribute="trailing" secondItem="U6B-zh-Kbo" secondAttribute="trailing" id="seX-od-HLi"/>
+            </constraints>
+            <point key="canvasLocation" x="525" y="478"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ship" width="960" height="638"/>
+    </resources>
+</document>
