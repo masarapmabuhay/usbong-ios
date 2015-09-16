@@ -26,12 +26,7 @@ class ImageDisplayNodeViewController: UIViewController {
 //            print(imageViewAspectRatioConstraint)
 //            print(aspectRatio)
 //            
-//            imageView.setNeedsDisplay()
-//            imageView.setNeedsLayout()
-//            scrollView.setNeedsDisplay()
-//            scrollView.setNeedsLayout()
-//            view.setNeedsDisplay()
-//            view.setNeedsLayout()
+//            view.layoutIfNeeded()
 //        }
     }
     
