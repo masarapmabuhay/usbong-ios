@@ -11,6 +11,8 @@ import UIKit
 // Root view controller for Tree (Page-based)
 class TreeViewController: UIViewController {
 
+    @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
