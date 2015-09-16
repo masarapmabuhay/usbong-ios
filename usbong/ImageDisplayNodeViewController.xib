@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImageDisplayNodeViewController" customModule="usbong" customModuleProvider="target">
             <connections>
                 <outlet property="imageView" destination="hRF-Tk-24x" id="t3c-8s-PSt"/>
+                <outlet property="imageViewAspectRatioConstraint" destination="F4g-Tq-a4m" id="qxY-0r-RPm"/>
                 <outlet property="scrollView" destination="U6B-zh-Kbo" id="HZ4-34-l1b"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -20,7 +21,7 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U6B-zh-Kbo">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ship" translatesAutoresizingMaskIntoConstraints="NO" id="hRF-Tk-24x">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ship" translatesAutoresizingMaskIntoConstraints="NO" id="hRF-Tk-24x">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="338"/>
                             <animations/>
                             <constraints>

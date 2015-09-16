@@ -12,9 +12,27 @@ class ImageDisplayNodeViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var imageViewAspectRatioConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(imageViewAspectRatioConstraint)
+        print(imageViewAspectRatioConstraint.multiplier)
+        
+//        if let imageSize = imageView.image?.size {
+//            print(imageSize)
+//            let aspectRatio = imageSize.width / imageSize.height
+//            imageViewAspectRatioConstraint = NSLayoutConstraint(item: imageViewAspectRatioConstraint.firstItem, attribute: .Width, relatedBy: .Equal, toItem: imageViewAspectRatioConstraint.secondItem, attribute: .Height, multiplier: aspectRatio, constant: 0)
+//            print(imageViewAspectRatioConstraint)
+//            print(aspectRatio)
+//            
+//            imageView.setNeedsDisplay()
+//            imageView.setNeedsLayout()
+//            scrollView.setNeedsDisplay()
+//            scrollView.setNeedsLayout()
+//            view.setNeedsDisplay()
+//            view.setNeedsLayout()
+//        }
     }
     
     // Hacky method - has noticeable delay
