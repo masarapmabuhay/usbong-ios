@@ -8,6 +8,7 @@
 
 import Foundation
 
+// TODO: Make it modular as much as possible
 class TaskNode {
     class var type: String { return "" }
     
