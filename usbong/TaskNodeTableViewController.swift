@@ -21,9 +21,10 @@ class TaskNodeTableViewController: UITableViewController {
         
         // Register nibs
         tableView.registerNib(UINib(nibName: "TextTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Text")
+        tableView.registerNib(UINib(nibName: "ImageTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Image")
         
         // Table view properties
-        tableView.separatorStyle = .None
+//        tableView.separatorStyle = .None
         
         // Table view self-sizing height
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -36,7 +37,7 @@ class TaskNodeTableViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -46,7 +47,7 @@ class TaskNodeTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Text", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("Image", forIndexPath: indexPath)
         
         return cell
     }
