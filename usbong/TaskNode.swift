@@ -8,7 +8,8 @@
 
 import Foundation
 
-// TODO: Make TaskNode a protocol
+// TODO: Make TaskNode a protocol -- Nevermind?
+// TODO: Order of modules?
 class TaskNode {
     class var type: String { return "" }
     
