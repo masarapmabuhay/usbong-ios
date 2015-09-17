@@ -29,6 +29,8 @@
 		CFF224F51BAA750200CA0FBD /* TaskNodeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF224F41BAA750200CA0FBD /* TaskNodeTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CFF224F81BAA779D00CA0FBD /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF224F61BAA779D00CA0FBD /* TextTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		CFF224F91BAA779D00CA0FBD /* TextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFF224F71BAA779D00CA0FBD /* TextTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
+		CFF225061BAA7BA200CA0FBD /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF225041BAA7BA200CA0FBD /* ImageTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		CFF225071BAA7BA200CA0FBD /* ImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFF225051BAA7BA200CA0FBD /* ImageTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		DF45DAFB1BA926CF007BE6FE /* UsbongXMLParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF45DAFA1BA926CF007BE6FE /* UsbongXMLParser.swift */; settings = {ASSET_TAGS = (); }; };
 		DF60E85C1BA7F6EB0060BFF6 /* TreeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF60E85B1BA7F6EB0060BFF6 /* TreeViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
@@ -79,6 +81,8 @@
 		CFF224F41BAA750200CA0FBD /* TaskNodeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskNodeTableViewController.swift; sourceTree = "<group>"; };
 		CFF224F61BAA779D00CA0FBD /* TextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		CFF224F71BAA779D00CA0FBD /* TextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextTableViewCell.xib; sourceTree = "<group>"; };
+		CFF225041BAA7BA200CA0FBD /* ImageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		CFF225051BAA7BA200CA0FBD /* ImageTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageTableViewCell.xib; sourceTree = "<group>"; };
 		DF45DAFA1BA926CF007BE6FE /* UsbongXMLParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsbongXMLParser.swift; sourceTree = "<group>"; };
 		DF60E85B1BA7F6EB0060BFF6 /* TreeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TreeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -214,6 +218,15 @@
 			name = TextTableViewCell;
 			sourceTree = "<group>";
 		};
+		CFF225081BAA7BA500CA0FBD /* ImageTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				CFF225041BAA7BA200CA0FBD /* ImageTableViewCell.swift */,
+				CFF225051BAA7BA200CA0FBD /* ImageTableViewCell.xib */,
+			);
+			name = ImageTableViewCell;
+			sourceTree = "<group>";
+		};
 		DFABED681BA824AA000101A5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +245,7 @@
 			children = (
 				DFABED6A1BA824BD000101A5 /* CommunityTableViewCell */,
 				CFF224FB1BAA77D400CA0FBD /* TextTableViewCell */,
+				CFF225081BAA7BA500CA0FBD /* ImageTableViewCell */,
 			);
 			name = TableVIewCells;
 			sourceTree = "<group>";
@@ -364,6 +378,7 @@
 				CFF224F91BAA779D00CA0FBD /* TextTableViewCell.xib in Resources */,
 				CFC97E541BA7CA6A0090F14F /* Assets.xcassets in Resources */,
 				CFC97E521BA7CA6A0090F14F /* Main.storyboard in Resources */,
+				CFF225071BAA7BA200CA0FBD /* ImageTableViewCell.xib in Resources */,
 				CF6744DA1BA8109100971B3F /* CommunityTableViewCell.xib in Resources */,
 				CF0898601BA99630007BFE80 /* ImageDisplayNodeViewController.xib in Resources */,
 			);
@@ -399,6 +414,7 @@
 				CF6744D91BA8109100971B3F /* CommunityTableViewCell.swift in Sources */,
 				CFC97E4B1BA7CA6A0090F14F /* AppDelegate.swift in Sources */,
 				CF6289A11BA8ED19005EC006 /* ImageDisplayNode.swift in Sources */,
+				CFF225061BAA7BA200CA0FBD /* ImageTableViewCell.swift in Sources */,
 				CFF224F81BAA779D00CA0FBD /* TextTableViewCell.swift in Sources */,
 				CF0898571BA98B53007BFE80 /* TextDisplayNodeViewController.swift in Sources */,
 				CF62899C1BA8EAAB005EC006 /* TaskNode.swift in Sources */,
