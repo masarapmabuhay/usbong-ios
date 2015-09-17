@@ -20,10 +20,11 @@ class TreeViewController: UIViewController {
 
         // Test TextDisplayViewController
         // TODO: Use table view controllers instead. For modularity of components such as text, image, etc.
-        let viewController = TextDisplayNodeViewController(nibName: "TextDisplayNodeViewController", bundle: NSBundle.mainBundle())
+//        let viewController = TextDisplayNodeViewController(nibName: "TextDisplayNodeViewController", bundle: NSBundle.mainBundle())
         
         // Test TextDisplayViewController
 //        let viewController = ImageDisplayNodeViewController(nibName: "ImageDisplayNodeViewController", bundle: NSBundle.mainBundle())
+        let viewController = TaskNodeTableViewController()
         
         addChildViewController(viewController)
         containerView.addSubview(viewController.view)
