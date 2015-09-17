@@ -13,5 +13,25 @@ class TaskNode {
     class var type: String { return "" }
     
     var name = ""
-    var transitionNodesAndNames: [String: String] = [String : String]()
+    var transitionNamesAndNodeNames: [String: String] = [String : String]()
+}
+
+protocol HasTextNode {
+    var text: String { get }
+}
+
+extension HasTextNode where Self: TaskNode {
+    var text: String {
+        return name.componentsSeparatedByString("~").last ?? "" // Last component
+    }
+}
+
+protocol HasImageNode {
+    var imageFileName: String { get }
+}
+
+extension HasImageNode where Self: TaskNode {
+    var imageFileName: String {
+        return name.componentsSeparatedByString("~")[1] // Second component
+    }
 }

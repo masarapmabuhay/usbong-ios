@@ -8,15 +8,6 @@
 
 import Foundation
 
-class TextDisplayNode: TaskNode {
+class TextDisplayNode: TaskNode, HasTextNode {
     override class var type: String { return "textDisplay" }
-    
-    var text: String {
-        var components = name.componentsSeparatedByString("~")
-        
-        // Remove node type string
-        components.removeFirst()
-        
-        return components.joinWithSeparator("~")
-    }
 }

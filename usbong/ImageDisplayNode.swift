@@ -8,15 +8,6 @@
 
 import Foundation
 
-class ImageDisplayNode: TaskNode {
+class ImageDisplayNode: TaskNode, HasImageNode {
     override class var type: String { return "imageDisplay" }
-    
-    var imageFileName: String {
-        var components = name.componentsSeparatedByString("~")
-        
-        // Remove node type string
-        components.removeFirst()
-        
-        return components.joinWithSeparator("~")
-    }
 }
