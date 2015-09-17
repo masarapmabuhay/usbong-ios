@@ -9,7 +9,9 @@
 import UIKit
 
 class TaskNodeTableViewController: UITableViewController {
-
+    
+//    var indexPathsAndHeights = [NSIndexPath: CGFloat]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,13 +24,13 @@ class TaskNodeTableViewController: UITableViewController {
         // Register nibs
         tableView.registerNib(UINib(nibName: "TextTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Text")
         tableView.registerNib(UINib(nibName: "ImageTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Image")
-        
+        tableView.reloadData()
         // Table view properties
 //        tableView.separatorStyle = .None
         
         // Table view self-sizing height
-//        tableView.rowHeight = UITableViewAutomaticDimension
-//        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,19 +51,34 @@ class TaskNodeTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Image", forIndexPath: indexPath)
         
+//        if let imageCell = cell as? ImageTableViewCell {
+//            print(imageCell.frame.size)
+//            print(imageCell.customImageView.image?.size)
+//            if let image = imageCell.customImageView.image {
+//                let scale = image.size.width / imageCell.frame.width
+//                
+//                if scale > 1 {
+//                    // Scale down the height
+//                    indexPathsAndHeights[indexPath] = image.size.height / scale
+//                }
+//            }
+//            
+//        }
+        
         return cell
     }
     
     // MARK: - Table view delegate
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
-//        return
-    }
-    
-    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
-    }
+//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        print(indexPathsAndHeights[indexPath])
+//        return indexPathsAndHeights[indexPath] ?? UITableViewAutomaticDimension
+////        return
+//    }
+//    
+//    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+//        return 100
+//    }
     
     /*
     // MARK: - Navigation
