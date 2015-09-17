@@ -8,32 +8,37 @@
 
 import Foundation
 
-// TODO: Make TaskNode a protocol -- Nevermind?
+enum Module {
+    case Text
+    case Image
+}
+
 // TODO: Order of modules?
 class TaskNode {
     class var type: String { return "" }
     
     var name = ""
+    var modules: [Module] { return [] }
     var transitionNamesAndNodeNames: [String: String] = [String : String]()
 }
 
-protocol HasTextNode {
+protocol HasTextModule {
     var text: String { get }
 }
 
 // Default implementation of text
-extension HasTextNode where Self: TaskNode {
+extension HasTextModule where Self: TaskNode {
     var text: String {
         return name.componentsSeparatedByString("~").last ?? "" // Last component
     }
 }
 
-protocol HasImageNode {
+protocol HasImageModule {
     var imageFileName: String { get }
 }
 
 // Default implementation of image file name
-extension HasImageNode where Self: TaskNode {
+extension HasImageModule where Self: TaskNode {
     var imageFileName: String {
         return name.componentsSeparatedByString("~")[1] // Second component
     }

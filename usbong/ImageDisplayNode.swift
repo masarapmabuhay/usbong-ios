@@ -8,6 +8,8 @@
 
 import Foundation
 
-class ImageDisplayNode: TaskNode, HasImageNode {
+class ImageDisplayNode: TaskNode, HasImageModule {
     override class var type: String { return "imageDisplay" }
+    
+    override var modules: [Module] { return [.Image] }
 }
