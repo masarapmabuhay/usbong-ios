@@ -9,8 +9,7 @@
 import UIKit
 
 class TaskNodeTableViewController: UITableViewController {
-    
-//    var indexPathsAndHeights = [NSIndexPath: CGFloat]()
+    var taskNode: TaskNode = TaskNode()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +20,22 @@ class TaskNodeTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        // Test TaskNode
+        taskNode = TextImageDisplayNode()
+        
         // Register nibs
-        tableView.registerNib(UINib(nibName: "TextTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Text")
-        tableView.registerNib(UINib(nibName: "ImageTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Image")
-        tableView.reloadData()
+        let modules = taskNode.modules
+        for module in modules {
+            switch module {
+            case .Text:
+                tableView.registerNib(UINib(nibName: "TextTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Text")
+            case .Image:
+                tableView.registerNib(UINib(nibName: "ImageTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Image")
+            }
+        }
+        
         // Table view properties
-//        tableView.separatorStyle = .None
+        tableView.separatorStyle = .None
         
         // Table view self-sizing height
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -45,25 +54,27 @@ class TaskNodeTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return taskNode.modules.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Image", forIndexPath: indexPath)
+        let cell: UITableViewCell
         
-//        if let imageCell = cell as? ImageTableViewCell {
-//            print(imageCell.frame.size)
-//            print(imageCell.customImageView.image?.size)
-//            if let image = imageCell.customImageView.image {
-//                let scale = image.size.width / imageCell.frame.width
-//                
-//                if scale > 1 {
-//                    // Scale down the height
-//                    indexPathsAndHeights[indexPath] = image.size.height / scale
-//                }
+        let module = taskNode.modules[indexPath.row]
+        switch module {
+        case .Text:
+            cell = tableView.dequeueReusableCellWithIdentifier("Text", forIndexPath: indexPath) as! TextTableViewCell
+            
+//            if let textModule = taskNode as? HasTextModule {
+//                textModule.text
 //            }
-//            
-//        }
+        case .Image:
+            cell = tableView.dequeueReusableCellWithIdentifier("Image", forIndexPath: indexPath) as! ImageTableViewCell
+            
+//            if let imageModule = taskNode as? HasImageModule {
+//                imageModule.imageFileName
+//            }
+        }
         
         return cell
     }
