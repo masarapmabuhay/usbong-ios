@@ -26,10 +26,12 @@ class TreeViewController: UIViewController {
         let textDisplay = TextDisplayNode(name: "a")
         let imageDisplay = ImageDisplayNode(name: "b")
         let textImageDisplay = TextImageDisplayNode(name: "c")
+        let imageTextDisplay = ImageTextDisplayNode(name: "d")
         
         taskNodes.append(textDisplay)
         taskNodes.append(imageDisplay)
         taskNodes.append(textImageDisplay)
+        taskNodes.append(imageTextDisplay)
         
         // Page view controller
         pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
