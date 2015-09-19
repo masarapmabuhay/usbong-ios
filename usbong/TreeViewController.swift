@@ -10,6 +10,8 @@ import UIKit
 
 // Root view controller for Tree (Page-based)
 class TreeViewController: UIViewController {
+    
+    var pageViewController: UIPageViewController?
 
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
@@ -24,12 +26,28 @@ class TreeViewController: UIViewController {
         
         // Test TextDisplayViewController
 //        let viewController = ImageDisplayNodeViewController(nibName: "ImageDisplayNodeViewController", bundle: NSBundle.mainBundle())
-        let viewController = TaskNodeTableViewController()
+//        let viewController = TaskNodeTableViewController()
+//        
+//        addChildViewController(viewController)
+//        containerView.addSubview(viewController.view)
+//        
+//        viewController.view.frame = containerView.bounds
         
-        addChildViewController(viewController)
-        containerView.addSubview(viewController.view)
+        // Page view controller
+        pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         
-        viewController.view.frame = containerView.bounds
+        if let pageVC = pageViewController {
+            pageVC.delegate = self
+            
+            pageVC.setViewControllers([TaskNodeTableViewController()], direction: .Forward, animated: false, completion: nil)
+            pageVC.dataSource = self
+            
+            addChildViewController(pageVC)
+            containerView.addSubview(pageVC.view)
+            
+            pageVC.view.frame = containerView.bounds
+            pageVC.didMoveToParentViewController(self)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,4 +66,15 @@ class TreeViewController: UIViewController {
     }
     */
 
+}
+
+extension TreeViewController: UIPageViewControllerDelegate {}
+
+extension TreeViewController: UIPageViewControllerDataSource {
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+        return TaskNodeTableViewController()
+    }
+    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+        return TaskNodeTableViewController()
+    }
 }
