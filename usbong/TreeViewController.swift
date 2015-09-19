@@ -12,26 +12,24 @@ import UIKit
 class TreeViewController: UIViewController {
     
     var pageViewController: UIPageViewController?
-
+    var taskNodes: [TaskNode] = []
+    
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
     @IBOutlet weak var containerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Test TextDisplayViewController
-        // TODO: Use table view controllers instead. For modularity of components such as text, image, etc.
-//        let viewController = TextDisplayNodeViewController(nibName: "TextDisplayNodeViewController", bundle: NSBundle.mainBundle())
         
-        // Test TextDisplayViewController
-//        let viewController = ImageDisplayNodeViewController(nibName: "ImageDisplayNodeViewController", bundle: NSBundle.mainBundle())
-//        let viewController = TaskNodeTableViewController()
-//        
-//        addChildViewController(viewController)
-//        containerView.addSubview(viewController.view)
-//        
-//        viewController.view.frame = containerView.bounds
+        // Task Nodes
+        // Test task nodes
+        let textDisplay = TextDisplayNode(name: "a")
+        let imageDisplay = ImageDisplayNode(name: "b")
+        let textImageDisplay = TextImageDisplayNode(name: "c")
+        
+        taskNodes.append(textDisplay)
+        taskNodes.append(imageDisplay)
+        taskNodes.append(textImageDisplay)
         
         // Page view controller
         pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
@@ -39,7 +37,9 @@ class TreeViewController: UIViewController {
         if let pageVC = pageViewController {
             pageVC.delegate = self
             
-            pageVC.setViewControllers([TaskNodeTableViewController()], direction: .Forward, animated: false, completion: nil)
+            if let startingViewController = viewControllerAtIndex(0) {
+                pageVC.setViewControllers([startingViewController], direction: .Forward, animated: false, completion: nil)
+            }
             pageVC.dataSource = self
             
             addChildViewController(pageVC)
@@ -55,26 +55,44 @@ class TreeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: - Custom
+    
+    func viewControllerAtIndex(index: Int) -> TaskNodeTableViewController? {
+        guard taskNodes.count != 0 && index < taskNodes.count else {
+            return nil
+        }
+        
+        // Assign task node for view controller
+        let taskVC = TaskNodeTableViewController()
+        taskVC.taskNode = taskNodes[index]
+        
+        return taskVC
     }
-    */
-
+    
+    func indexOfViewController(viewController: TaskNodeTableViewController) -> Int {
+        return taskNodes.indexOf(viewController.taskNode) ?? NSNotFound
+    }
 }
 
 extension TreeViewController: UIPageViewControllerDelegate {}
 
 extension TreeViewController: UIPageViewControllerDataSource {
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        return TaskNodeTableViewController()
+        var index = self.indexOfViewController(viewController as! TaskNodeTableViewController)
+        guard index > 0 && index != NSNotFound else {
+            return nil
+        }
+        
+        index--
+        return viewControllerAtIndex(index)
     }
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        return TaskNodeTableViewController()
+        var index = self.indexOfViewController(viewController as! TaskNodeTableViewController)
+        guard index < taskNodes.count && index != NSNotFound else {
+            return nil
+        }
+        
+        index++
+        return viewControllerAtIndex(index)
     }
 }

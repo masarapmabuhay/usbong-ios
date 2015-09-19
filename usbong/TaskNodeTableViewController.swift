@@ -20,9 +20,6 @@ class TaskNodeTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        // Test TaskNode
-        taskNode = TextImageDisplayNode()
-        
         // Register nibs
         let modules = taskNode.modules
         for module in modules {

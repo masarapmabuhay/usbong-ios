@@ -8,18 +8,29 @@
 
 import Foundation
 
+// Modules - used for ordering
 enum Module {
     case Text
     case Image
 }
 
-// TODO: Order of modules?
 class TaskNode {
     class var type: String { return "" }
     
     var name = ""
     var modules: [Module] { return [] }
     var transitionNamesAndNodeNames: [String: String] = [String : String]()
+    
+    init() {}
+    init(name: String) {
+        self.name = name
+    }
+}
+
+// Task node name and modules determine equality. Transitions don't affect equality.
+extension TaskNode: Equatable {}
+func ==(lhs: TaskNode, rhs: TaskNode) -> Bool {
+    return lhs.name == rhs.name && lhs.modules == rhs.modules
 }
 
 protocol HasTextModule {
