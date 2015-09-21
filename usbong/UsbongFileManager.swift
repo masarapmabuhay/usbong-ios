@@ -76,6 +76,8 @@ class UsbongFileManager {
         let unpackDirectoryURL = temporaryDirectoryURL.URLByAppendingPathComponent("\(md5)/")
         print("UsbongFileManager: TemporaryDirectoryURL: \(unpackDirectoryURL)")
         
+        // TODO: If temporary directory has lots of unpacked trees, delete all first
+        
         // If unpack directory exists, it means, same file is already unpacked
         if NSFileManager.defaultManager().fileExistsAtPath(unpackDirectoryURL.path ?? "") {
             print("UsbongFileManager: Tree has already been unpacked before. Skipping unpack...")
