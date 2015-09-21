@@ -19,11 +19,11 @@ class UsbongFileManager {
         return urls[urls.count-1]
     }()
     
-    private func fetchAllFilesAtPath(path: String) -> [String]? {
-        return try? NSFileManager.defaultManager().contentsOfDirectoryAtPath(path)
+    func fetchAllFileNamesAtRootURL() -> [String]? {
+        return try? NSFileManager.defaultManager().contentsOfDirectoryAtPath(rootURL.path ?? "")
     }
     
-    func fetchAllFilesAtRootURL() -> [String]? {
-        return try? NSFileManager.defaultManager().contentsOfDirectoryAtPath(rootURL.path ?? "")
+    func getURLUsingRootURLAndFileName(fileName: String) -> NSURL {
+        return rootURL.URLByAppendingPathComponent(fileName)
     }
 }
