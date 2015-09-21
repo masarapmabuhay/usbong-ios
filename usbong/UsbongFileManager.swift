@@ -35,25 +35,35 @@ class UsbongFileManager {
         return []
     }
     
-    func unpackTreeWithURL(url: NSURL, toDestinationURL destinationURL: NSURL) -> Bool {
-        // Make sure tree URL is a file and destination url is a directory, else, return false
+    func firstTreeInURL(url: NSURL) -> NSURL? {
+        // Get directory of .utree folder in unpack directory
+        let contents = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(url, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles)
+        
+        // Return first .utree found, else, return nil
+        return contents?.filter({ $0.pathExtension == "utree" }).first ?? nil
+    }
+    
+    func unpackTreeWithURL(url: NSURL, toDestinationURL destinationURL: NSURL) -> NSURL? {
+        // Make sure tree URL is a file and destination url is a directory, else, return nil
         guard !url.hasDirectoryPath && destinationURL.hasDirectoryPath else {
             print("UsbongFileManager: Invalid URLs\nurl: \(url) \(url.fileURL)\ndestinationURL: \(destinationURL) \(destinationURL.fileURL)")
-            return false
+            return nil
         }
         
         // Unpack
         if let zipPath = url.path, let destinationPath = destinationURL.path {
-            let success = ZipArchive.unzipFileAtPath(zipPath, toDestination: destinationPath)
-            if !success {
+            guard ZipArchive.unzipFileAtPath(zipPath, toDestination: destinationPath) else {
                 print("Failed to unzip")
+                return nil
             }
-            return success
+            
+            // Return first tree in unpacked directory
+            return firstTreeInURL(destinationURL)
         }
         
-        // If paths are nil, return false
+        // If paths are nil, return nil
         print("UsbongFileManager: Paths are nil")
-        return false
+        return nil
     }
     
     func unpackTreeToTemporaryDirectoryWithTreeURL(treeURL: NSURL) -> NSURL? {
@@ -69,9 +79,11 @@ class UsbongFileManager {
         // If unpack directory exists, it means, same file is already unpacked
         if NSFileManager.defaultManager().fileExistsAtPath(unpackDirectoryURL.path ?? "") {
             print("UsbongFileManager: Tree has already been unpacked before. Skipping unpack...")
-            return unpackDirectoryURL
+            
+            // Return first tree in unpacked directory
+            return firstTreeInURL(unpackDirectoryURL)
         }
         
-        return unpackTreeWithURL(treeURL, toDestinationURL: unpackDirectoryURL) ? unpackDirectoryURL : nil
+        return unpackTreeWithURL(treeURL, toDestinationURL: unpackDirectoryURL)
     }
 }
