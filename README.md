@@ -16,8 +16,13 @@ Open `usbong.xcodeproj`, then build the project. The recommended dependency mana
 - [x] ImageDisplay
 - [x] TextImageDisplay
 - [x] ImageTextDisplay
-- [ ] Read .utree
+- [x] Read .utree
 - [ ] Read .xml
+
+### Extras
+
+- [x] Smart unpacking of trees (used md5 hash to check for cached tree)
+- [ ] Clear cache of unpacked trees
 
 ## License
 
