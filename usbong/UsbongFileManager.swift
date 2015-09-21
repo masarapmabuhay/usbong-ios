@@ -20,6 +20,7 @@ class UsbongFileManager {
         return urls[urls.count-1]
     }()
     var temporaryDirectoryURL = NSURL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true).URLByAppendingPathComponent("trees", isDirectory: true)
+    var defaultFileName = "Unnamed"
     
     func contentsOfDirectoryAtRootURL() -> [NSURL]? {
         return try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(rootURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles)
@@ -34,40 +35,43 @@ class UsbongFileManager {
         return []
     }
     
-    var defaultFileName = "Unnamed"
-    
     func unpackTreeWithURL(url: NSURL, toDestinationURL destinationURL: NSURL) -> Bool {
         // Make sure tree URL is a file and destination url is a directory, else, return false
-        guard url.fileURL && !destinationURL.fileURL else {
+        guard !url.hasDirectoryPath && destinationURL.hasDirectoryPath else {
+            print("UsbongFileManager: Invalid URLs\nurl: \(url) \(url.fileURL)\ndestinationURL: \(destinationURL) \(destinationURL.fileURL)")
             return false
         }
         
-        // Unpack code here
+        // Unpack
+        if let zipPath = url.path, let destinationPath = destinationURL.path {
+            let success = ZipArchive.unzipFileAtPath(zipPath, toDestination: destinationPath)
+            if !success {
+                print("Failed to unzip")
+            }
+            return success
+        }
         
-        return true
+        // If paths are nil, return false
+        print("UsbongFileManager: Paths are nil")
+        return false
     }
     
-    func unpackTreeToTemporaryDirectoryWithTreeURL(treeURL: NSURL) -> Bool {
-        // Make sure treeURL is a file, else, return false
-        guard treeURL.fileURL else {
-            return false
+    func unpackTreeToTemporaryDirectoryWithTreeURL(treeURL: NSURL) -> NSURL? {
+        // Make sure treeURL is a file, else, return nil
+        guard !treeURL.hasDirectoryPath else {
+            return nil
         }
         
-        print("TemporaryDirectoryURL: \(temporaryDirectoryURL)")
+        let md5 = NSData(contentsOfURL: treeURL)?.hashMD5() ?? "failedMD5"
+        let unpackDirectoryURL = temporaryDirectoryURL.URLByAppendingPathComponent("\(md5)/")
+        print("UsbongFileManager: TemporaryDirectoryURL: \(unpackDirectoryURL)")
         
-        // If tempDirectoryURL does not exist or is not a directory, create directory
-        var isDirectory: ObjCBool = true
-        let fileManager = NSFileManager.defaultManager()
-        if !fileManager.fileExistsAtPath(temporaryDirectoryURL.path ?? "", isDirectory: &isDirectory) || !isDirectory {
-            print("Temp directory does not exist")
-            do {
-                try fileManager.createDirectoryAtURL(temporaryDirectoryURL, withIntermediateDirectories: true, attributes: nil)
-                print("Created temporary directory")
-            } catch {
-                return false
-            }
+        // If unpack directory exists, it means, same file is already unpacked
+        if NSFileManager.defaultManager().fileExistsAtPath(unpackDirectoryURL.path ?? "") {
+            print("UsbongFileManager: Tree has already been unpacked before. Skipping unpack...")
+            return unpackDirectoryURL
         }
         
-        return unpackTreeWithURL(treeURL, toDestinationURL: temporaryDirectoryURL)
+        return unpackTreeWithURL(treeURL, toDestinationURL: unpackDirectoryURL) ? unpackDirectoryURL : nil
     }
 }

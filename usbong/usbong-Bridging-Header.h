@@ -4,3 +4,5 @@
 
 #import "ZipArchive.h"
 #import "ZipArchive.m"
+
+#import <CommonCrypto/CommonCrypto.h>
