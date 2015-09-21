@@ -21,4 +21,4 @@ Open `usbong.xcodeproj`, the build the project. The recommended dependency manag
 
 ## License
 
-This software is distributed under the [Apache License Version 2.0](./LICENSE.md)
+This software is distributed under the [Apache License Version 2.0](./LICENSE)
