@@ -39,9 +39,9 @@ class UsbongTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
-        var fileName = treeURLs[indexPath.row].URLByDeletingPathExtension?.lastPathComponent ?? "No name"
-        if fileName.stringByReplacingOccurrencesOfString(" ", withString: "").characters.count == 0 {
-            fileName = "No name"
+        var fileName = treeURLs[indexPath.row].URLByDeletingPathExtension?.lastPathComponent
+        if fileName?.stringByReplacingOccurrencesOfString(" ", withString: "").characters.count == 0 || fileName == nil {
+            fileName = UsbongFileManager.defaultManager().defaultFileName
         }
         
         cell.textLabel?.text = fileName

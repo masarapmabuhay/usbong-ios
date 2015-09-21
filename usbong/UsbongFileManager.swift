@@ -32,4 +32,6 @@ class UsbongFileManager {
         // Return empty array if contents is nil
         return []
     }
+    
+    var defaultFileName = "Unnamed"
 }
