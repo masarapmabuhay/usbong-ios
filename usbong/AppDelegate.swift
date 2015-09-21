@@ -17,11 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        let fileNames = UsbongFileManager.defaultManager().fetchAllFileNamesAtRootURL()
+        let fileNames = UsbongFileManager.defaultManager().contentsOfDirectoryAtRootURL()
         print(fileNames)
-        let first = UsbongFileManager.defaultManager().getURLUsingRootURLAndFileName(fileNames?.first ?? "")
-        print(first)
-        print(NSData(contentsOfURL: first)?.length)
         return true
     }
 
