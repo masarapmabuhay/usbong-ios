@@ -9,7 +9,8 @@
 import UIKit
 
 class UsbongTableViewController: UITableViewController {
-
+    var treeURLs = UsbongFileManager.defaultManager().treesAtRootURL()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,13 +33,18 @@ class UsbongTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return treeURLs.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
         
-        cell.textLabel?.text = "Tree \(indexPath.row)"
+        var fileName = treeURLs[indexPath.row].URLByDeletingPathExtension?.lastPathComponent ?? "No name"
+        if fileName.stringByReplacingOccurrencesOfString(" ", withString: "").characters.count == 0 {
+            fileName = "No name"
+        }
+        
+        cell.textLabel?.text = fileName
         
         return cell
     }
