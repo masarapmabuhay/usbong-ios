@@ -1,4 +1,5 @@
 # Usbong iOS
+[![License](https://img.shields.io/badge/license-ALv2-blue.svg)](./LICENSE)
 
 This is the Usbong app for iOS written in Swift.
 
@@ -23,6 +24,7 @@ Open `usbong.xcodeproj`, then build the project. The recommended dependency mana
 
 - [x] Smart unpacking of trees (used md5 hash to check for cached tree)
 - [ ] Clear cache of unpacked trees
+- [ ] Travis CI
 
 ## Components
 
