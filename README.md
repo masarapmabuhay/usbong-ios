@@ -26,7 +26,7 @@ Open `usbong.xcodeproj`, then build the project. The recommended dependency mana
 
 ## Components
 
-- ZipArchive [https://github.com/ZipArchive/ZipArchive]
+- [ZipArchive](https://github.com/ZipArchive/ZipArchive)
   - ZipArchive is released under the [MIT license](https://github.com/ZipArchive/ZipArchive/raw/master/LICENSE.txt) and ZipArchive's modified version of [Minizip](http://www.winimage.com/zLibDll/minizip.html) 1.1 is licensed under the [Zlib license](http://www.zlib.net/zlib_license.html).
 
 ## License
