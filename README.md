@@ -2,7 +2,7 @@
 
 This is the Usbong app for iOS written in Swift.
 
-## Building the code
+## Build
 
 - Xcode 7
 - iOS 9 SDK
@@ -23,6 +23,11 @@ Open `usbong.xcodeproj`, then build the project. The recommended dependency mana
 
 - [x] Smart unpacking of trees (used md5 hash to check for cached tree)
 - [ ] Clear cache of unpacked trees
+
+## Components
+
+- ZipArchive [https://github.com/ZipArchive/ZipArchive]
+  - ZipArchive is released under the [MIT license](https://github.com/ZipArchive/ZipArchive/raw/master/LICENSE.txt) and ZipArchive's modified version of [Minizip](http://www.winimage.com/zLibDll/minizip.html) 1.1 is licensed under the [Zlib license](http://www.zlib.net/zlib_license.html).
 
 ## License
 
