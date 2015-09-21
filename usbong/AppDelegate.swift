@@ -17,10 +17,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        let treeURLs = UsbongFileManager.defaultManager().treesAtRootURL()
-        print(treeURLs)
-        
-        print(UsbongFileManager.defaultManager().unpackTreeToTemporaryDirectoryWithTreeURL(treeURLs.first ?? NSURL()))
+//        let treeURLs = UsbongFileManager.defaultManager().treesAtRootURL()
+//        print(treeURLs)
+//        
+//        print(UsbongFileManager.defaultManager().unpackTreeToTemporaryDirectoryWithTreeURL(treeURLs.first ?? NSURL()))
         return true
     }
 

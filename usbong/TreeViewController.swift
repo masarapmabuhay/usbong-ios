@@ -13,6 +13,8 @@ class TreeViewController: UIViewController {
     
     var pageViewController: UIPageViewController?
     var taskNodes: [TaskNode] = []
+    var treeZipURL: NSURL?
+    var treeRootFolderURL: NSURL?
     
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
@@ -50,6 +52,11 @@ class TreeViewController: UIViewController {
             pageVC.view.frame = containerView.bounds
             pageVC.didMoveToParentViewController(self)
         }
+        
+        // Unpack tree (place this on a background thread if noticeable lag occurs)
+        treeRootFolderURL = UsbongFileManager.defaultManager().unpackTreeToTemporaryDirectoryWithTreeURL(treeZipURL ?? NSURL())
+        
+        print(treeRootFolderURL)
     }
 
     override func didReceiveMemoryWarning() {
