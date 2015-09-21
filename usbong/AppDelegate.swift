@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let treeURLs = UsbongFileManager.defaultManager().treesAtRootURL()
         print(treeURLs)
+        
+        print(UsbongFileManager.defaultManager().unpackTreeToTemporaryDirectoryWithTreeURL(treeURLs.first ?? NSURL()))
         return true
     }
 

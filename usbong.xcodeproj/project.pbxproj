@@ -17,6 +17,12 @@
 		CF6744D91BA8109100971B3F /* CommunityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6744D71BA8109100971B3F /* CommunityTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		CF6744DA1BA8109100971B3F /* CommunityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF6744D81BA8109100971B3F /* CommunityTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		CF6DC8DD1BB01BE0001A3D5B /* UsbongFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6DC8DC1BB01BE0001A3D5B /* UsbongFileManager.swift */; settings = {ASSET_TAGS = (); }; };
+		CF6DC8FA1BB05772001A3D5B /* ZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = CF6DC8EF1BB05772001A3D5B /* ZipArchive.m */; settings = {ASSET_TAGS = (); }; };
+		CF6DC8FB1BB05772001A3D5B /* ioapi.c in Sources */ = {isa = PBXBuildFile; fileRef = CF6DC8F21BB05772001A3D5B /* ioapi.c */; settings = {ASSET_TAGS = (); }; };
+		CF6DC8FC1BB05772001A3D5B /* mztools.c in Sources */ = {isa = PBXBuildFile; fileRef = CF6DC8F41BB05772001A3D5B /* mztools.c */; settings = {ASSET_TAGS = (); }; };
+		CF6DC8FD1BB05772001A3D5B /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = CF6DC8F61BB05772001A3D5B /* unzip.c */; settings = {ASSET_TAGS = (); }; };
+		CF6DC8FE1BB05772001A3D5B /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = CF6DC8F81BB05772001A3D5B /* zip.c */; settings = {ASSET_TAGS = (); }; };
+		CF6DC9001BB05815001A3D5B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6DC8FF1BB05815001A3D5B /* libz.tbd */; };
 		CFC97E4B1BA7CA6A0090F14F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC97E4A1BA7CA6A0090F14F /* AppDelegate.swift */; };
 		CFC97E521BA7CA6A0090F14F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFC97E501BA7CA6A0090F14F /* Main.storyboard */; };
 		CFC97E541BA7CA6A0090F14F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFC97E531BA7CA6A0090F14F /* Assets.xcassets */; };
@@ -61,6 +67,19 @@
 		CF6744D71BA8109100971B3F /* CommunityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityTableViewCell.swift; sourceTree = "<group>"; };
 		CF6744D81BA8109100971B3F /* CommunityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunityTableViewCell.xib; sourceTree = "<group>"; };
 		CF6DC8DC1BB01BE0001A3D5B /* UsbongFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsbongFileManager.swift; sourceTree = "<group>"; };
+		CF6DC8ED1BB05772001A3D5B /* usbong-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "usbong-Bridging-Header.h"; sourceTree = "<group>"; };
+		CF6DC8EE1BB05772001A3D5B /* ZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipArchive.h; sourceTree = "<group>"; };
+		CF6DC8EF1BB05772001A3D5B /* ZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZipArchive.m; sourceTree = "<group>"; };
+		CF6DC8F11BB05772001A3D5B /* crypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = crypt.h; sourceTree = "<group>"; };
+		CF6DC8F21BB05772001A3D5B /* ioapi.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = ioapi.c; sourceTree = "<group>"; };
+		CF6DC8F31BB05772001A3D5B /* ioapi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioapi.h; sourceTree = "<group>"; };
+		CF6DC8F41BB05772001A3D5B /* mztools.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mztools.c; sourceTree = "<group>"; };
+		CF6DC8F51BB05772001A3D5B /* mztools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mztools.h; sourceTree = "<group>"; };
+		CF6DC8F61BB05772001A3D5B /* unzip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unzip.c; sourceTree = "<group>"; };
+		CF6DC8F71BB05772001A3D5B /* unzip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unzip.h; sourceTree = "<group>"; };
+		CF6DC8F81BB05772001A3D5B /* zip.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = zip.c; sourceTree = "<group>"; };
+		CF6DC8F91BB05772001A3D5B /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
+		CF6DC8FF1BB05815001A3D5B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CFC97E471BA7CA6A0090F14F /* usbong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = usbong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFC97E4A1BA7CA6A0090F14F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFC97E511BA7CA6A0090F14F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -88,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF6DC9001BB05815001A3D5B /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +133,7 @@
 			children = (
 				DF45DAFA1BA926CF007BE6FE /* UsbongXMLParser.swift */,
 				CF6DC8DC1BB01BE0001A3D5B /* UsbongFileManager.swift */,
+				CF6DC9011BB0582D001A3D5B /* ZipArchive */,
 				CF62899D1BA8EC7A005EC006 /* TaskNodes */,
 			);
 			name = Classes;
@@ -130,9 +151,36 @@
 			name = TaskNodes;
 			sourceTree = "<group>";
 		};
+		CF6DC8F01BB05772001A3D5B /* minizip */ = {
+			isa = PBXGroup;
+			children = (
+				CF6DC8F11BB05772001A3D5B /* crypt.h */,
+				CF6DC8F21BB05772001A3D5B /* ioapi.c */,
+				CF6DC8F31BB05772001A3D5B /* ioapi.h */,
+				CF6DC8F41BB05772001A3D5B /* mztools.c */,
+				CF6DC8F51BB05772001A3D5B /* mztools.h */,
+				CF6DC8F61BB05772001A3D5B /* unzip.c */,
+				CF6DC8F71BB05772001A3D5B /* unzip.h */,
+				CF6DC8F81BB05772001A3D5B /* zip.c */,
+				CF6DC8F91BB05772001A3D5B /* zip.h */,
+			);
+			path = minizip;
+			sourceTree = "<group>";
+		};
+		CF6DC9011BB0582D001A3D5B /* ZipArchive */ = {
+			isa = PBXGroup;
+			children = (
+				CF6DC8EE1BB05772001A3D5B /* ZipArchive.h */,
+				CF6DC8EF1BB05772001A3D5B /* ZipArchive.m */,
+				CF6DC8F01BB05772001A3D5B /* minizip */,
+			);
+			name = ZipArchive;
+			sourceTree = "<group>";
+		};
 		CFC97E3E1BA7CA6A0090F14F = {
 			isa = PBXGroup;
 			children = (
+				CF6DC8FF1BB05815001A3D5B /* libz.tbd */,
 				CFC97E491BA7CA6A0090F14F /* usbong */,
 				CFC97E601BA7CA6A0090F14F /* usbongTests */,
 				CFC97E6B1BA7CA6A0090F14F /* usbongUITests */,
@@ -236,6 +284,7 @@
 				CFC97E531BA7CA6A0090F14F /* Assets.xcassets */,
 				CFC97E551BA7CA6A0090F14F /* LaunchScreen.storyboard */,
 				CFC97E581BA7CA6A0090F14F /* Info.plist */,
+				CF6DC8ED1BB05772001A3D5B /* usbong-Bridging-Header.h */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -302,6 +351,7 @@
 		CFC97E3F1BA7CA6A0090F14F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Joe Christopher Paul Amanse";
 				TargetAttributes = {
@@ -376,10 +426,14 @@
 				CF3085731BA7CB2F00CBD8CF /* CommunityTableViewController.swift in Sources */,
 				CF3085751BA7CB4F00CBD8CF /* SettingsTableViewController.swift in Sources */,
 				DF60E85C1BA7F6EB0060BFF6 /* TreeViewController.swift in Sources */,
+				CF6DC8FC1BB05772001A3D5B /* mztools.c in Sources */,
 				CFF224F51BAA750200CA0FBD /* TaskNodeTableViewController.swift in Sources */,
 				DF45DAFB1BA926CF007BE6FE /* UsbongXMLParser.swift in Sources */,
+				CF6DC8FD1BB05772001A3D5B /* unzip.c in Sources */,
 				CF6744D91BA8109100971B3F /* CommunityTableViewCell.swift in Sources */,
+				CF6DC8FB1BB05772001A3D5B /* ioapi.c in Sources */,
 				CF5829601BAD8BA700FE6672 /* ImageTextDisplayNode.swift in Sources */,
+				CF6DC8FA1BB05772001A3D5B /* ZipArchive.m in Sources */,
 				CFC97E4B1BA7CA6A0090F14F /* AppDelegate.swift in Sources */,
 				CF6289A11BA8ED19005EC006 /* ImageDisplayNode.swift in Sources */,
 				CFF225061BAA7BA200CA0FBD /* ImageTableViewCell.swift in Sources */,
@@ -387,6 +441,7 @@
 				CF6DC8DD1BB01BE0001A3D5B /* UsbongFileManager.swift in Sources */,
 				CF62899C1BA8EAAB005EC006 /* TaskNode.swift in Sources */,
 				CFC97E7B1BA7CAC10090F14F /* UsbongTableViewController.swift in Sources */,
+				CF6DC8FE1BB05772001A3D5B /* zip.c in Sources */,
 				CF62899F1BA8EC87005EC006 /* TextDisplayNode.swift in Sources */,
 				CF6289A31BA8ED96005EC006 /* TextImageDisplayNode.swift in Sources */,
 			);
@@ -530,10 +585,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = usbong/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joechristopherpaulamanse.usbong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "usbong/usbong-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -541,10 +599,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = usbong/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joechristopherpaulamanse.usbong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "usbong/usbong-Bridging-Header.h";
 			};
 			name = Release;
 		};
