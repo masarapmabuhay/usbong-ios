@@ -15,11 +15,21 @@ class UsbongFileManager {
     }
     
     var rootURL: NSURL = {
+        // Default root URL is App's Documents folder
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         return urls[urls.count-1]
     }()
     
     func contentsOfDirectoryAtRootURL() -> [NSURL]? {
         return try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(rootURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles)
+    }
+    
+    func treesAtRootURL() -> [NSURL] {
+        if let contents = contentsOfDirectoryAtRootURL() {
+            // filter contents to URLs with path extension 'utree'
+            return contents.filter({ $0.pathExtension == "utree" })
+        }
+        // Return empty array if contents is nil
+        return []
     }
 }
