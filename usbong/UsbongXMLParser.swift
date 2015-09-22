@@ -62,6 +62,10 @@ extension UsbongXMLParser: NSXMLParserDelegate {
 //    func parser(parser: NSXMLParser, foundComment comment: String)
 //    func parser(parser: NSXMLParser, foundCDATA CDATABlock: NSData)
 //    func parser(parser: NSXMLParser, resolveExternalEntityName name: String, systemID: String?) -> NSData?
-//    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError)
-//    func parser(parser: NSXMLParser, validationErrorOccurred validationError: NSError)
+    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
+        print("parseErrorOccured: \(parseError)")
+    }
+    func parser(parser: NSXMLParser, validationErrorOccurred validationError: NSError) {
+        print("validationErrorOccured: \(validationError)")
+    }
 }
