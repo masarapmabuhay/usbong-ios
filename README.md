@@ -12,6 +12,9 @@ This is the Usbong app for iOS written in Swift.
 Open `usbong.xcodeproj`, then build the project. The recommended dependency manager is [Carthage](https://github.com/Carthage/Carthage), though, it is not yet used in this project.
 
 ## To-do
+
+Check out the [Trello Board](https://trello.com/b/aHNqwHCu) for more detailed updates on progress.
+
 ### Phase 1
 - [x] TextDisplay
 - [x] ImageDisplay
