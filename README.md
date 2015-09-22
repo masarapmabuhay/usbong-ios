@@ -28,6 +28,7 @@ Check out the [Trello Board](https://trello.com/b/aHNqwHCu) for more detailed up
 - [x] Smart unpacking of trees (used md5 hash to check for cached tree)
 - [ ] Clear cache of unpacked trees
 - [ ] Travis CI
+- [ ] Acknowledgements Page
 
 ## Components
 
@@ -36,4 +37,4 @@ Check out the [Trello Board](https://trello.com/b/aHNqwHCu) for more detailed up
 
 ## License
 
-This software is distributed under the [Apache License Version 2.0](./LICENSE)
+This software is distributed under the [Apache License Version 2.0](./LICENSE).
