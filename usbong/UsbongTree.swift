@@ -24,11 +24,9 @@ class UsbongTree {
     
     init(treeDirectoryURL: NSURL) {
         self.treeDirectoryURL = treeDirectoryURL
-        // Find XML
-        let XMLURL = treeDirectoryURL.URLByAppendingPathComponent("\(name).xml")
-        print(XMLURL.path)
-        
-        parser = UsbongXMLParser(contentsOfURL: XMLURL)
+        // Get XML URL - Assume xml is located on (name).utree/(name).xml
+        // And put it in UsbongXMLParser
+        parser = UsbongXMLParser(contentsOfURL: treeDirectoryURL.URLByAppendingPathComponent("\(name).xml"))
     }
     
     func transitionToNextTaskNode() {

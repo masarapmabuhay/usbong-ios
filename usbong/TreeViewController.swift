@@ -14,7 +14,7 @@ class TreeViewController: UIViewController {
     var pageViewController: UIPageViewController?
     var taskNodes: [TaskNode] = []
     var treeZipURL: NSURL?
-    var treeRootFolderURL: NSURL?
+    var tree: UsbongTree?
     
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     
@@ -54,9 +54,14 @@ class TreeViewController: UIViewController {
         }
         
         // Unpack tree (place this on a background thread if noticeable lag occurs)
-        treeRootFolderURL = UsbongFileManager.defaultManager().unpackTreeToTemporaryDirectoryWithTreeURL(treeZipURL ?? NSURL())
-        
-        print(treeRootFolderURL)
+        if let zipURL = treeZipURL {
+            if let url = UsbongFileManager.defaultManager().unpackTreeToTemporaryDirectoryWithTreeURL(zipURL) {
+                tree = UsbongTree(treeDirectoryURL: url)
+                
+                // Set navigation bar title to tree name
+                navigationItem.title = tree?.name
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
