@@ -74,7 +74,6 @@ class UsbongFileManager {
         
         let md5 = NSData(contentsOfURL: treeURL)?.hashMD5() ?? "failedMD5"
         let unpackDirectoryURL = temporaryDirectoryURL.URLByAppendingPathComponent("\(md5)/")
-        print("UsbongFileManager: TemporaryDirectoryURL: \(unpackDirectoryURL)")
         
         // TODO: If temporary directory has lots of unpacked trees, delete all first
         
