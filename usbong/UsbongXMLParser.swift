@@ -35,14 +35,21 @@ class UsbongXMLParser: NSObject {
     func fetchStartingTaskNode() -> TaskNode? {
         if let element = processDefinition[UsbongXMLParserID.startState][UsbongXMLParserID.transition].element {
             if let name = element.attributes[UsbongXMLParserID.to] {
-                if let type = name.componentsSeparatedByString("~").first {
-                    print(type)
-                }
+                return fetchTaskNodeWithName(name)
             }
         }
         return nil
     }
     func fetchTaskNodeWithName(name: String) -> TaskNode? {
+        if let element = try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name) {
+            print(element)
+            if let taskNode = TaskNode.taskNodeFromName(name) {
+                print(taskNode)
+                // Get transition tos and names from element
+                
+                return taskNode
+            }
+        }
         return nil
     }
 }
