@@ -27,6 +27,7 @@
 		CF6DC8FE1BB05772001A3D5B /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = CF6DC8F81BB05772001A3D5B /* zip.c */; settings = {ASSET_TAGS = (); }; };
 		CF6DC9001BB05815001A3D5B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CF6DC8FF1BB05815001A3D5B /* libz.tbd */; };
 		CF6DC9071BB061FA001A3D5B /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6DC9061BB061FA001A3D5B /* MD5.swift */; settings = {ASSET_TAGS = (); }; };
+		CF8993C71BB2DDB000C1A9A9 /* TaskNodeModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8993C61BB2DDB000C1A9A9 /* TaskNodeModule.swift */; settings = {ASSET_TAGS = (); }; };
 		CFC97E4B1BA7CA6A0090F14F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC97E4A1BA7CA6A0090F14F /* AppDelegate.swift */; };
 		CFC97E521BA7CA6A0090F14F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CFC97E501BA7CA6A0090F14F /* Main.storyboard */; };
 		CFC97E541BA7CA6A0090F14F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CFC97E531BA7CA6A0090F14F /* Assets.xcassets */; };
@@ -102,6 +103,7 @@
 		CF6DC8F91BB05772001A3D5B /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		CF6DC8FF1BB05815001A3D5B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CF6DC9061BB061FA001A3D5B /* MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
+		CF8993C61BB2DDB000C1A9A9 /* TaskNodeModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskNodeModule.swift; sourceTree = "<group>"; };
 		CFC97E471BA7CA6A0090F14F /* usbong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = usbong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFC97E4A1BA7CA6A0090F14F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CFC97E511BA7CA6A0090F14F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 		CF62899D1BA8EC7A005EC006 /* TaskNodes */ = {
 			isa = PBXGroup;
 			children = (
+				CF8993C61BB2DDB000C1A9A9 /* TaskNodeModule.swift */,
 				CF62899B1BA8EAAB005EC006 /* TaskNode.swift */,
 				CF62899E1BA8EC87005EC006 /* TextDisplayNode.swift */,
 				CF6289A01BA8ED19005EC006 /* ImageDisplayNode.swift */,
@@ -510,6 +513,7 @@
 				CFC97E7B1BA7CAC10090F14F /* UsbongTableViewController.swift in Sources */,
 				CF6DC8FE1BB05772001A3D5B /* zip.c in Sources */,
 				CF62899F1BA8EC87005EC006 /* TextDisplayNode.swift in Sources */,
+				CF8993C71BB2DDB000C1A9A9 /* TaskNodeModule.swift in Sources */,
 				CF6289A31BA8ED96005EC006 /* TextImageDisplayNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
