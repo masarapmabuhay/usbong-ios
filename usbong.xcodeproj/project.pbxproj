@@ -151,6 +151,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CF373AE11BB232420015F128 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CF1436131BB22B6D00FD3D31 /* SWXMLHash.framework */,
+				CF6DC8FF1BB05815001A3D5B /* libz.tbd */,
+			);
+			name = Frameworks;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		CF373AE21BB232480015F128 /* dSYM */ = {
+			isa = PBXGroup;
+			children = (
+				CF1436171BB22CEE00FD3D31 /* SWXMLHash.framework.dSYM */,
+			);
+			name = dSYM;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		CF6289981BA8E75B005EC006 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,9 +224,6 @@
 		CFC97E3E1BA7CA6A0090F14F = {
 			isa = PBXGroup;
 			children = (
-				CF1436171BB22CEE00FD3D31 /* SWXMLHash.framework.dSYM */,
-				CF1436131BB22B6D00FD3D31 /* SWXMLHash.framework */,
-				CF6DC8FF1BB05815001A3D5B /* libz.tbd */,
 				CFC97E491BA7CA6A0090F14F /* usbong */,
 				CFC97E601BA7CA6A0090F14F /* usbongTests */,
 				CFC97E6B1BA7CA6A0090F14F /* usbongUITests */,
@@ -312,6 +328,8 @@
 				CFC97E551BA7CA6A0090F14F /* LaunchScreen.storyboard */,
 				CFC97E581BA7CA6A0090F14F /* Info.plist */,
 				CF6DC8ED1BB05772001A3D5B /* usbong-Bridging-Header.h */,
+				CF373AE21BB232480015F128 /* dSYM */,
+				CF373AE11BB232420015F128 /* Frameworks */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
