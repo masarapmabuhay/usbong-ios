@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF1436141BB22B6D00FD3D31 /* SWXMLHash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF1436131BB22B6D00FD3D31 /* SWXMLHash.framework */; };
+		CF1436181BB22CEE00FD3D31 /* SWXMLHash.framework.dSYM in Carthage Copy Files */ = {isa = PBXBuildFile; fileRef = CF1436171BB22CEE00FD3D31 /* SWXMLHash.framework.dSYM */; };
 		CF3085731BA7CB2F00CBD8CF /* CommunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CF3085751BA7CB4F00CBD8CF /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CF43218C1BB19A46008EE1CB /* UsbongTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF43218B1BB19A46008EE1CB /* UsbongTree.swift */; settings = {ASSET_TAGS = (); }; };
@@ -58,7 +60,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		CF1436161BB22C8B00FD3D31 /* Carthage Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				CF1436181BB22CEE00FD3D31 /* SWXMLHash.framework.dSYM in Carthage Copy Files */,
+			);
+			name = "Carthage Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		CF1436131BB22B6D00FD3D31 /* SWXMLHash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SWXMLHash.framework; path = Carthage/Build/iOS/SWXMLHash.framework; sourceTree = "<group>"; };
+		CF1436171BB22CEE00FD3D31 /* SWXMLHash.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SWXMLHash.framework.dSYM; path = Carthage/Build/iOS/SWXMLHash.framework.dSYM; sourceTree = "<group>"; };
 		CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityTableViewController.swift; sourceTree = "<group>"; };
 		CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		CF43218B1BB19A46008EE1CB /* UsbongTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsbongTree.swift; sourceTree = "<group>"; };
@@ -112,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF6DC9001BB05815001A3D5B /* libz.tbd in Frameworks */,
+				CF1436141BB22B6D00FD3D31 /* SWXMLHash.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +205,8 @@
 		CFC97E3E1BA7CA6A0090F14F = {
 			isa = PBXGroup;
 			children = (
+				CF1436171BB22CEE00FD3D31 /* SWXMLHash.framework.dSYM */,
+				CF1436131BB22B6D00FD3D31 /* SWXMLHash.framework */,
 				CF6DC8FF1BB05815001A3D5B /* libz.tbd */,
 				CFC97E491BA7CA6A0090F14F /* usbong */,
 				CFC97E601BA7CA6A0090F14F /* usbongTests */,
@@ -305,6 +326,8 @@
 				CFC97E431BA7CA6A0090F14F /* Sources */,
 				CFC97E441BA7CA6A0090F14F /* Frameworks */,
 				CFC97E451BA7CA6A0090F14F /* Resources */,
+				CF1436151BB22BA700FD3D31 /* Carthage Script */,
+				CF1436161BB22C8B00FD3D31 /* Carthage Copy Files */,
 			);
 			buildRules = (
 			);
@@ -423,6 +446,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CF1436151BB22BA700FD3D31 /* Carthage Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/SWXMLHash.framework",
+			);
+			name = "Carthage Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CFC97E431BA7CA6A0090F14F /* Sources */ = {
@@ -594,6 +635,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = usbong/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joechristopherpaulamanse.usbong;
@@ -608,6 +653,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = usbong/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.joechristopherpaulamanse.usbong;
