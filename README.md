@@ -9,7 +9,7 @@ This is the Usbong app for iOS written in Swift.
 - iOS 9 SDK
 - Deployment Target: iOS 9 (will change to iOS 8 once [Phase 1](#phase-1) is finished)
 
-Open `usbong.xcodeproj`, then build the project. The recommended dependency manager is [Carthage](https://github.com/Carthage/Carthage), though, it is not yet used in this project.
+This project uses [Carthage](https://github.com/Carthage/Carthage) as the dependency manager. [Install Carthage](https://github.com/Carthage/Carthage#installing-carthage) if it's not yet installed on your system. Run `carthage bootstrap`. Finally, open `usbong.xcodeproj`, then build the project.
 
 ## To-do
 
@@ -33,7 +33,9 @@ Check out the [Trello Board](https://trello.com/b/aHNqwHCu) for more detailed up
 ## Components
 
 - [ZipArchive](https://github.com/ZipArchive/ZipArchive)
-  - ZipArchive is released under the [MIT license](https://github.com/ZipArchive/ZipArchive/raw/master/LICENSE.txt) and ZipArchive's modified version of [Minizip](http://www.winimage.com/zLibDll/minizip.html) 1.1 is licensed under the [Zlib license](http://www.zlib.net/zlib_license.html).
+  - ZipArchive is released under the [MIT license](https://github.com/ZipArchive/ZipArchive/blob/master/LICENSE.txt) and ZipArchive's modified version of [Minizip](http://www.winimage.com/zLibDll/minizip.html) 1.1 is licensed under the [Zlib license](http://www.zlib.net/zlib_license.html).
+- [SWXMLHash](https://github.com/drmohundro/SWXMLHash)
+  - SWXMLHash is released under the [MIT license](https://github.com/drmohundro/SWXMLHash/blob/master/LICENSE).
 
 ## License
 
