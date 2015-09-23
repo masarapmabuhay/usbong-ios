@@ -9,7 +9,7 @@
 import Foundation
 
 // Modules - used for ordering
-enum Module {
+enum TaskNodeModule {
     case Text
     case Image
 }
@@ -17,15 +17,29 @@ enum Module {
 class TaskNode {
     class var type: String { return "" }
     
+    /**
+    Name with format:
+    
+    *taskNodeType~imageIfApplicable~otherStuff~textIfApplicable*.
+    */
     var name = ""
-    var modules: [Module] { return [] }
-    var transitionNamesAndNodeNames: [String: String] = [String : String]()
+    var modules: [TaskNodeModule] { return [] }
+    var transitionNamesAndTaskNodeNames: [String: String] = [String : String]()
     
     init() {}
     init(name: String) {
         self.name = name
     }
     
+    /**
+    Create a `TaskNode` based on name.
+    
+    - parameters:
+      - name: Name with format:
+
+        *taskNodeType~imageIfApplicable~otherStuff~textIfApplicable*.
+    - returns: Returns nil if unrecognized type. Else, returns the appropriate TaskNode subclass
+    */
     static func taskNodeFromName(name: String) -> TaskNode? {
         // Determine subclass based on first component of name (i.e. "textDisplay~Scene 1~This is the text")
         let typeString = name.componentsSeparatedByString("~").first ?? ""

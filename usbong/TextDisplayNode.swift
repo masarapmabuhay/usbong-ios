@@ -11,5 +11,5 @@ import Foundation
 class TextDisplayNode: TaskNode, HasTextModule {
     override class var type: String { return "textDisplay" }
     
-    override var modules: [Module] { return [.Text] }
+    override var modules: [TaskNodeModule] { return [.Text] }
 }

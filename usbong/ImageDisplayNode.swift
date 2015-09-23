@@ -11,5 +11,5 @@ import Foundation
 class ImageDisplayNode: TaskNode, HasImageModule {
     override class var type: String { return "imageDisplay" }
     
-    override var modules: [Module] { return [.Image] }
+    override var modules: [TaskNodeModule] { return [.Image] }
 }
