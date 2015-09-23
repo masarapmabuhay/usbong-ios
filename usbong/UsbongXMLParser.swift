@@ -7,24 +7,47 @@
 //
 
 import Foundation
+import SWXMLHash
+
+class UsbongXMLParserID {
+    static let processDefinition = "process-definition"
+    static let startState = "start-state"
+    static let taskNode = "task-node"
+    static let transition = "transition"
+    static let to = "to"
+    static let name = "name"
+}
 
 class UsbongXMLParser: NSObject {
-    private let parser: NSXMLParser?
+    var xml: XMLIndexer
+    var processDefinition: XMLIndexer
     
     init(contentsOfURL: NSURL) {
         print("XML URL: \(contentsOfURL)")
-        parser = NSXMLParser(contentsOfURL: contentsOfURL)
+        xml = SWXMLHash.parse(NSData(contentsOfURL: contentsOfURL) ?? NSData())
+        processDefinition = xml[UsbongXMLParserID.processDefinition]
         
         super.init()
         
-        parser?.delegate = self
+        fetchStartingTaskNode()
     }
     
-    func findStartState() {
-        
+    func fetchStartingTaskNode() -> TaskNode? {
+        if let element = processDefinition[UsbongXMLParserID.startState][UsbongXMLParserID.transition].element {
+            if let name = element.attributes[UsbongXMLParserID.to] {
+                if let type = name.componentsSeparatedByString("~").first {
+                    print(type)
+                }
+            }
+        }
+        return nil
+    }
+    func fetchTaskNodeWithName(name: String) -> TaskNode? {
+        return nil
     }
 }
 
+/*
 extension UsbongXMLParser: NSXMLParserDelegate {
     func parserDidStartDocument(parser: NSXMLParser) {
         print("Started parsing")
@@ -69,3 +92,4 @@ extension UsbongXMLParser: NSXMLParserDelegate {
         print("validationErrorOccured: \(validationError)")
     }
 }
+*/
