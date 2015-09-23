@@ -12,11 +12,11 @@
 		CF3085731BA7CB2F00CBD8CF /* CommunityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CF3085751BA7CB4F00CBD8CF /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CF43218C1BB19A46008EE1CB /* UsbongTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF43218B1BB19A46008EE1CB /* UsbongTree.swift */; settings = {ASSET_TAGS = (); }; };
-		CF5829601BAD8BA700FE6672 /* ImageTextDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF58295F1BAD8BA700FE6672 /* ImageTextDisplayNode.swift */; settings = {ASSET_TAGS = (); }; };
+		CF5829601BAD8BA700FE6672 /* ImageTextDisplayTaskNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF58295F1BAD8BA700FE6672 /* ImageTextDisplayTaskNode.swift */; settings = {ASSET_TAGS = (); }; };
 		CF62899C1BA8EAAB005EC006 /* TaskNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF62899B1BA8EAAB005EC006 /* TaskNode.swift */; settings = {ASSET_TAGS = (); }; };
-		CF62899F1BA8EC87005EC006 /* TextDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF62899E1BA8EC87005EC006 /* TextDisplayNode.swift */; settings = {ASSET_TAGS = (); }; };
-		CF6289A11BA8ED19005EC006 /* ImageDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6289A01BA8ED19005EC006 /* ImageDisplayNode.swift */; settings = {ASSET_TAGS = (); }; };
-		CF6289A31BA8ED96005EC006 /* TextImageDisplayNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6289A21BA8ED96005EC006 /* TextImageDisplayNode.swift */; settings = {ASSET_TAGS = (); }; };
+		CF62899F1BA8EC87005EC006 /* TextDisplayTaskNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF62899E1BA8EC87005EC006 /* TextDisplayTaskNode.swift */; settings = {ASSET_TAGS = (); }; };
+		CF6289A11BA8ED19005EC006 /* ImageDisplayTaskNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6289A01BA8ED19005EC006 /* ImageDisplayTaskNode.swift */; settings = {ASSET_TAGS = (); }; };
+		CF6289A31BA8ED96005EC006 /* TextImageDisplayTaskNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6289A21BA8ED96005EC006 /* TextImageDisplayTaskNode.swift */; settings = {ASSET_TAGS = (); }; };
 		CF6744D91BA8109100971B3F /* CommunityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6744D71BA8109100971B3F /* CommunityTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		CF6744DA1BA8109100971B3F /* CommunityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF6744D81BA8109100971B3F /* CommunityTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		CF6DC8DD1BB01BE0001A3D5B /* UsbongFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6DC8DC1BB01BE0001A3D5B /* UsbongFileManager.swift */; settings = {ASSET_TAGS = (); }; };
@@ -81,11 +81,11 @@
 		CF3085721BA7CB2F00CBD8CF /* CommunityTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityTableViewController.swift; sourceTree = "<group>"; };
 		CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		CF43218B1BB19A46008EE1CB /* UsbongTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsbongTree.swift; sourceTree = "<group>"; };
-		CF58295F1BAD8BA700FE6672 /* ImageTextDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextDisplayNode.swift; sourceTree = "<group>"; };
+		CF58295F1BAD8BA700FE6672 /* ImageTextDisplayTaskNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTextDisplayTaskNode.swift; sourceTree = "<group>"; };
 		CF62899B1BA8EAAB005EC006 /* TaskNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskNode.swift; sourceTree = "<group>"; };
-		CF62899E1BA8EC87005EC006 /* TextDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDisplayNode.swift; sourceTree = "<group>"; };
-		CF6289A01BA8ED19005EC006 /* ImageDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDisplayNode.swift; sourceTree = "<group>"; };
-		CF6289A21BA8ED96005EC006 /* TextImageDisplayNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextImageDisplayNode.swift; sourceTree = "<group>"; };
+		CF62899E1BA8EC87005EC006 /* TextDisplayTaskNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextDisplayTaskNode.swift; sourceTree = "<group>"; };
+		CF6289A01BA8ED19005EC006 /* ImageDisplayTaskNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDisplayTaskNode.swift; sourceTree = "<group>"; };
+		CF6289A21BA8ED96005EC006 /* TextImageDisplayTaskNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextImageDisplayTaskNode.swift; sourceTree = "<group>"; };
 		CF6744D71BA8109100971B3F /* CommunityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommunityTableViewCell.swift; sourceTree = "<group>"; };
 		CF6744D81BA8109100971B3F /* CommunityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunityTableViewCell.xib; sourceTree = "<group>"; };
 		CF6DC8DC1BB01BE0001A3D5B /* UsbongFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsbongFileManager.swift; sourceTree = "<group>"; };
@@ -190,10 +190,10 @@
 			children = (
 				CF8993C61BB2DDB000C1A9A9 /* TaskNodeModule.swift */,
 				CF62899B1BA8EAAB005EC006 /* TaskNode.swift */,
-				CF62899E1BA8EC87005EC006 /* TextDisplayNode.swift */,
-				CF6289A01BA8ED19005EC006 /* ImageDisplayNode.swift */,
-				CF6289A21BA8ED96005EC006 /* TextImageDisplayNode.swift */,
-				CF58295F1BAD8BA700FE6672 /* ImageTextDisplayNode.swift */,
+				CF62899E1BA8EC87005EC006 /* TextDisplayTaskNode.swift */,
+				CF6289A01BA8ED19005EC006 /* ImageDisplayTaskNode.swift */,
+				CF6289A21BA8ED96005EC006 /* TextImageDisplayTaskNode.swift */,
+				CF58295F1BAD8BA700FE6672 /* ImageTextDisplayTaskNode.swift */,
 			);
 			name = TaskNodes;
 			sourceTree = "<group>";
@@ -500,21 +500,21 @@
 				CF6DC8FD1BB05772001A3D5B /* unzip.c in Sources */,
 				CF6744D91BA8109100971B3F /* CommunityTableViewCell.swift in Sources */,
 				CF6DC8FB1BB05772001A3D5B /* ioapi.c in Sources */,
-				CF5829601BAD8BA700FE6672 /* ImageTextDisplayNode.swift in Sources */,
+				CF5829601BAD8BA700FE6672 /* ImageTextDisplayTaskNode.swift in Sources */,
 				CF6DC9071BB061FA001A3D5B /* MD5.swift in Sources */,
 				CF6DC8FA1BB05772001A3D5B /* ZipArchive.m in Sources */,
 				CF43218C1BB19A46008EE1CB /* UsbongTree.swift in Sources */,
 				CFC97E4B1BA7CA6A0090F14F /* AppDelegate.swift in Sources */,
-				CF6289A11BA8ED19005EC006 /* ImageDisplayNode.swift in Sources */,
+				CF6289A11BA8ED19005EC006 /* ImageDisplayTaskNode.swift in Sources */,
 				CFF225061BAA7BA200CA0FBD /* ImageTableViewCell.swift in Sources */,
 				CFF224F81BAA779D00CA0FBD /* TextTableViewCell.swift in Sources */,
 				CF6DC8DD1BB01BE0001A3D5B /* UsbongFileManager.swift in Sources */,
 				CF62899C1BA8EAAB005EC006 /* TaskNode.swift in Sources */,
 				CFC97E7B1BA7CAC10090F14F /* UsbongTableViewController.swift in Sources */,
 				CF6DC8FE1BB05772001A3D5B /* zip.c in Sources */,
-				CF62899F1BA8EC87005EC006 /* TextDisplayNode.swift in Sources */,
+				CF62899F1BA8EC87005EC006 /* TextDisplayTaskNode.swift in Sources */,
 				CF8993C71BB2DDB000C1A9A9 /* TaskNodeModule.swift in Sources */,
-				CF6289A31BA8ED96005EC006 /* TextImageDisplayNode.swift in Sources */,
+				CF6289A31BA8ED96005EC006 /* TextImageDisplayTaskNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
