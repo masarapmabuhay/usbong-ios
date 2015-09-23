@@ -14,7 +14,7 @@ class UsbongTree {
     var name: String {
         // Tree directory URL ends with name.utree/
         if let folderNameWithoutExtension = treeDirectoryURL.lastPathComponent?.componentsSeparatedByString(".").first {
-            if folderNameWithoutExtension.characters.count > 0 {
+            if folderNameWithoutExtension.stringByReplacingOccurrencesOfString(" ", withString: "").characters.count > 0 {
                 return folderNameWithoutExtension
             }
         }
