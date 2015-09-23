@@ -25,6 +25,21 @@ class TaskNode {
     init(name: String) {
         self.name = name
     }
+    
+    static func taskNodeFromName(name: String) -> TaskNode? {
+        switch name {
+        case TextDisplayNode.type:
+            return TextDisplayNode(name: name)
+        case ImageDisplayNode.type:
+            return ImageDisplayNode(name: name)
+        case TextImageDisplayNode.type:
+            return TextImageDisplayNode(name: name)
+        case ImageTextDisplayNode.type:
+            return ImageTextDisplayNode(name: name)
+        default:
+            return nil
+        }
+    }
 }
 
 // Task node name and modules determine equality. Transitions don't affect equality.
