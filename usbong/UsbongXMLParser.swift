@@ -44,18 +44,7 @@ class UsbongXMLNameComponents {
             let resURL = rootURL.URLByAppendingPathComponent("res")
             let imageURLWithoutExtension = resURL.URLByAppendingPathComponent(imageFileName)
             
-            // Check for images with extension
-            /*
-            Supported file formats by iOS (using UIImage)
-            Tagged Image File Format (TIFF) .tiff, .tif
-            Joint Photographic Experts Group (JPEG) .jpg, .jpeg
-            Graphic Interchange Format (GIF) .gif
-            Portable Network Graphic (PNG) .png
-            Windows Bitmap Format (DIB) .bmp, .BMPf
-            Windows Icon Format .ico
-            Windows Cursor .cur
-            X Window System bitmap .xbm
-            */
+            // Check for images with supported image formats
             let supportedImageFormats = ["jpg", "jpeg", "png", "gif", "bmp", "tiff", "tif", "ico", "cur", "BMPf", "xbm"]
             let fileManager = NSFileManager.defaultManager()
             for format in supportedImageFormats {
@@ -118,24 +107,5 @@ class UsbongXMLParser: NSObject {
         print(taskNode)
         print(try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name))
         return taskNode
-        
-//        if let element = try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name) {
-//            print(element)
-//            let nameComponents = UsbongXMLNameComponents(name: name)
-//            let type = nameComponents.type
-//            switch type {
-//            case TextDisplayTaskNode.type:
-//                return TextDisplayTaskNode(text: nameComponents.text)
-//            case ImageDisplayTaskNode.type:
-//                return ImageDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingXMLURL(url))
-//            case TextImageDisplayTaskNode.type:
-//                return TextImageDisplayTaskNode(text: nameComponents.text, imageFilePath: nameComponents.imagePathUsingXMLURL(url))
-//            case ImageTextDisplayTaskNode.type:
-//                return ImageTextDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingXMLURL(url), text: nameComponents.text)
-//            default:
-//                break
-//            }
-//        }
-//        return nil
     }
 }

@@ -8,12 +8,6 @@
 
 import Foundation
 
-//class TextDisplayNode: TaskNode, HasTextModule {
-//    override class var type: String { return "textDisplay" }
-//    
-//    override var modules: [TaskNodeModule] { return [.Text] }
-//}
-
 class TextDisplayTaskNode: TaskNode {
     override class var type: String { return "textDisplay" }
     

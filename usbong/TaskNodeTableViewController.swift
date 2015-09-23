@@ -78,15 +78,6 @@ class TaskNodeTableViewController: UITableViewController {
     
     // MARK: - Table view delegate
     
-//    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        print(indexPathsAndHeights[indexPath])
-//        return indexPathsAndHeights[indexPath] ?? UITableViewAutomaticDimension
-////        return
-//    }
-//    
-//    override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//        return 100
-//    }
     
     /*
     // MARK: - Navigation

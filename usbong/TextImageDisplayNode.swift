@@ -8,12 +8,6 @@
 
 import Foundation
 
-//class TextImageDisplayNode: TaskNode, HasTextModule, HasImageModule {
-//    override class var type: String { return "textImageDisplay" }
-//    
-//    override var modules: [TaskNodeModule] { return [.Text, .Image] }
-//}
-
 class TextImageDisplayTaskNode: TaskNode {
     override class var type: String { return "textImageDisplay" }
     
