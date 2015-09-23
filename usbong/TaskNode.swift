@@ -27,7 +27,9 @@ class TaskNode {
     }
     
     static func taskNodeFromName(name: String) -> TaskNode? {
-        switch name {
+        // Determine subclass based on first component of name (i.e. "textDisplay~Scene 1~This is the text")
+        let typeString = name.componentsSeparatedByString("~").first ?? ""
+        switch typeString {
         case TextDisplayNode.type:
             return TextDisplayNode(name: name)
         case ImageDisplayNode.type:
