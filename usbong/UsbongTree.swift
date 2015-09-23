@@ -7,14 +7,20 @@
 //
 
 import Foundation
+import SWXMLHash
 
 class UsbongTree {
     var treeDirectoryURL: NSURL
     var name: String {
         // Tree directory URL ends with name.utree/
-        return treeDirectoryURL.lastPathComponent?.componentsSeparatedByString(".").first ?? UsbongFileManager.defaultManager().defaultFileName
+        if let folderNameWithoutExtension = treeDirectoryURL.lastPathComponent?.componentsSeparatedByString(".").first {
+            if folderNameWithoutExtension.characters.count > 0 {
+                return folderNameWithoutExtension
+            }
+        }
+        return UsbongFileManager.defaultManager().defaultFileName
     }
-    var parser: UsbongXMLParser?
+    var parser: UsbongXMLParser
     
     // Task Nodes
     var taskNodes: [TaskNode] = []
@@ -24,9 +30,15 @@ class UsbongTree {
     
     init(treeDirectoryURL: NSURL) {
         self.treeDirectoryURL = treeDirectoryURL
+        
         // Get XML URL - Assume xml is located on (name).utree/(name).xml
         // And put it in UsbongXMLParser
-        parser = UsbongXMLParser(contentsOfURL: treeDirectoryURL.URLByAppendingPathComponent("\(name).xml"))
+        let fileName = treeDirectoryURL.lastPathComponent?.componentsSeparatedByString(".").first ?? ""
+        parser = UsbongXMLParser(contentsOfURL: treeDirectoryURL.URLByAppendingPathComponent("\(fileName).xml"))
+        
+        if let startNode = parser.fetchStartingTaskNode() {
+            taskNodes.append(startNode)
+        }
     }
     
     func transitionToNextTaskNode() {

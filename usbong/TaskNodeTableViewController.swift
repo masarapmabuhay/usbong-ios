@@ -9,7 +9,7 @@
 import UIKit
 
 class TaskNodeTableViewController: UITableViewController {
-    var taskNode: TaskNode = TaskNode()
+    var taskNode: TaskNode = TaskNode(modules: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +24,12 @@ class TaskNodeTableViewController: UITableViewController {
         let modules = taskNode.modules
         for module in modules {
             switch module {
-            case .Text:
+            case _ as TextTaskNodeModule:
                 tableView.registerNib(UINib(nibName: "TextTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Text")
-            case .Image:
+            case _ as ImageTaskNodeModule:
                 tableView.registerNib(UINib(nibName: "ImageTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Image")
+            default:
+                break
             }
         }
         
@@ -59,18 +61,16 @@ class TaskNodeTableViewController: UITableViewController {
         
         let module = taskNode.modules[indexPath.row]
         switch module {
-        case .Text:
+        case let textModule as TextTaskNodeModule:
             cell = tableView.dequeueReusableCellWithIdentifier("Text", forIndexPath: indexPath) as! TextTableViewCell
+            print("Text: \(textModule.text)")
             
-//            if let textModule = taskNode as? HasTextModule {
-//                textModule.text
-//            }
-        case .Image:
+        case let imageModule as ImageTaskNodeModule:
             cell = tableView.dequeueReusableCellWithIdentifier("Image", forIndexPath: indexPath) as! ImageTableViewCell
-            
-//            if let imageModule = taskNode as? HasImageModule {
-//                imageModule.imageFileName
-//            }
+            print("Image: \(imageModule.imageFilePath)")
+        default:
+            cell = UITableViewCell(style: .Default, reuseIdentifier: "unknownModule")
+            cell.textLabel?.text = "Unkown"
         }
         
         return cell

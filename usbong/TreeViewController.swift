@@ -25,10 +25,10 @@ class TreeViewController: UIViewController {
         
         // Task Nodes
         // Test task nodes
-        let textDisplay = TextDisplayNode(name: "a")
-        let imageDisplay = ImageDisplayNode(name: "b")
-        let textImageDisplay = TextImageDisplayNode(name: "c")
-        let imageTextDisplay = ImageTextDisplayNode(name: "d")
+        let textDisplay = TextDisplayTaskNode(text: "Some Text.")
+        let imageDisplay = ImageDisplayTaskNode(imageFilePath: "someFile")
+        let textImageDisplay = TextImageDisplayTaskNode(text: "Some Text.", imageFilePath: "someFilePath")
+        let imageTextDisplay = ImageTextDisplayTaskNode(imageFilePath: "someFilePath", text: "Some Text.")
         
         taskNodes.append(textDisplay)
         taskNodes.append(imageDisplay)

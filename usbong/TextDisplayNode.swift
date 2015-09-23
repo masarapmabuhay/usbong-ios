@@ -8,8 +8,17 @@
 
 import Foundation
 
-class TextDisplayNode: TaskNode, HasTextModule {
+//class TextDisplayNode: TaskNode, HasTextModule {
+//    override class var type: String { return "textDisplay" }
+//    
+//    override var modules: [TaskNodeModule] { return [.Text] }
+//}
+
+class TextDisplayTaskNode: TaskNode {
     override class var type: String { return "textDisplay" }
     
-    override var modules: [TaskNodeModule] { return [.Text] }
+    init(text: String) {
+        let textModule = TextTaskNodeModule(text: text)
+        super.init(modules: [textModule])
+    }
 }

@@ -18,18 +18,72 @@ class UsbongXMLParserID {
     static let name = "name"
 }
 
+class UsbongXMLNameComponents {
+    let components: [String]
+    init(name: String) {
+        self.components = name.componentsSeparatedByString("~")
+    }
+    
+    var type: String {
+        return components.first ?? ""
+    }
+    
+    var text: String {
+        return components.last ?? ""
+    }
+    
+    var imageFileName: String {
+        guard components.count > 2 else {
+            return ""
+        }
+        return components[1]
+    }
+    
+    func imagePathUsingXMLURL(url: NSURL) -> String {
+        if let rootURL = url.URLByDeletingLastPathComponent {
+            let resURL = rootURL.URLByAppendingPathComponent("res")
+            let imageURLWithoutExtension = resURL.URLByAppendingPathComponent(imageFileName)
+            
+            // Check for images with extension
+            /*
+            Supported file formats by iOS (using UIImage)
+            Tagged Image File Format (TIFF) .tiff, .tif
+            Joint Photographic Experts Group (JPEG) .jpg, .jpeg
+            Graphic Interchange Format (GIF) .gif
+            Portable Network Graphic (PNG) .png
+            Windows Bitmap Format (DIB) .bmp, .BMPf
+            Windows Icon Format .ico
+            Windows Cursor .cur
+            X Window System bitmap .xbm
+            */
+            let supportedImageFormats = ["jpg", "jpeg", "png", "gif", "bmp", "tiff", "tif", "ico", "cur", "BMPf", "xbm"]
+            let fileManager = NSFileManager.defaultManager()
+            for format in supportedImageFormats {
+                if let imagePath = imageURLWithoutExtension.URLByAppendingPathExtension(format).path {
+                    if fileManager.fileExistsAtPath(imagePath) {
+                        return imagePath
+                    }
+                }
+            }
+            
+            return imageURLWithoutExtension.URLByAppendingPathExtension(supportedImageFormats[0]).path ?? ""
+        }
+        return ""
+    }
+}
+
 class UsbongXMLParser: NSObject {
+    let url: NSURL
     var xml: XMLIndexer
     var processDefinition: XMLIndexer
     
     init(contentsOfURL: NSURL) {
         print("XML URL: \(contentsOfURL)")
+        url = contentsOfURL
         xml = SWXMLHash.parse(NSData(contentsOfURL: contentsOfURL) ?? NSData())
         processDefinition = xml[UsbongXMLParserID.processDefinition]
         
         super.init()
-        
-        fetchStartingTaskNode()
     }
     
     func fetchStartingTaskNode() -> TaskNode? {
@@ -41,62 +95,47 @@ class UsbongXMLParser: NSObject {
         return nil
     }
     func fetchTaskNodeWithName(name: String) -> TaskNode? {
-        if let element = try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name) {
-            print(element)
-            if let taskNode = TaskNode.taskNodeFromName(name) {
-                print(taskNode)
-                // Get transition tos and names from element
-                
-                return taskNode
-            }
+        // Find task-node element with attribute name value
+        guard (try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name)) != nil else {
+            return nil
         }
-        return nil
+        let taskNode: TaskNode?
+        let nameComponents = UsbongXMLNameComponents(name: name)
+        let type = nameComponents.type
+        switch type {
+        case TextDisplayTaskNode.type:
+            taskNode =  TextDisplayTaskNode(text: nameComponents.text)
+        case ImageDisplayTaskNode.type:
+            taskNode =  ImageDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingXMLURL(url))
+        case TextImageDisplayTaskNode.type:
+            taskNode = TextImageDisplayTaskNode(text: nameComponents.text, imageFilePath: nameComponents.imagePathUsingXMLURL(url))
+        case ImageTextDisplayTaskNode.type:
+            taskNode = ImageTextDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingXMLURL(url), text: nameComponents.text)
+        default:
+            taskNode = nil
+        }
+        // Fetch transitions
+        print(taskNode)
+        print(try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name))
+        return taskNode
+        
+//        if let element = try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name) {
+//            print(element)
+//            let nameComponents = UsbongXMLNameComponents(name: name)
+//            let type = nameComponents.type
+//            switch type {
+//            case TextDisplayTaskNode.type:
+//                return TextDisplayTaskNode(text: nameComponents.text)
+//            case ImageDisplayTaskNode.type:
+//                return ImageDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingXMLURL(url))
+//            case TextImageDisplayTaskNode.type:
+//                return TextImageDisplayTaskNode(text: nameComponents.text, imageFilePath: nameComponents.imagePathUsingXMLURL(url))
+//            case ImageTextDisplayTaskNode.type:
+//                return ImageTextDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingXMLURL(url), text: nameComponents.text)
+//            default:
+//                break
+//            }
+//        }
+//        return nil
     }
 }
-
-/*
-extension UsbongXMLParser: NSXMLParserDelegate {
-    func parserDidStartDocument(parser: NSXMLParser) {
-        print("Started parsing")
-    }
-    func parserDidEndDocument(parser: NSXMLParser) {
-        print("Ended parsing")
-    }
-    
-    func parser(parser: NSXMLParser, foundNotationDeclarationWithName name: String, publicID: String?, systemID: String?) {
-        print("found notation declaration with name publicID systemID:\(name)\n\(publicID)\n\(systemID)")
-    }
-    
-    func parser(parser: NSXMLParser, foundUnparsedEntityDeclarationWithName name: String, publicID: String?, systemID: String?, notationName: String?) {
-        print("found unparsed entity declaration with name publicID systemID notationName:\(name)\n\(publicID)\n\(systemID)\n\(notationName)")
-    }
-    
-    func parser(parser: NSXMLParser, foundAttributeDeclarationWithName attributeName: String, forElement elementName: String, type: String?, defaultValue: String?) {
-        print("found attribute declaration with attributeName elementName type defaultValue:\(attributeName)\n\(elementName)\n\(type)\n\(defaultValue))")
-    }
-    
-//    func parser(parser: NSXMLParser, foundElementDeclarationWithName elementName: String, model: String)
-//    func parser(parser: NSXMLParser, foundInternalEntityDeclarationWithName name: String, value: String?)
-//    func parser(parser: NSXMLParser, foundExternalEntityDeclarationWithName name: String, publicID: String?, systemID: String?)
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        print("DidStartElement: \(elementName)\n\tNamespace: \(namespaceURI)\n\tQualifiedName: \(qName)\n\tattributes: \(attributeDict)")
-    }
-    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        print("DidEndElement: \(elementName)\n\tNamespace: \(namespaceURI)\n\tQualifiedName: \(qName)\n")
-    }
-//    func parser(parser: NSXMLParser, didStartMappingPrefix prefix: String, toURI namespaceURI: String)
-//    func parser(parser: NSXMLParser, didEndMappingPrefix prefix: String)
-//    func parser(parser: NSXMLParser, foundCharacters string: String)
-//    func parser(parser: NSXMLParser, foundIgnorableWhitespace whitespaceString: String)
-//    func parser(parser: NSXMLParser, foundProcessingInstructionWithTarget target: String, data: String?)
-//    func parser(parser: NSXMLParser, foundComment comment: String)
-//    func parser(parser: NSXMLParser, foundCDATA CDATABlock: NSData)
-//    func parser(parser: NSXMLParser, resolveExternalEntityName name: String, systemID: String?) -> NSData?
-    func parser(parser: NSXMLParser, parseErrorOccurred parseError: NSError) {
-        print("parseErrorOccured: \(parseError)")
-    }
-    func parser(parser: NSXMLParser, validationErrorOccurred validationError: NSError) {
-        print("validationErrorOccured: \(validationError)")
-    }
-}
-*/

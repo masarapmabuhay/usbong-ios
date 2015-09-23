@@ -8,8 +8,18 @@
 
 import Foundation
 
-class TextImageDisplayNode: TaskNode, HasTextModule, HasImageModule {
+//class TextImageDisplayNode: TaskNode, HasTextModule, HasImageModule {
+//    override class var type: String { return "textImageDisplay" }
+//    
+//    override var modules: [TaskNodeModule] { return [.Text, .Image] }
+//}
+
+class TextImageDisplayTaskNode: TaskNode {
     override class var type: String { return "textImageDisplay" }
     
-    override var modules: [TaskNodeModule] { return [.Text, .Image] }
+    init(text: String, imageFilePath: String) {
+        let textModule = TextTaskNodeModule(text: text)
+        let imageModule = ImageTaskNodeModule(imageFilePath: imageFilePath)
+        super.init(modules: [textModule, imageModule])
+    }
 }
