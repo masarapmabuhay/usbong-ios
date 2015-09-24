@@ -28,6 +28,10 @@ class TreeViewController: UIViewController {
             if let url = UsbongFileManager.defaultManager().unpackTreeToTemporaryDirectoryWithTreeURL(zipURL) {
                 tree = UsbongTree(treeDirectoryURL: url)
                 
+                // TODO: Show alert
+                if tree?.taskNodes.count == 0 {
+                    navigationController?.popViewControllerAnimated(true)
+                }
                 // Set navigation bar title to tree name
                 navigationItem.title = tree?.name
             }
@@ -87,7 +91,7 @@ class TreeViewController: UIViewController {
     }
     
     func indexOfViewController(viewController: TaskNodeTableViewController) -> Int {
-        return taskNodes.indexOf(viewController.taskNode) ?? NSNotFound
+        return tree?.taskNodes.indexOf(viewController.taskNode) ?? NSNotFound
     }
 }
 
@@ -95,6 +99,9 @@ extension TreeViewController: UIPageViewControllerDelegate {}
 
 extension TreeViewController: UIPageViewControllerDataSource {
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+        guard viewController is TaskNodeTableViewController else {
+            return nil
+        }
         var index = self.indexOfViewController(viewController as! TaskNodeTableViewController)
         guard index > 0 && index != NSNotFound else {
             return nil
@@ -104,8 +111,11 @@ extension TreeViewController: UIPageViewControllerDataSource {
         return viewControllerAtIndex(index)
     }
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+        guard viewController is TaskNodeTableViewController else {
+            return nil
+        }
         var index = self.indexOfViewController(viewController as! TaskNodeTableViewController)
-        guard index < taskNodes.count && index != NSNotFound else {
+        guard index < tree?.taskNodes.count && index != NSNotFound else {
             return nil
         }
         
