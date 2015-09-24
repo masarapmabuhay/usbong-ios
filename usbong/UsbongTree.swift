@@ -24,9 +24,9 @@ class UsbongTree {
     
     // Task Nodes
     var taskNodes: [TaskNode] = []
-    var currentTaskNode: TaskNode?
-    var previousTaskNode: TaskNode?
-    var nextTaskNode: TaskNode?
+    var currentTaskNode: TaskNode? {
+        return taskNodes.last
+    }
     
     init(treeDirectoryURL: NSURL) {
         self.treeDirectoryURL = treeDirectoryURL
@@ -42,7 +42,21 @@ class UsbongTree {
     }
     
     func transitionToNextTaskNode() {
+        transitionToNextTaskNodeWithTransitionName("Any")
     }
+    func transitionToNextTaskNodeWithTransitionName(transitionName: String) {
+        if let current = currentTaskNode {
+            if let taskNodeName = current.transitionNamesAndToTaskNodeNames[transitionName] {
+                if let nextTaskNode = parser.fetchTaskNodeWithName(taskNodeName) {
+                    taskNodes.append(nextTaskNode)
+                }
+            }
+        }
+    }
+    
     func transitionToPreviousTaskNode() {
+        if taskNodes.count > 1 {
+            taskNodes.removeLast()
+        }
     }
 }
