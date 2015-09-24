@@ -62,12 +62,17 @@ class TaskNodeTableViewController: UITableViewController {
         let module = taskNode.modules[indexPath.row]
         switch module {
         case let textModule as TextTaskNodeModule:
-            cell = tableView.dequeueReusableCellWithIdentifier("Text", forIndexPath: indexPath) as! TextTableViewCell
+            let textCell = tableView.dequeueReusableCellWithIdentifier("Text", forIndexPath: indexPath) as! TextTableViewCell
             print("Text: \(textModule.text)")
+            textCell.titleLabel.text = textModule.text
             
+            cell = textCell
         case let imageModule as ImageTaskNodeModule:
-            cell = tableView.dequeueReusableCellWithIdentifier("Image", forIndexPath: indexPath) as! ImageTableViewCell
+            let imageCell = tableView.dequeueReusableCellWithIdentifier("Image", forIndexPath: indexPath) as! ImageTableViewCell
             print("Image: \(imageModule.imageFilePath)")
+            imageCell.customImageView.image = UIImage(contentsOfFile: imageModule.imageFilePath)
+            
+            cell = imageCell
         default:
             cell = UITableViewCell(style: .Default, reuseIdentifier: "unknownModule")
             cell.textLabel?.text = "Unkown"
