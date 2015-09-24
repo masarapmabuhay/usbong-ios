@@ -90,6 +90,7 @@ class UsbongXMLParser: NSObject {
         var taskNode: TaskNode?
         // Find task-node element with attribute name value
         if let taskNodeElement = try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name) {
+            print(taskNodeElement)
             let nameComponents = UsbongXMLNameComponents(name: name)
             let type = nameComponents.type
             switch type {
@@ -104,10 +105,21 @@ class UsbongXMLParser: NSObject {
             default:
                 taskNode = nil
             }
+            
             // Fetch transitions
             // TODO: Transitions
+            let transitionElements = taskNodeElement[UsbongXMLParserID.transition].all
             
-            print(taskNodeElement)
+            if let targetTaskNode = taskNode {
+                for transitionElement in transitionElements {
+                    if let attributes = transitionElement.element?.attributes {
+                        let name = attributes["name"] ?? "Any"
+                        targetTaskNode.transitionNamesAndToTaskNodeNames[name] = attributes["to"] ?? ""
+                    }
+                }
+                print("Transitions:\n\(targetTaskNode.transitionNamesAndToTaskNodeNames)")
+            }
+            
             print(try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name))
             return taskNode
         } else if let endStateElement = try? processDefinition[UsbongXMLParserID.endState].withAttr(UsbongXMLParserID.name, name) {
