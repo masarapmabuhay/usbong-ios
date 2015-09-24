@@ -175,10 +175,8 @@
 		CF6289981BA8E75B005EC006 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				DF45DAFA1BA926CF007BE6FE /* UsbongXMLParser.swift */,
-				CF6DC8DC1BB01BE0001A3D5B /* UsbongFileManager.swift */,
-				CF43218B1BB19A46008EE1CB /* UsbongTree.swift */,
 				CF6DC9061BB061FA001A3D5B /* MD5.swift */,
+				CFF436F71BB444CC0063379C /* Usbong */,
 				CF6DC9011BB0582D001A3D5B /* ZipArchive */,
 				CF62899D1BA8EC7A005EC006 /* TaskNodes */,
 			);
@@ -290,6 +288,32 @@
 				CFF225051BAA7BA200CA0FBD /* ImageTableViewCell.xib */,
 			);
 			name = ImageTableViewCell;
+			sourceTree = "<group>";
+		};
+		CFF436F51BB444AB0063379C /* UsbongEngine */ = {
+			isa = PBXGroup;
+			children = (
+				DF45DAFA1BA926CF007BE6FE /* UsbongXMLParser.swift */,
+				CF43218B1BB19A46008EE1CB /* UsbongTree.swift */,
+			);
+			name = UsbongEngine;
+			sourceTree = "<group>";
+		};
+		CFF436F61BB444C50063379C /* UsbongFileManager */ = {
+			isa = PBXGroup;
+			children = (
+				CF6DC8DC1BB01BE0001A3D5B /* UsbongFileManager.swift */,
+			);
+			name = UsbongFileManager;
+			sourceTree = "<group>";
+		};
+		CFF436F71BB444CC0063379C /* Usbong */ = {
+			isa = PBXGroup;
+			children = (
+				CFF436F61BB444C50063379C /* UsbongFileManager */,
+				CFF436F51BB444AB0063379C /* UsbongEngine */,
+			);
+			name = Usbong;
 			sourceTree = "<group>";
 		};
 		DFABED681BA824AA000101A5 /* ViewControllers */ = {
