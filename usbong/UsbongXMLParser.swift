@@ -12,6 +12,7 @@ import SWXMLHash
 class UsbongXMLParserID {
     static let processDefinition = "process-definition"
     static let startState = "start-state"
+    static let endState = "end-state"
     static let taskNode = "task-node"
     static let transition = "transition"
     static let to = "to"
@@ -83,29 +84,38 @@ class UsbongXMLParser: NSObject {
         }
         return nil
     }
+    
     func fetchTaskNodeWithName(name: String) -> TaskNode? {
+        // task-node
+        var taskNode: TaskNode?
         // Find task-node element with attribute name value
-        guard (try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name)) != nil else {
-            return nil
+        if let taskNodeElement = try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name) {
+            let nameComponents = UsbongXMLNameComponents(name: name)
+            let type = nameComponents.type
+            switch type {
+            case TextDisplayTaskNode.type:
+                taskNode =  TextDisplayTaskNode(text: nameComponents.text)
+            case ImageDisplayTaskNode.type:
+                taskNode =  ImageDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingXMLURL(url))
+            case TextImageDisplayTaskNode.type:
+                taskNode = TextImageDisplayTaskNode(text: nameComponents.text, imageFilePath: nameComponents.imagePathUsingXMLURL(url))
+            case ImageTextDisplayTaskNode.type:
+                taskNode = ImageTextDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingXMLURL(url), text: nameComponents.text)
+            default:
+                taskNode = nil
+            }
+            // Fetch transitions
+            // TODO: Transitions
+            
+            print(taskNodeElement)
+            print(try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name))
+            return taskNode
+        } else if let endStateElement = try? processDefinition[UsbongXMLParserID.endState].withAttr(UsbongXMLParserID.name, name) {
+            // Find end-state node if task-node not found
+            print(endStateElement)
+            taskNode =  TextDisplayTaskNode(text: "You've now reached the end")
         }
-        let taskNode: TaskNode?
-        let nameComponents = UsbongXMLNameComponents(name: name)
-        let type = nameComponents.type
-        switch type {
-        case TextDisplayTaskNode.type:
-            taskNode =  TextDisplayTaskNode(text: nameComponents.text)
-        case ImageDisplayTaskNode.type:
-            taskNode =  ImageDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingXMLURL(url))
-        case TextImageDisplayTaskNode.type:
-            taskNode = TextImageDisplayTaskNode(text: nameComponents.text, imageFilePath: nameComponents.imagePathUsingXMLURL(url))
-        case ImageTextDisplayTaskNode.type:
-            taskNode = ImageTextDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingXMLURL(url), text: nameComponents.text)
-        default:
-            taskNode = nil
-        }
-        // Fetch transitions
-        print(taskNode)
-        print(try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name))
+        
         return taskNode
     }
 }

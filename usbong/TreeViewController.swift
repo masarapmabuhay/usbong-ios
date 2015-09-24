@@ -53,7 +53,7 @@ class TreeViewController: UIViewController {
         pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         
         if let pageVC = pageViewController {
-            pageVC.delegate = self
+//            pageVC.delegate = self
             
             if let startingViewController = viewControllerAtIndex(0) {
                 pageVC.setViewControllers([startingViewController], direction: .Forward, animated: false, completion: nil)
@@ -101,6 +101,15 @@ extension TreeViewController: UIPageViewControllerDelegate {
         print("Index of now: \(indexOfViewController(pageViewController.viewControllers?[0] as! TaskNodeTableViewController))")
         pageViewController
         print("Undo transition: \(!completed)")
+        
+        // Revert transition if applicable.
+        // TODO: transition previous
+        if !completed {
+            let currentIndex = indexOfViewController(previousViewControllers.first as! TaskNodeTableViewController)
+            if currentIndex >= tree?.taskNodes.count {
+                print("Should revert transition")
+            }
+        }
     }
 }
 
@@ -126,6 +135,8 @@ extension TreeViewController: UIPageViewControllerDataSource {
             return nil
         }
         
+        // Transition to next task node here
+        // TODO: transition next
         index++
         return viewControllerAtIndex(index)
     }
