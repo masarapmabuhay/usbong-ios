@@ -95,14 +95,21 @@ class TreeViewController: UIViewController {
     }
 }
 
-extension TreeViewController: UIPageViewControllerDelegate {}
+extension TreeViewController: UIPageViewControllerDelegate {
+    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        print("Index of previous: \(indexOfViewController(previousViewControllers[0] as! TaskNodeTableViewController))")
+        print("Index of now: \(indexOfViewController(pageViewController.viewControllers?[0] as! TaskNodeTableViewController))")
+        pageViewController
+        print("Undo transition: \(!completed)")
+    }
+}
 
 extension TreeViewController: UIPageViewControllerDataSource {
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         guard viewController is TaskNodeTableViewController else {
             return nil
         }
-        var index = self.indexOfViewController(viewController as! TaskNodeTableViewController)
+        var index = indexOfViewController(viewController as! TaskNodeTableViewController)
         guard index > 0 && index != NSNotFound else {
             return nil
         }
@@ -114,7 +121,7 @@ extension TreeViewController: UIPageViewControllerDataSource {
         guard viewController is TaskNodeTableViewController else {
             return nil
         }
-        var index = self.indexOfViewController(viewController as! TaskNodeTableViewController)
+        var index = indexOfViewController(viewController as! TaskNodeTableViewController)
         guard index < tree?.taskNodes.count && index != NSNotFound else {
             return nil
         }
