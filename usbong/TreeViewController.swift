@@ -75,6 +75,7 @@ class TreeViewController: UIViewController {
     // MARK: - Actions
     
     @IBAction func didPressPreviousOrNext(sender: UISegmentedControl) {
+        // Before transition
         if sender.selectedSegmentIndex == 0 {
             // Previous
             if tree?.previousTaskNode == nil {
@@ -85,7 +86,7 @@ class TreeViewController: UIViewController {
             
         } else {
             // Next
-            if tree?.nextTaskNode == nil {
+            if tree?.currentTaskNode is EndStateTaskNode {
                 dismissViewControllerAnimated(true, completion: nil)
             } else {
                 tree?.transitionToNextTaskNode()
@@ -96,14 +97,15 @@ class TreeViewController: UIViewController {
             taskNodeTableViewController.taskNode = currentTaskNode
         }
         
+        // Finished transition
         // Change back button title to exit if there are no previous task nodes
         if tree?.previousTaskNode == nil {
             sender.setTitle("Exit", forSegmentAtIndex: 0)
         } else {
             sender.setTitle("Back", forSegmentAtIndex: 0)
         }
-        // Change next button title to exit if there are no next task nodes
-        if tree?.nextTaskNode == nil {
+        // Change next button title to exit if transitioned node is end state
+        if tree?.currentTaskNode is EndStateTaskNode {
             sender.setTitle("Exit", forSegmentAtIndex: 1)
         } else {
             sender.setTitle("Next", forSegmentAtIndex: 1)

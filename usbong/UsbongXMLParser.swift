@@ -122,7 +122,7 @@ class UsbongXMLParser: NSObject {
         } else if let endStateElement = try? processDefinition[UsbongXMLParserID.endState].withAttr(UsbongXMLParserID.name, name) {
             // Find end-state node if task-node not found
             print(endStateElement)
-            taskNode =  TextDisplayTaskNode(text: "You've now reached the end")
+            taskNode =  EndStateTaskNode(text: "You've now reached the end")
         }
         
         return taskNode

@@ -25,3 +25,10 @@ extension TaskNode: Equatable {}
 func ==(lhs: TaskNode, rhs: TaskNode) -> Bool {
     return lhs.modules == rhs.modules
 }
+
+class EndStateTaskNode: TaskNode {
+    init(text: String) {
+        let textModule = TextTaskNodeModule(text: text)
+        super.init(modules: [textModule])
+    }
+}
