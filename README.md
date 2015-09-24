@@ -21,7 +21,7 @@ Check out the [Trello Board](https://trello.com/b/aHNqwHCu) for more detailed up
 - [x] TextImageDisplay
 - [x] ImageTextDisplay
 - [x] Read .utree
-- [ ] Read .xml
+- [x] Read .xml
 
 ### Extras
 
