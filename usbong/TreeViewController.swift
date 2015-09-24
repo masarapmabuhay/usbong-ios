@@ -28,13 +28,14 @@ class TreeViewController: UIViewController {
             if let url = UsbongFileManager.defaultManager().unpackTreeToTemporaryDirectoryWithTreeURL(zipURL) {
                 tree = UsbongTree(treeDirectoryURL: url)
                 
-                // TODO: Show alert
-                if tree?.taskNodes.count == 0 {
-                    navigationController?.popViewControllerAnimated(true)
-                }
                 // Set navigation bar title to tree name
                 navigationItem.title = tree?.name
             }
+        }
+        
+        // TODO: Show alert
+        if tree?.taskNodes.count ?? 0 == 0 {
+            navigationController?.popViewControllerAnimated(true)
         }
         
         // Task Nodes

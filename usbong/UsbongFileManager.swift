@@ -45,10 +45,20 @@ class UsbongFileManager {
     
     func unpackTreeWithURL(url: NSURL, toDestinationURL destinationURL: NSURL) -> NSURL? {
         // Make sure tree URL is a file and destination url is a directory, else, return nil
-        guard !url.hasDirectoryPath && destinationURL.hasDirectoryPath else {
-            print("UsbongFileManager: Invalid URLs\nurl: \(url) \(url.fileURL)\ndestinationURL: \(destinationURL) \(destinationURL.fileURL)")
-            return nil
-        }
+//        if #available(iOS 9.0, *) {
+//            guard !url.hasDirectoryPath && destinationURL.hasDirectoryPath else {
+//                print("UsbongFileManager: Invalid URLs\nurl: \(url) \(url.fileURL)\ndestinationURL: \(destinationURL) \(destinationURL.fileURL)")
+//                return nil
+//            }
+//        } else {
+            // Fallback on earlier versions
+//            print(url.path?.characters.last)
+//            print(destinationURL.path?.characters.last)
+//            guard url.path?[(url.path?.endIndex.predecessor())!] != "/" && destinationURL.path?[(destinationURL.path?.endIndex.predecessor())!] == "/" else {
+//                print("UsbongFileManager: Invalid URLs\nurl: \(url) \ndestinationURL: \(destinationURL)")
+//                return nil
+//            }
+//        }
         
         // Unpack
         if let zipPath = url.path, let destinationPath = destinationURL.path {
@@ -68,12 +78,19 @@ class UsbongFileManager {
     
     func unpackTreeToTemporaryDirectoryWithTreeURL(treeURL: NSURL) -> NSURL? {
         // Make sure treeURL is a file, else, return nil
-        guard !treeURL.hasDirectoryPath else {
-            return nil
-        }
+//        if #available(iOS 9.0, *) {
+//            guard !treeURL.hasDirectoryPath else {
+//                return nil
+//            }
+//        } else {
+//            // Fallback on earlier versions
+//            guard treeURL.path?.characters.last != "/" else {
+//                return nil
+//            }
+//        }
         
         let md5 = NSData(contentsOfURL: treeURL)?.hashMD5() ?? "failedMD5"
-        let unpackDirectoryURL = temporaryDirectoryURL.URLByAppendingPathComponent("\(md5)/")
+        let unpackDirectoryURL = temporaryDirectoryURL.URLByAppendingPathComponent("\(md5)", isDirectory: true)
         
         // TODO: If temporary directory has lots of unpacked trees, delete all first
         
@@ -84,6 +101,7 @@ class UsbongFileManager {
             // Return first tree in unpacked directory
             return firstTreeInURL(unpackDirectoryURL)
         }
+        print(unpackDirectoryURL.path)
         
         return unpackTreeWithURL(treeURL, toDestinationURL: unpackDirectoryURL)
     }
