@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A282b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Tab Bar Controller-->
@@ -55,7 +57,7 @@
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
-                                    <segue destination="hhd-22-cBW" kind="show" identifier="showTree" id="6gU-79-utq"/>
+                                    <segue destination="hhd-22-cBW" kind="presentation" identifier="showTree" id="6gU-79-utq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -83,33 +85,61 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SPF-Jn-pn3">
-                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <rect key="frame" x="0.0" y="20" width="600" height="526"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TfZ-wS-KGy">
-                                        <rect key="frame" x="290" y="234" width="20" height="20"/>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TfZ-wS-KGy">
+                                        <rect key="frame" x="290" y="280" width="20" height="20"/>
                                         <animations/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.96652759598603832" green="0.96652759598603832" blue="0.96652759598603832" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="TfZ-wS-KGy" firstAttribute="centerX" secondItem="SPF-Jn-pn3" secondAttribute="centerX" id="4lu-sF-wyi"/>
                                     <constraint firstItem="TfZ-wS-KGy" firstAttribute="centerY" secondItem="SPF-Jn-pn3" secondAttribute="centerY" id="jNc-at-exv"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lcb-v3-cgP">
+                                <rect key="frame" x="0.0" y="546" width="600" height="54"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" momentary="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kbx-Gz-d6m">
+                                        <rect key="frame" x="8" y="13" width="584" height="29"/>
+                                        <animations/>
+                                        <segments>
+                                            <segment title="Previous"/>
+                                            <segment title="Next"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="didPressPreviousOrNext:" destination="hhd-22-cBW" eventType="valueChanged" id="AyO-mv-zbC"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstItem="Kbx-Gz-d6m" firstAttribute="leading" secondItem="Lcb-v3-cgP" secondAttribute="leadingMargin" id="5ZK-91-yU8"/>
+                                    <constraint firstItem="Kbx-Gz-d6m" firstAttribute="trailing" secondItem="Lcb-v3-cgP" secondAttribute="trailingMargin" id="cJm-j8-Km8"/>
+                                    <constraint firstItem="Kbx-Gz-d6m" firstAttribute="centerX" secondItem="Lcb-v3-cgP" secondAttribute="centerX" id="mjS-9x-dnf"/>
+                                    <constraint firstItem="Kbx-Gz-d6m" firstAttribute="centerY" secondItem="Lcb-v3-cgP" secondAttribute="centerY" id="nqy-wE-T2e"/>
+                                    <constraint firstAttribute="height" constant="54" id="sHI-jP-v4f"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="SPF-Jn-pn3" firstAttribute="top" secondItem="dCR-Hp-Chf" secondAttribute="bottom" id="SgV-l8-xwe"/>
-                            <constraint firstItem="pHe-xs-SOE" firstAttribute="top" secondItem="SPF-Jn-pn3" secondAttribute="bottom" id="YNZ-q7-RQT"/>
+                            <constraint firstItem="Lcb-v3-cgP" firstAttribute="top" secondItem="SPF-Jn-pn3" secondAttribute="bottom" id="8t4-qs-WiZ"/>
+                            <constraint firstItem="Lcb-v3-cgP" firstAttribute="leading" secondItem="E9i-FF-HbS" secondAttribute="leading" id="CB3-wb-w9D"/>
+                            <constraint firstItem="pHe-xs-SOE" firstAttribute="top" secondItem="Lcb-v3-cgP" secondAttribute="bottom" id="IvS-eu-A03"/>
+                            <constraint firstItem="SPF-Jn-pn3" firstAttribute="top" secondItem="dCR-Hp-Chf" secondAttribute="bottom" id="Jhh-9b-0gK"/>
                             <constraint firstAttribute="trailing" secondItem="SPF-Jn-pn3" secondAttribute="trailing" id="jj1-Ed-jNn"/>
+                            <constraint firstAttribute="trailing" secondItem="Lcb-v3-cgP" secondAttribute="trailing" id="lzz-8s-6q4"/>
                             <constraint firstItem="SPF-Jn-pn3" firstAttribute="leading" secondItem="E9i-FF-HbS" secondAttribute="leading" id="uoQ-P0-77X"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tree" id="iyr-hY-RCK"/>
                     <connections>
                         <outlet property="activityIndicatorView" destination="TfZ-wS-KGy" id="Tdb-rN-VNg"/>
+                        <outlet property="backNextSegmentedControl" destination="Kbx-Gz-d6m" id="ouj-JO-ylE"/>
                         <outlet property="containerView" destination="SPF-Jn-pn3" id="fzn-gR-ikR"/>
                     </connections>
                 </viewController>

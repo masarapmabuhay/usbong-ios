@@ -9,7 +9,12 @@
 import UIKit
 
 class TaskNodeTableViewController: UITableViewController {
-    var taskNode: TaskNode = TaskNode(modules: [])
+    var taskNode: TaskNode = TaskNode(modules: []) {
+        didSet {
+            registerNibs()
+            tableView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,17 +26,7 @@ class TaskNodeTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         // Register nibs
-        let modules = taskNode.modules
-        for module in modules {
-            switch module {
-            case _ as TextTaskNodeModule:
-                tableView.registerNib(UINib(nibName: "TextTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Text")
-            case _ as ImageTaskNodeModule:
-                tableView.registerNib(UINib(nibName: "ImageTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Image")
-            default:
-                break
-            }
-        }
+        registerNibs()
         
         // Table view properties
         tableView.separatorStyle = .None
@@ -44,6 +39,20 @@ class TaskNodeTableViewController: UITableViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func registerNibs() {
+        let modules = taskNode.modules
+        for module in modules {
+            switch module {
+            case _ as TextTaskNodeModule:
+                tableView.registerNib(UINib(nibName: "TextTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Text")
+            case _ as ImageTaskNodeModule:
+                tableView.registerNib(UINib(nibName: "ImageTableViewCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "Image")
+            default:
+                break
+            }
+        }
     }
 
     // MARK: - Table view data source

@@ -10,15 +10,13 @@ import UIKit
 
 // Root view controller for Tree (Page-based)
 class TreeViewController: UIViewController {
-    
-    var pageViewController: UIPageViewController?
-//    var taskNodes: [TaskNode] = []
     var treeZipURL: NSURL?
     var tree: UsbongTree?
+    var taskNodeTableViewController = TaskNodeTableViewController()
     
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
-    
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var backNextSegmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,39 +31,37 @@ class TreeViewController: UIViewController {
             }
         }
         
-        // TODO: Show alert
-        if tree?.taskNodes.count ?? 0 == 0 {
-            navigationController?.popViewControllerAnimated(true)
+        if let firstTaskNode = tree?.taskNodes.first {
+            taskNodeTableViewController.taskNode = firstTaskNode
+            
+            addChildViewController(taskNodeTableViewController)
+            containerView.addSubview(taskNodeTableViewController.view)
+            
+            taskNodeTableViewController.view.frame = containerView.bounds
+            taskNodeTableViewController.didMoveToParentViewController(self)
+            
+            activityIndicatorView.stopAnimating()
         }
         
-        // Task Nodes
-        // Test task nodes
-//        let textDisplay = TextDisplayTaskNode(text: "Some Text.")
-//        let imageDisplay = ImageDisplayTaskNode(imageFilePath: "someFile")
-//        let textImageDisplay = TextImageDisplayTaskNode(text: "Some Text.", imageFilePath: "someFilePath")
-//        let imageTextDisplay = ImageTextDisplayTaskNode(imageFilePath: "someFilePath", text: "Some Text.")
-//        
-//        taskNodes.append(textDisplay)
-//        taskNodes.append(imageDisplay)
-//        taskNodes.append(textImageDisplay)
-//        taskNodes.append(imageTextDisplay)
+        backNextSegmentedControl.setTitle("Exit", forSegmentAtIndex: 0)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
-        // Page view controller
-        pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
-        
-        if let pageVC = pageViewController {
-            pageVC.delegate = self
+        // If no task nodes, show alert
+        if tree?.taskNodes.count ?? 0 == 0 {
+            print("No task nodes found!")
             
-            if let startingViewController = viewControllerAtIndex(0) {
-                pageVC.setViewControllers([startingViewController], direction: .Forward, animated: false, completion: nil)
-            }
-            pageVC.dataSource = self
+            let alertController = UIAlertController(title: "Invalid Tree", message: "This tree can't be opened by the app.", preferredStyle: .Alert)
             
-            addChildViewController(pageVC)
-            containerView.addSubview(pageVC.view)
+            let closeAction = UIAlertAction(title: "Close", style: .Destructive, handler: { (action) -> Void in
+                self.dismissViewControllerAnimated(true, completion: nil)
+            })
             
-            pageVC.view.frame = containerView.bounds
-            pageVC.didMoveToParentViewController(self)
+            alertController.addAction(closeAction)
+            
+            presentViewController(alertController, animated: true, completion: nil)
         }
     }
 
@@ -74,96 +70,31 @@ class TreeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Actions
+    
+    @IBAction func didPressPreviousOrNext(sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            // Previous
+            if tree?.taskNodes.count <= 1 {
+                dismissViewControllerAnimated(true, completion: nil)
+            } else {
+                tree?.transitionToPreviousTaskNode()
+            }
+        } else {
+            // Next
+            tree?.transitionToNextTaskNode()
+        }
+        if let currentTaskNode = tree?.currentTaskNode {
+            taskNodeTableViewController.taskNode = currentTaskNode
+        }
+        
+        if tree?.taskNodes.count > 1 {
+            sender.setTitle("Back", forSegmentAtIndex: 0)
+        } else {
+            sender.setTitle("Exit", forSegmentAtIndex: 0)
+        }
+    }
+    
     // MARK: - Custom
     
-    func viewControllerAtIndex(index: Int) -> TaskNodeTableViewController? {
-        guard tree?.taskNodes.count != 0 && index < tree?.taskNodes.count else {
-            return nil
-        }
-        
-        // Assign task node for view controller
-        let taskVC = TaskNodeTableViewController()
-        if let taskNode = tree?.taskNodes[index] {
-            print("TaskNode found: \(taskNode)")
-            taskVC.taskNode = taskNode
-        }
-        
-        return taskVC
-    }
-    
-    func indexOfViewController(viewController: TaskNodeTableViewController) -> Int {
-        return tree?.taskNodes.indexOf(viewController.taskNode) ?? NSNotFound
-    }
-}
-
-extension TreeViewController: UIPageViewControllerDelegate {
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        print("Index of previous: \(indexOfViewController(previousViewControllers[0] as! TaskNodeTableViewController))")
-        print("Index of now: \(indexOfViewController(pageViewController.viewControllers?[0] as! TaskNodeTableViewController))")
-        print("Undo transition: \(!completed)")
-//        weak var myself = self
-//        pageViewController.setViewControllers(pageViewController.viewControllers, direction: .Forward, animated: true) { (finished) -> Void in
-//            if finished {
-//                dispatch_async(dispatch_get_main_queue()) {
-//                    myself?.pageViewController?.setViewControllers(pageViewController.viewControllers, direction: .Forward, animated: false, completion: nil)
-//                }
-//            }
-//        }
-        pageViewController.setViewControllers(pageViewController.viewControllers, direction: .Forward, animated: false, completion: nil)
-        
-        // Revert transition if applicable.
-        // TODO: transition previous
-        if !completed {
-            let currentIndex = indexOfViewController(pageViewController.viewControllers?.first as! TaskNodeTableViewController)
-            print("current = \(currentIndex); count = \(tree?.taskNodes.count)")
-            if currentIndex + 1 < tree?.taskNodes.count {
-                print("*** Removing task node ***")
-                tree?.transitionToPreviousTaskNode()
-//                pageViewController.setViewControllers(pageViewController.viewControllers, direction: .Forward, animated: false, completion: nil)
-                print(tree?.taskNodes.count)
-                print("VCs.count: \(pageViewController.childViewControllers.count)")
-            } else {
-                tree?.transitionToNextTaskNode()
-//                pageViewController.setViewControllers(pageViewController.viewControllers, direction: .Forward, animated: false, completion: nil)
-                print(tree?.taskNodes.count)
-                print("VCs.count: \(pageViewController.childViewControllers.count)")
-            }
-        }
-    }
-}
-
-extension TreeViewController: UIPageViewControllerDataSource {
-    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        guard viewController is TaskNodeTableViewController else {
-            return nil
-        }
-        var index = indexOfViewController(viewController as! TaskNodeTableViewController)
-        guard index > 0 && index != NSNotFound else {
-            return nil
-        }
-        
-        // Transition to previous task node
-        tree?.transitionToPreviousTaskNode()
-        
-        index--
-        return viewControllerAtIndex(index)
-    }
-    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        guard viewController is TaskNodeTableViewController else {
-            return nil
-        }
-        var index = indexOfViewController(viewController as! TaskNodeTableViewController)
-        guard index < tree?.taskNodes.count && index != NSNotFound else {
-            print("Index at end or index not found.")
-            return nil
-        }
-        
-        print("*** Appending task node ***")
-        // Transition to next task node here
-        // TODO: transition next
-        tree?.transitionToNextTaskNode()
-        
-        index++
-        return viewControllerAtIndex(index)
-    }
 }
