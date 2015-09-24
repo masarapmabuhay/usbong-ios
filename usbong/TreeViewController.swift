@@ -9,6 +9,7 @@
 import UIKit
 
 // Root view controller for Tree (Page-based)
+// TODO: Place string literals as constants in a class (Global if it will be used throughout the project, or local if used only here). Do this after finalizing UI of app
 class TreeViewController: UIViewController {
     var treeZipURL: NSURL?
     var tree: UsbongTree?
