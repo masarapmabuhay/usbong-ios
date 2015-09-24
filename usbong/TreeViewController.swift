@@ -54,7 +54,7 @@ class TreeViewController: UIViewController {
         pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         
         if let pageVC = pageViewController {
-//            pageVC.delegate = self
+            pageVC.delegate = self
             
             if let startingViewController = viewControllerAtIndex(0) {
                 pageVC.setViewControllers([startingViewController], direction: .Forward, animated: false, completion: nil)
@@ -100,15 +100,33 @@ extension TreeViewController: UIPageViewControllerDelegate {
     func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         print("Index of previous: \(indexOfViewController(previousViewControllers[0] as! TaskNodeTableViewController))")
         print("Index of now: \(indexOfViewController(pageViewController.viewControllers?[0] as! TaskNodeTableViewController))")
-        pageViewController
         print("Undo transition: \(!completed)")
+//        weak var myself = self
+//        pageViewController.setViewControllers(pageViewController.viewControllers, direction: .Forward, animated: true) { (finished) -> Void in
+//            if finished {
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    myself?.pageViewController?.setViewControllers(pageViewController.viewControllers, direction: .Forward, animated: false, completion: nil)
+//                }
+//            }
+//        }
+        pageViewController.setViewControllers(pageViewController.viewControllers, direction: .Forward, animated: false, completion: nil)
         
         // Revert transition if applicable.
         // TODO: transition previous
         if !completed {
-            let currentIndex = indexOfViewController(previousViewControllers.first as! TaskNodeTableViewController)
-            if currentIndex >= tree?.taskNodes.count {
-                print("Should revert transition")
+            let currentIndex = indexOfViewController(pageViewController.viewControllers?.first as! TaskNodeTableViewController)
+            print("current = \(currentIndex); count = \(tree?.taskNodes.count)")
+            if currentIndex + 1 < tree?.taskNodes.count {
+                print("*** Removing task node ***")
+                tree?.transitionToPreviousTaskNode()
+//                pageViewController.setViewControllers(pageViewController.viewControllers, direction: .Forward, animated: false, completion: nil)
+                print(tree?.taskNodes.count)
+                print("VCs.count: \(pageViewController.childViewControllers.count)")
+            } else {
+                tree?.transitionToNextTaskNode()
+//                pageViewController.setViewControllers(pageViewController.viewControllers, direction: .Forward, animated: false, completion: nil)
+                print(tree?.taskNodes.count)
+                print("VCs.count: \(pageViewController.childViewControllers.count)")
             }
         }
     }
@@ -124,6 +142,9 @@ extension TreeViewController: UIPageViewControllerDataSource {
             return nil
         }
         
+        // Transition to previous task node
+        tree?.transitionToPreviousTaskNode()
+        
         index--
         return viewControllerAtIndex(index)
     }
@@ -133,11 +154,15 @@ extension TreeViewController: UIPageViewControllerDataSource {
         }
         var index = indexOfViewController(viewController as! TaskNodeTableViewController)
         guard index < tree?.taskNodes.count && index != NSNotFound else {
+            print("Index at end or index not found.")
             return nil
         }
         
+        print("*** Appending task node ***")
         // Transition to next task node here
         // TODO: transition next
+        tree?.transitionToNextTaskNode()
+        
         index++
         return viewControllerAtIndex(index)
     }
