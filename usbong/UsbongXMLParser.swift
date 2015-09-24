@@ -106,19 +106,16 @@ class UsbongXMLParser: NSObject {
                 taskNode = nil
             }
             
-            // Fetch transitions
-            // TODO: Transitions
+            // Fetch transitions elements (<transition></transition>). For each transition, add to TaskNode transitions dictionary property.
             let transitionElements = taskNodeElement[UsbongXMLParserID.transition].all
-            
-            if let targetTaskNode = taskNode {
-                for transitionElement in transitionElements {
-                    if let attributes = transitionElement.element?.attributes {
-                        let name = attributes["name"] ?? "Any"
-                        targetTaskNode.transitionNamesAndToTaskNodeNames[name] = attributes["to"] ?? ""
-                    }
+            for transitionElement in transitionElements {
+                if let attributes = transitionElement.element?.attributes {
+                    // Get values of attributes name and to, add to taskNode object
+                    let name = attributes["name"] ?? "Any" // Default is Any if no name found
+                    taskNode?.transitionNamesAndToTaskNodeNames[name] = attributes["to"] ?? ""
                 }
-                print("Transitions:\n\(targetTaskNode.transitionNamesAndToTaskNodeNames)")
             }
+            print("Transitions:\n\(taskNode?.transitionNamesAndToTaskNodeNames)")
             
             print(try? processDefinition[UsbongXMLParserID.taskNode].withAttr(UsbongXMLParserID.name, name))
             return taskNode
