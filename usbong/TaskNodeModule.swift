@@ -9,9 +9,9 @@
 import Foundation
 
 class TaskNodeModule {
-    var content: String
+    var content: [String: NSObject]
     
-    init(content: String) {
+    init(content: [String: NSObject]) {
         self.content = content
     }
 }
@@ -23,28 +23,30 @@ func ==(lhs: TaskNodeModule, rhs: TaskNodeModule) -> Bool {
 
 class TextTaskNodeModule: TaskNodeModule {
     init(text: String) {
-        super.init(content: text)
+        let dict: [String: NSObject] = [ "text": NSString(string: text) ]
+        super.init(content: dict)
     }
     var text: String {
         get {
-            return content
+            return ((content["text"] as? NSString) ?? "") as String
         }
         set {
-            content = newValue
+            content["text"] = NSString(string: newValue)
         }
     }
 }
 
 class ImageTaskNodeModule: TaskNodeModule {
     init(imageFilePath: String) {
-        super.init(content: imageFilePath)
+        let dict: [String: NSObject] = [ "imageFilePath": NSString(string: imageFilePath)]
+        super.init(content: dict)
     }
     var imageFilePath: String {
         get {
-            return content
+            return ((content["imageFilePath"] as? NSString) ?? "") as String
         }
         set {
-            content = newValue
+            content["imageFilePath"] = NSString(string: newValue)
         }
     }
 }
