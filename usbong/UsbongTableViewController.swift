@@ -88,7 +88,7 @@ class UsbongTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showTree" {
-            if let treeVC = segue.destinationViewController as? TreeViewController, let indexPath = tableView.indexPathForSelectedRow {
+            if let treeVC = (segue.destinationViewController as? UINavigationController)?.topViewController as? TreeViewController, let indexPath = tableView.indexPathForSelectedRow {
                 treeVC.treeZipURL = treeURLs[indexPath.row]
             }
         }
