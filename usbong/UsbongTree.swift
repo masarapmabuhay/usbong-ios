@@ -27,6 +27,15 @@ class UsbongTree {
     var currentTaskNode: TaskNode? {
         return taskNodes.last
     }
+    var nextTaskNode: TaskNode? {
+        return nextTaskNodeWithTransitionName(currentTaskNode?.targetTransitionName ?? "Any")
+    }
+    var previousTaskNode: TaskNode? {
+        guard taskNodes.count > 1 else {
+            return nil
+        }
+        return taskNodes[taskNodes.count - 2]
+    }
     
     init(treeDirectoryURL: NSURL) {
         self.treeDirectoryURL = treeDirectoryURL
@@ -41,22 +50,34 @@ class UsbongTree {
         }
     }
     
-    func transitionToNextTaskNode() {
-        transitionToNextTaskNodeWithTransitionName("Any")
-    }
-    func transitionToNextTaskNodeWithTransitionName(transitionName: String) {
+    func nextTaskNodeWithTransitionName(transitionName: String) -> TaskNode? {
         if let current = currentTaskNode {
             if let taskNodeName = current.transitionNamesAndToTaskNodeNames[transitionName] {
-                if let nextTaskNode = parser.fetchTaskNodeWithName(taskNodeName) {
-                    taskNodes.append(nextTaskNode)
-                }
+                return parser.fetchTaskNodeWithName(taskNodeName)
             }
         }
+        return nil
     }
     
-    func transitionToPreviousTaskNode() {
+    func transitionToNextTaskNode() -> Bool {
+        if let next = nextTaskNode {
+            taskNodes.append(next)
+            return true
+        }
+        return false
+    }
+    func transitionToNextTaskNodeWithTransitionName(transitionName: String) -> Bool {
+        if let next = nextTaskNodeWithTransitionName(transitionName) {
+            taskNodes.append(next)
+            return true
+        }
+        return false
+    }
+    func transitionToPreviousTaskNode() -> Bool {
         if taskNodes.count > 1 {
             taskNodes.removeLast()
+            return true
         }
+        return false
     }
 }

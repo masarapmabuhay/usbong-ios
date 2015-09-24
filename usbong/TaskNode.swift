@@ -9,15 +9,16 @@
 import Foundation
 
 class TaskNode {
+    // TODO: Don't put type in TaskNode. This is used only in XML parser, so put it there. (Even for subclasses)
     class var type: String { return "taskNode" }
     
     let modules: [TaskNodeModule]
+    var targetTransitionName: String?
     var transitionNamesAndToTaskNodeNames: [String: String] = [String: String]()
     
     init(modules: [TaskNodeModule]) {
         self.modules = modules
     }
-    
 }
 
 extension TaskNode: Equatable {}
