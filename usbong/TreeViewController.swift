@@ -43,7 +43,9 @@ class TreeViewController: UIViewController {
             activityIndicatorView.stopAnimating()
         }
         
-        backNextSegmentedControl.setTitle("Exit", forSegmentAtIndex: 0)
+        if tree?.previousTaskNode == nil {
+            backNextSegmentedControl.setTitle("Exit", forSegmentAtIndex: 0)
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -75,23 +77,36 @@ class TreeViewController: UIViewController {
     @IBAction func didPressPreviousOrNext(sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             // Previous
-            if tree?.taskNodes.count <= 1 {
+            if tree?.previousTaskNode == nil {
                 dismissViewControllerAnimated(true, completion: nil)
             } else {
                 tree?.transitionToPreviousTaskNode()
             }
+            
         } else {
             // Next
-            tree?.transitionToNextTaskNode()
+            if tree?.nextTaskNode == nil {
+                dismissViewControllerAnimated(true, completion: nil)
+            } else {
+                tree?.transitionToNextTaskNode()
+            }
         }
+        
         if let currentTaskNode = tree?.currentTaskNode {
             taskNodeTableViewController.taskNode = currentTaskNode
         }
         
-        if tree?.taskNodes.count > 1 {
-            sender.setTitle("Back", forSegmentAtIndex: 0)
-        } else {
+        // Change back button title to exit if there are no previous task nodes
+        if tree?.previousTaskNode == nil {
             sender.setTitle("Exit", forSegmentAtIndex: 0)
+        } else {
+            sender.setTitle("Back", forSegmentAtIndex: 0)
+        }
+        // Change next button title to exit if there are no next task nodes
+        if tree?.nextTaskNode == nil {
+            sender.setTitle("Exit", forSegmentAtIndex: 1)
+        } else {
+            sender.setTitle("Next", forSegmentAtIndex: 1)
         }
     }
     
