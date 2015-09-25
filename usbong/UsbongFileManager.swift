@@ -26,6 +26,10 @@ class UsbongFileManager {
         return try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(rootURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsHiddenFiles)
     }
     
+    func clearTemporaryDirectory() -> Bool {
+        return (try? NSFileManager.defaultManager().removeItemAtURL(temporaryDirectoryURL)) != nil
+    }
+    
     func treesAtRootURL() -> [NSURL] {
         if let contents = contentsOfDirectoryAtRootURL() {
             // filter contents to URLs with path extension 'utree'
