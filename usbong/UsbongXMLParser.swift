@@ -34,7 +34,7 @@ class UsbongXMLNameComponents {
     }
     
     var imageFileName: String {
-        guard components.count > 2 else {
+        guard components.count >= 2 else {
             return ""
         }
         return components[1]
