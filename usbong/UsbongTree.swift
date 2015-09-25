@@ -20,10 +20,10 @@ class UsbongTree {
         }
         return UsbongFileManager.defaultManager().defaultFileName
     }
-    var parser: UsbongXMLParser
+    private(set) var parser: UsbongXMLParser
     
     // Task Nodes
-    var taskNodes: [TaskNode] = []
+    private(set) var taskNodes: [TaskNode] = []
     var currentTaskNode: TaskNode? {
         return taskNodes.last
     }
