@@ -68,6 +68,7 @@ class TaskNodeTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell
         
+        // Figures out what type of TaskNodeModule, and loads the appropriate cell (text = text cell, image = image cell, etc.)
         let module = taskNode.modules[indexPath.row]
         switch module {
         case let textModule as TextTaskNodeModule:
