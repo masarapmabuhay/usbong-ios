@@ -7,14 +7,21 @@
 //
 
 import UIKit
+import AVFoundation
 
 class TaskNodeTableViewController: UITableViewController {
     var taskNode: TaskNode = TaskNode(modules: []) {
         didSet {
             registerNibs()
             tableView.reloadData()
+            
+            // Background Audio
+            backgroundAudioPlayer = nil
+            loadBackgroundAudio()
         }
     }
+    
+    var backgroundAudioPlayer: AVAudioPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +41,25 @@ class TaskNodeTableViewController: UITableViewController {
         // Table view self-sizing height
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
+        
+        // Background audio
+        loadBackgroundAudio()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - Custom
+    
+    func loadBackgroundAudio() {
+        if let backgroundAudopFilePath = taskNode.backgroundAudioFilePath {
+            backgroundAudioPlayer = try? AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: backgroundAudopFilePath))
+            backgroundAudioPlayer?.numberOfLoops = -1 // Endless loop
+            backgroundAudioPlayer?.prepareToPlay()
+            backgroundAudioPlayer?.play()
+        }
     }
     
     func registerNibs() {
