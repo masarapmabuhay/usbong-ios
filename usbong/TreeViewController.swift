@@ -12,7 +12,9 @@ import UIKit
 // TODO: Place string literals as constants in a class (Global if it will be used throughout the project, or local if used only here). Do this after finalizing UI of app
 class TreeViewController: UIViewController {
     var treeZipURL: NSURL?
+    var treeEngine: UsbongTreeEngine?
     var tree: UsbongTree?
+    
     var taskNodeTableViewController = TaskNodeTableViewController()
     
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
@@ -24,8 +26,9 @@ class TreeViewController: UIViewController {
         
         // Unpack tree (place this on a background thread if noticeable lag occurs)
         if let zipURL = treeZipURL {
-            if let url = UsbongFileManager.defaultManager().unpackTreeToTemporaryDirectoryWithTreeURL(zipURL) {
-                tree = UsbongTree(treeDirectoryURL: url)
+            if let treeRootURL = UsbongFileManager.defaultManager().unpackTreeToTemporaryDirectoryWithTreeURL(zipURL) {
+                treeEngine = UsbongTreeXMLEngine(treeRootURL: treeRootURL)
+                tree = treeEngine?.tree
                 
                 // Set navigation bar title to tree name
                 navigationItem.title = tree?.name

@@ -10,17 +10,15 @@ import Foundation
 import SWXMLHash
 
 class UsbongTree {
-    var treeDirectoryURL: NSURL
-    var name: String {
-        // Tree directory URL ends with name.utree/
-        if let folderNameWithoutExtension = treeDirectoryURL.lastPathComponent?.componentsSeparatedByString(".").first {
-            if folderNameWithoutExtension.stringByReplacingOccurrencesOfString(" ", withString: "").characters.count > 0 {
-                return folderNameWithoutExtension
-            }
+//    var treeDirectoryURL: NSURL
+    var name: String = ""
+    
+    weak var treeEngine: UsbongTreeEngine? {
+        didSet {
+            taskNodes = []
+            loadStartingTreeFromEngine()
         }
-        return UsbongFileManager.defaultManager().defaultFileName
     }
-    private(set) var parser: UsbongXMLParser
     
     // Task Nodes
     private(set) var taskNodes: [TaskNode] = []
@@ -37,15 +35,18 @@ class UsbongTree {
         return taskNodes[taskNodes.count - 2]
     }
     
-    init(treeDirectoryURL: NSURL) {
-        self.treeDirectoryURL = treeDirectoryURL
+    convenience init() {
+        self.init(treeEngine: nil)
+    }
+    init(treeEngine: UsbongTreeEngine?) {
+        self.treeEngine = treeEngine
         
-        // Get XML URL - Assume xml is located on (name).utree/(name).xml
-        // And put it in UsbongXMLParser
-        let fileName = treeDirectoryURL.lastPathComponent?.componentsSeparatedByString(".").first ?? ""
-        parser = UsbongXMLParser(contentsOfURL: treeDirectoryURL.URLByAppendingPathComponent("\(fileName).xml"))
-        
-        if let startNode = parser.fetchStartingTaskNode() {
+        loadStartingTreeFromEngine()
+    }
+    
+    private func loadStartingTreeFromEngine() {
+        // Fetch starting task node
+        if let startNode = treeEngine?.fetchStartingTaskNode() {
             taskNodes.append(startNode)
         }
     }
@@ -53,7 +54,7 @@ class UsbongTree {
     func nextTaskNodeWithTransitionName(transitionName: String) -> TaskNode? {
         if let current = currentTaskNode {
             if let taskNodeName = current.transitionNamesAndToTaskNodeNames[transitionName] {
-                return parser.fetchTaskNodeWithName(taskNodeName)
+                return treeEngine?.fetchTaskNodeWithName(taskNodeName)
             }
         }
         return nil
@@ -80,4 +81,11 @@ class UsbongTree {
         }
         return false
     }
+}
+
+protocol UsbongTreeEngine: class {
+    var tree: UsbongTree { get }
+    
+    func fetchStartingTaskNode() -> TaskNode?
+    func fetchTaskNodeWithName(name: String) -> TaskNode?
 }

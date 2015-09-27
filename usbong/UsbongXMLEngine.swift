@@ -1,5 +1,5 @@
 //
-//  UsbongXMLParser.swift
+//  UsbongXMLEngine.swift
 //  usbong
 //
 //  Created by Chris Amanse on 9/16/15.
@@ -9,7 +9,7 @@
 import Foundation
 import SWXMLHash
 
-class UsbongXMLParserID {
+private struct UsbongXMLParserID {
     static let processDefinition = "process-definition"
     static let startState = "start-state"
     static let endState = "end-state"
@@ -19,7 +19,7 @@ class UsbongXMLParserID {
     static let name = "name"
 }
 
-class UsbongXMLNameComponents {
+private struct UsbongXMLNameComponents {
     static var backgroundAudioIdentifier = "bgAudioName"
     
     let components: [String]
@@ -36,32 +36,34 @@ class UsbongXMLNameComponents {
         return (components.last ?? "").stringByReplacingOccurrencesOfString("\\n", withString: "\n")
     }
     
-    var imageFileName: String {
+    var imageFileName: String? {
         guard components.count >= 2 else {
-            return ""
+            return nil
         }
         return components[1]
     }
     
-    func imagePathUsingXMLURL(url: NSURL) -> String {
-        if let rootURL = url.URLByDeletingLastPathComponent {
-            let resURL = rootURL.URLByAppendingPathComponent("res")
-            let imageURLWithoutExtension = resURL.URLByAppendingPathComponent(imageFileName)
-            
-            // Check for images with supported image formats
-            let supportedImageFormats = ["jpg", "jpeg", "png", "gif", "bmp", "tiff", "tif", "ico", "cur", "BMPf", "xbm"]
-            let fileManager = NSFileManager.defaultManager()
-            for format in supportedImageFormats {
-                if let imagePath = imageURLWithoutExtension.URLByAppendingPathExtension(format).path {
-                    if fileManager.fileExistsAtPath(imagePath) {
-                        return imagePath
-                    }
+    func imagePathUsingTreeURL(url: NSURL) -> String? {
+        // Make sure imageFileName is nil, else, return nil
+        guard imageFileName != nil else {
+            return nil
+        }
+        
+        let resURL = url.URLByAppendingPathComponent("res")
+        let imageURLWithoutExtension = resURL.URLByAppendingPathComponent(imageFileName!)
+        
+        // Check for images with supported image formats
+        let supportedImageFormats = ["jpg", "jpeg", "png", "gif", "bmp", "tiff", "tif", "ico", "cur", "BMPf", "xbm"]
+        let fileManager = NSFileManager.defaultManager()
+        for format in supportedImageFormats {
+            if let imagePath = imageURLWithoutExtension.URLByAppendingPathExtension(format).path {
+                if fileManager.fileExistsAtPath(imagePath) {
+                    return imagePath
                 }
             }
-            
-            return imageURLWithoutExtension.URLByAppendingPathExtension(supportedImageFormats[0]).path ?? ""
         }
-        return ""
+        
+        return nil
     }
     
     var backgroundAudioFileName: String? {
@@ -78,16 +80,14 @@ class UsbongXMLNameComponents {
     }
     
     func backgroundAudioPathUsingXMLURL(url: NSURL) -> String? {
-        if let rootURL = url.URLByDeletingLastPathComponent {
-            let audioURL = rootURL.URLByAppendingPathComponent("audio")
-            
-            // Finds files in audio/ with file name same to backgroundAudioFileName
-            if let contents = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(audioURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants) {
-                for content in contents {
-                    if let fileName = content.URLByDeletingPathExtension?.lastPathComponent {
-                        if fileName == backgroundAudioFileName {
-                            return content.path
-                        }
+        let audioURL = url.URLByAppendingPathComponent("audio")
+        
+        // Finds files in audio/ with file name same to backgroundAudioFileName
+        if let contents = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(audioURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants) {
+            for content in contents {
+                if let fileName = content.URLByDeletingPathExtension?.lastPathComponent {
+                    if fileName == backgroundAudioFileName {
+                        return content.path
                     }
                 }
             }
@@ -96,19 +96,32 @@ class UsbongXMLNameComponents {
     }
 }
 
-class UsbongXMLParser: NSObject {
-    let url: NSURL
+class UsbongTreeXMLEngine: NSObject, UsbongTreeEngine {
+    let treeRootURL: NSURL
+    let xmlURL: NSURL
+    
     var xml: XMLIndexer
     var processDefinition: XMLIndexer
     
-    init(contentsOfURL: NSURL) {
-        print("XML URL: \(contentsOfURL)")
-        url = contentsOfURL
-        xml = SWXMLHash.parse(NSData(contentsOfURL: contentsOfURL) ?? NSData())
+    init(treeRootURL: NSURL) {
+        self.treeRootURL = treeRootURL
+        
+        let fileName = treeRootURL.lastPathComponent?.componentsSeparatedByString(".").first ?? ""
+        xmlURL = treeRootURL.URLByAppendingPathComponent("\(fileName).xml")
+        xml = SWXMLHash.parse(NSData(contentsOfURL: xmlURL) ?? NSData())
         processDefinition = xml[UsbongXMLParserID.processDefinition]
         
         super.init()
+        
+        tree = UsbongTree(treeEngine: self)
+        
+        // Set to "Unnamed" if fileName is black or contains spaces only
+        tree.name = fileName.stringByReplacingOccurrencesOfString(" ", withString: "").characters.count == 0 ? "Unnamed" : fileName
     }
+    
+    // MARK: - UsbongTreeEngine
+    
+    private(set) var tree: UsbongTree = UsbongTree()
     
     func fetchStartingTaskNode() -> TaskNode? {
         if let element = processDefinition[UsbongXMLParserID.startState][UsbongXMLParserID.transition].element {
@@ -131,16 +144,16 @@ class UsbongXMLParser: NSObject {
             case TextDisplayTaskNode.type:
                 taskNode =  TextDisplayTaskNode(text: nameComponents.text)
             case ImageDisplayTaskNode.type:
-                taskNode =  ImageDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingXMLURL(url))
+                taskNode =  ImageDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingTreeURL(treeRootURL) ?? "")
             case TextImageDisplayTaskNode.type:
-                taskNode = TextImageDisplayTaskNode(text: nameComponents.text, imageFilePath: nameComponents.imagePathUsingXMLURL(url))
+                taskNode = TextImageDisplayTaskNode(text: nameComponents.text, imageFilePath: nameComponents.imagePathUsingTreeURL(treeRootURL) ?? "")
             case ImageTextDisplayTaskNode.type:
-                taskNode = ImageTextDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingXMLURL(url), text: nameComponents.text)
+                taskNode = ImageTextDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingTreeURL(treeRootURL) ?? "", text: nameComponents.text)
             default:
                 taskNode = nil
             }
             
-            taskNode?.backgroundAudioFilePath = nameComponents.backgroundAudioPathUsingXMLURL(url)
+            taskNode?.backgroundAudioFilePath = nameComponents.backgroundAudioPathUsingXMLURL(treeRootURL)
             
             // Fetch transitions elements (<transition></transition>). For each transition, add to TaskNode transitions dictionary property.
             let transitionElements = taskNodeElement[UsbongXMLParserID.transition].all
