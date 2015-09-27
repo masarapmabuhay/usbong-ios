@@ -15,9 +15,11 @@ class TaskNodeTableViewController: UITableViewController {
             registerNibs()
             tableView.reloadData()
             
-            // Background Audio
-            backgroundAudioPlayer = nil
-            loadBackgroundAudio()
+            // Reload background audio only if different than previous one (for seamless play)
+            if oldValue.backgroundAudioFilePath != taskNode.backgroundAudioFilePath {
+                backgroundAudioPlayer = nil
+                loadBackgroundAudio()
+            }
         }
     }
     
