@@ -13,6 +13,9 @@ class TaskNode {
     class var type: String { return "taskNode" }
     
     let modules: [TaskNodeModule]
+    
+    var backgroundAudioFilePath: String?
+    
     var targetTransitionName: String?
     var transitionNamesAndToTaskNodeNames: [String: String] = [String: String]()
     

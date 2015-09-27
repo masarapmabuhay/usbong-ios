@@ -20,6 +20,8 @@ class UsbongXMLParserID {
 }
 
 class UsbongXMLNameComponents {
+    static var backgroundAudioIdentifier = "bgAudioName"
+    
     let components: [String]
     init(name: String) {
         self.components = name.componentsSeparatedByString("~")
@@ -60,6 +62,37 @@ class UsbongXMLNameComponents {
             return imageURLWithoutExtension.URLByAppendingPathExtension(supportedImageFormats[0]).path ?? ""
         }
         return ""
+    }
+    
+    var backgroundAudioFileName: String? {
+        let fullIdentifier = "@" + UsbongXMLNameComponents.backgroundAudioIdentifier + "="
+        for component in components {
+            if component.hasPrefix(fullIdentifier) {
+                let startIndex = component.startIndex
+                let endIndex = startIndex.advancedBy(fullIdentifier.characters.count)
+                let range = Range(start: startIndex, end: endIndex)
+                return component.stringByReplacingCharactersInRange(range, withString: "")
+            }
+        }
+        return nil
+    }
+    
+    func backgroundAudioPathUsingXMLURL(url: NSURL) -> String? {
+        if let rootURL = url.URLByDeletingLastPathComponent {
+            let audioURL = rootURL.URLByAppendingPathComponent("audio")
+            
+            // Finds files in audio/ with file name same to backgroundAudioFileName
+            if let contents = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(audioURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants) {
+                for content in contents {
+                    if let fileName = content.URLByDeletingPathExtension?.lastPathComponent {
+                        if fileName == backgroundAudioFileName {
+                            return content.path
+                        }
+                    }
+                }
+            }
+        }
+        return nil
     }
 }
 
@@ -106,6 +139,8 @@ class UsbongXMLParser: NSObject {
             default:
                 taskNode = nil
             }
+            
+            taskNode?.backgroundAudioFilePath = nameComponents.backgroundAudioPathUsingXMLURL(url)
             
             // Fetch transitions elements (<transition></transition>). For each transition, add to TaskNode transitions dictionary property.
             let transitionElements = taskNodeElement[UsbongXMLParserID.transition].all
