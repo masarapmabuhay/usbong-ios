@@ -113,6 +113,10 @@ class TreeViewController: UIViewController {
         }
     }
     
+    @IBAction func didPressExit(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     // MARK: - Custom
     
 }

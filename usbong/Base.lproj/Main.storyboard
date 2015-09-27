@@ -136,7 +136,13 @@
                             <constraint firstItem="SPF-Jn-pn3" firstAttribute="leading" secondItem="E9i-FF-HbS" secondAttribute="leading" id="uoQ-P0-77X"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Tree" id="iyr-hY-RCK"/>
+                    <navigationItem key="navigationItem" title="Tree" id="iyr-hY-RCK">
+                        <barButtonItem key="leftBarButtonItem" title="Exit" id="0ah-AN-TZf">
+                            <connections>
+                                <action selector="didPressExit:" destination="hhd-22-cBW" id="9VC-OB-leN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorView" destination="TfZ-wS-KGy" id="Tdb-rN-VNg"/>
                         <outlet property="backNextSegmentedControl" destination="Kbx-Gz-d6m" id="ouj-JO-ylE"/>
