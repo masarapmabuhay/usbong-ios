@@ -28,8 +28,7 @@ class TextTaskNodeModule: TaskNodeModule {
     }
     var text: String {
         get {
-            // Parse new line strings and convert it to actual new line
-            return (((content["text"] as? NSString) ?? "") as String).stringByReplacingOccurrencesOfString("\\n", withString: "\n")
+            return ((content["text"] as? NSString) ?? "") as String
         }
         set {
             content["text"] = NSString(string: newValue)

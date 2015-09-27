@@ -30,7 +30,8 @@ class UsbongXMLNameComponents {
     }
     
     var text: String {
-        return components.last ?? ""
+        // Parse new line strings and convert it to actual new lines
+        return (components.last ?? "").stringByReplacingOccurrencesOfString("\\n", withString: "\n")
     }
     
     var imageFileName: String {
