@@ -23,6 +23,13 @@ Check out the [Trello Board](https://trello.com/b/aHNqwHCu) for more detailed up
 - [x] Read .utree
 - [x] Read .xml
 
+### Phase 2
+
+- [x] Background audio
+- [ ] Voice-over (Audio file and text-to-speech)
+- [ ] Translations
+- [ ] Hints
+
 ### Extras
 
 - [x] Smart unpacking of trees (used md5 hash to check for cached tree)
