@@ -10,8 +10,9 @@ import Foundation
 import SWXMLHash
 
 class UsbongTree {
-//    var treeDirectoryURL: NSURL
     var name: String = ""
+    
+    var language: String = "English"
     
     weak var treeEngine: UsbongTreeEngine? {
         didSet {
