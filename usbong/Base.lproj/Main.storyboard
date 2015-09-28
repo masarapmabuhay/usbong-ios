@@ -87,8 +87,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SPF-Jn-pn3">
                                 <rect key="frame" x="0.0" y="64" width="600" height="482"/>
                                 <subviews>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TfZ-wS-KGy">
-                                        <rect key="frame" x="290" y="280" width="20" height="20"/>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TfZ-wS-KGy">
+                                        <rect key="frame" x="290" y="231" width="20" height="20"/>
                                         <animations/>
                                     </activityIndicatorView>
                                 </subviews>
@@ -140,6 +140,11 @@
                         <barButtonItem key="leftBarButtonItem" title="Exit" id="0ah-AN-TZf">
                             <connections>
                                 <action selector="didPressExit:" destination="hhd-22-cBW" id="9VC-OB-leN"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="More" id="3uP-Wr-Nty">
+                            <connections>
+                                <action selector="didPressMore:" destination="hhd-22-cBW" id="ZE9-Tm-IhK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

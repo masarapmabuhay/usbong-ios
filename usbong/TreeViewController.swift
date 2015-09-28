@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 // Root view controller for Tree (Page-based)
 // TODO: Place string literals as constants in a class (Global if it will be used throughout the project, or local if used only here). Do this after finalizing UI of app
@@ -16,6 +17,8 @@ class TreeViewController: UIViewController {
     var tree: UsbongTree?
     
     var taskNodeTableViewController = TaskNodeTableViewController()
+    
+    lazy var speechSynthezier: AVSpeechSynthesizer = AVSpeechSynthesizer()
     
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var containerView: UIView!
@@ -76,9 +79,15 @@ class TreeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        stopTextToSpeech()
+    }
+    
     // MARK: - Actions
     
     @IBAction func didPressPreviousOrNext(sender: UISegmentedControl) {
+        stopTextToSpeech()
+        
         // Before transition
         if sender.selectedSegmentIndex == 0 {
             // Previous
@@ -89,7 +98,7 @@ class TreeViewController: UIViewController {
             }
             
         } else {
-            // Next
+            // Next transition
             if tree?.currentTaskNode is EndStateTaskNode {
                 dismissViewControllerAnimated(true, completion: nil)
             } else {
@@ -120,6 +129,60 @@ class TreeViewController: UIViewController {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func didPressMore(sender: AnyObject) {
+        let actionController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        
+        let speechAction = UIAlertAction(title: "Speech", style: .Default) { (action) -> Void in
+            self.startVoiceOver()
+        }
+        let setLanguageAction = UIAlertAction(title: "Set Language", style: .Default) { (action) -> Void in
+            self.showChoosLanguageScreen()
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        
+        actionController.addAction(speechAction)
+        actionController.addAction(setLanguageAction)
+        actionController.addAction(cancelAction)
+        
+        presentViewController(actionController, animated: true, completion: nil)
+    }
+    
     // MARK: - Custom
     
+    func startVoiceOver() {
+        if let audioFilePath = self.tree?.currentTaskNode?.audioFilePath {
+            print(">>> Audio: \(audioFilePath)")
+        } else {
+            print(">>> Text-to-speech")
+            if let currentTaskNode = tree?.currentTaskNode {
+                textToSpeechTaskNode(currentTaskNode)
+            }
+        }
+    }
+    
+    func textToSpeechTaskNode(taskNode: TaskNode) {
+        let modules = taskNode.modules
+        for module in modules {
+            if let textModule = module as? TextTaskNodeModule {
+                print("\(textModule.text)")
+                let utterance = AVSpeechUtterance(string: textModule.text)
+                
+                // Set voice with language
+                utterance.voice = AVSpeechSynthesisVoice(language: "en-EN")
+                
+                // Speak
+                speechSynthezier.speakUtterance(utterance)
+            }
+        }
+    }
+    
+    func stopTextToSpeech() {
+        if speechSynthezier.speaking {
+            speechSynthezier.stopSpeakingAtBoundary(.Immediate)
+        }
+    }
+    
+    func showChoosLanguageScreen() {
+        print(">>> Show choose language screen")
+    }
 }
