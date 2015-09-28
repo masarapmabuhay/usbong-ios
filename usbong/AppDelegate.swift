@@ -42,7 +42,47 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    func application(app: UIApplication, openURL url: NSURL, options: [String : AnyObject]) -> Bool {
+        print(url)
+        // Copy .utree to rootURL
+        if let fileNameExtension = url.pathExtension, let fileName = url.URLByDeletingPathExtension?.lastPathComponent {
+            guard fileNameExtension == "utree" else {
+                return false
+            }
+            
+            let rootURL = UsbongFileManager.defaultManager().rootURL
+            let defaultManager = NSFileManager.defaultManager()
+            
+            var count = 0
+            var newURL = rootURL
+            repeat {
+                let suffix = count == 0 ? "" : "-\(count)"
+                newURL = rootURL.URLByAppendingPathComponent("\(fileName)\(suffix)").URLByAppendingPathExtension(fileNameExtension)
+                count++
+            } while defaultManager.fileExistsAtPath(newURL.path ?? "")
+            
+            print(newURL.path)
+            
+            let success = (try? defaultManager.moveItemAtURL(url, toURL: newURL)) != nil
+            
+            // DEBUG: Remove contents of inbox
+//            if let inboxURL = rootURL.URLByDeletingLastPathComponent {
+//                if let contents = try? defaultManager.contentsOfDirectoryAtURL(inboxURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants) {
+//                    for content in contents {
+//                        try? defaultManager.removeItemAtPath(content.path ?? "")
+//                    }
+//                }
+//            }
+            
+            if success {
+                NSNotificationCenter.defaultCenter().postNotificationName(UIApplicationLaunchOptionsURLKey, object: nil)
+            }
+            return success
+        }
+        
+        
+        return false
+    }
 }
 

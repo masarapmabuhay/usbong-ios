@@ -19,11 +19,17 @@ class UsbongTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didOpenURL:"), name: UIApplicationLaunchOptionsURLKey, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 
     // MARK: - Table view data source
@@ -47,6 +53,15 @@ class UsbongTableViewController: UITableViewController {
         cell.textLabel?.text = fileName
         
         return cell
+    }
+    
+    // MARK: - NSNotification
+    
+    func didOpenURL(notification: NSNotification) {
+        print("DidOpenURL - reload utrees")
+        
+        treeURLs = UsbongFileManager.defaultManager().treesAtRootURL()
+        tableView.reloadData()
     }
 
     /*
