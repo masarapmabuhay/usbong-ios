@@ -21,6 +21,7 @@ private struct UsbongXMLParserID {
 
 private struct UsbongXMLNameComponents {
     static var backgroundAudioIdentifier = "bgAudioName"
+    static var audioIdentifier = "audioName"
     
     let components: [String]
     init(name: String) {
@@ -66,6 +67,7 @@ private struct UsbongXMLNameComponents {
         return nil
     }
     
+    // MARK: Background audio
     var backgroundAudioFileName: String? {
         let fullIdentifier = "@" + UsbongXMLNameComponents.backgroundAudioIdentifier + "="
         for component in components {
@@ -78,20 +80,53 @@ private struct UsbongXMLNameComponents {
         }
         return nil
     }
-    
     func backgroundAudioPathUsingXMLURL(url: NSURL) -> String? {
         let audioURL = url.URLByAppendingPathComponent("audio")
+        let targetFileName = backgroundAudioFileName
         
         // Finds files in audio/ with file name same to backgroundAudioFileName
         if let contents = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(audioURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants) {
             for content in contents {
                 if let fileName = content.URLByDeletingPathExtension?.lastPathComponent {
-                    if fileName == backgroundAudioFileName {
+                    if fileName == targetFileName {
                         return content.path
                     }
                 }
             }
         }
+        return nil
+    }
+    
+    // MARK: Audio
+    var audioFileName: String? {
+        let fullIdentifier = "@" + UsbongXMLNameComponents.audioIdentifier + "="
+        
+        for component in components {
+            if component.hasPrefix(fullIdentifier) {
+                let startIndex = component.startIndex
+                let endIndex = startIndex.advancedBy(fullIdentifier.characters.count)
+                let range = Range(start: startIndex, end: endIndex)
+                return component.stringByReplacingCharactersInRange(range, withString: "")
+            }
+        }
+        return nil
+    }
+    func audioPathUsingXMLURL(url: NSURL) -> String? {
+        let audioURL = url.URLByAppendingPathComponent("audio")
+        let audioLanguageURL = audioURL.URLByAppendingPathComponent("English")
+        let targetFileName = audioFileName
+        
+        // Find files in audio/{language} with file name same to audioFileName
+        if let contents = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(audioLanguageURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants) {
+            for content in contents {
+                if let fileName = content.URLByDeletingPathExtension?.lastPathComponent {
+                    if fileName == targetFileName {
+                        return content.path
+                    }
+                }
+            }
+        }
+        
         return nil
     }
 }
@@ -154,6 +189,7 @@ class UsbongTreeXMLEngine: NSObject, UsbongTreeEngine {
             }
             
             taskNode?.backgroundAudioFilePath = nameComponents.backgroundAudioPathUsingXMLURL(treeRootURL)
+            print("!!!! AUDIO: \(nameComponents.audioPathUsingXMLURL(treeRootURL))")
             
             // Fetch transitions elements (<transition></transition>). For each transition, add to TaskNode transitions dictionary property.
             let transitionElements = taskNodeElement[UsbongXMLParserID.transition].all
