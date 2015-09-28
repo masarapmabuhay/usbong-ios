@@ -189,7 +189,7 @@ class UsbongTreeXMLEngine: NSObject, UsbongTreeEngine {
             }
             
             taskNode?.backgroundAudioFilePath = nameComponents.backgroundAudioPathUsingXMLURL(treeRootURL)
-            print("!!!! AUDIO: \(nameComponents.audioPathUsingXMLURL(treeRootURL))")
+            taskNode?.audioFilePath = nameComponents.audioPathUsingXMLURL(treeRootURL)
             
             // Fetch transitions elements (<transition></transition>). For each transition, add to TaskNode transitions dictionary property.
             let transitionElements = taskNodeElement[UsbongXMLParserID.transition].all
