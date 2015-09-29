@@ -138,6 +138,8 @@ class UsbongTreeXMLEngine: NSObject, UsbongTreeEngine {
     var xml: XMLIndexer
     var processDefinition: XMLIndexer
     
+    var baseLanguage = "English"
+    
     init(treeRootURL: NSURL) {
         self.treeRootURL = treeRootURL
         
@@ -145,10 +147,14 @@ class UsbongTreeXMLEngine: NSObject, UsbongTreeEngine {
         xmlURL = treeRootURL.URLByAppendingPathComponent("\(fileName).xml")
         xml = SWXMLHash.parse(NSData(contentsOfURL: xmlURL) ?? NSData())
         processDefinition = xml[UsbongXMLParserID.processDefinition]
-        
         super.init()
         
+        // Get language
+        baseLanguage = processDefinition.element?.attributes["lang"] ?? baseLanguage
+        
+        // Create tree and set language
         tree = UsbongTree(treeEngine: self)
+        tree.language = baseLanguage
         
         // Set to "Unnamed" if fileName is black or contains spaces only
         tree.name = fileName.stringByReplacingOccurrencesOfString(" ", withString: "").characters.count == 0 ? "Unnamed" : fileName
