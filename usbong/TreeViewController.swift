@@ -19,6 +19,8 @@ class TreeViewController: UIViewController {
     var taskNodeTableViewController = TaskNodeTableViewController()
     
     lazy var speechSynthezier: AVSpeechSynthesizer = AVSpeechSynthesizer()
+    var backgroundAudioPlayer: AVAudioPlayer?
+    var audioSpeechPlayer: AVAudioPlayer?
     
     @IBOutlet weak var activityIndicatorView: UIActivityIndicatorView!
     @IBOutlet weak var containerView: UIView!
@@ -48,6 +50,9 @@ class TreeViewController: UIViewController {
             taskNodeTableViewController.didMoveToParentViewController(self)
             
             activityIndicatorView.stopAnimating()
+            
+            // Load background audio at start
+            loadBackgroundAudio()
         }
         
         if tree?.previousTaskNode == nil {
@@ -107,7 +112,14 @@ class TreeViewController: UIViewController {
         }
         
         if let currentTaskNode = tree?.currentTaskNode {
+            let oldTaskNode = taskNodeTableViewController.taskNode
             taskNodeTableViewController.taskNode = currentTaskNode
+            
+            // Background audio
+            if oldTaskNode.backgroundAudioFilePath != currentTaskNode.backgroundAudioFilePath {
+                backgroundAudioPlayer = nil
+                loadBackgroundAudio()
+            }
         }
         
         // Finished transition
@@ -149,6 +161,22 @@ class TreeViewController: UIViewController {
     
     // MARK: - Custom
     
+    // MARK: Background Audio
+    
+    func loadBackgroundAudio() {
+        if let currentTaskNode = tree?.currentTaskNode {
+            if let backgroundAudopFilePath = currentTaskNode.backgroundAudioFilePath {
+                if let audioPlayer = try? AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: backgroundAudopFilePath)) {
+                    audioPlayer.numberOfLoops = -1 // Endless loop
+                    audioPlayer.prepareToPlay()
+                    audioPlayer.play()
+                    
+                    backgroundAudioPlayer = audioPlayer
+                }
+            }
+        }
+    }
+    
     // MARK: Voice-over
     func startVoiceOver() {
         if let currentTaskNode = tree?.currentTaskNode {
@@ -160,16 +188,6 @@ class TreeViewController: UIViewController {
                 startTextToSpeechInTaskNode(currentTaskNode)
             }
         }
-        
-//        if let audioFilePath = self.tree?.currentTaskNode?.audioFilePath {
-//            print(">>> Audio: \(audioFilePath)")
-//            startAudioSpeechInTaskNode(taskNode: TaskNode)
-//        } else {
-//            print(">>> Text-to-speech")
-//            if let currentTaskNode = tree?.currentTaskNode {
-//                startTextToSpeechInTaskNode(currentTaskNode)
-//            }
-//        }
     }
     
     func startTextToSpeechInTaskNode(taskNode: TaskNode) {
@@ -193,7 +211,6 @@ class TreeViewController: UIViewController {
         }
     }
     
-    var audioSpeechPlayer: AVAudioPlayer?
     func startAudioSpeechInTaskNode(taskNode: TaskNode) {
         if let audioFilePath = taskNode.audioFilePath {
             do {
@@ -208,8 +225,6 @@ class TreeViewController: UIViewController {
             }
         }
     }
-    
-//    func startAudioSpeech
     
     // MARK: Translation
     

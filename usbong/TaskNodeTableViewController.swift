@@ -14,12 +14,6 @@ class TaskNodeTableViewController: UITableViewController {
         didSet {
             registerNibs()
             tableView.reloadData()
-            
-            // Reload background audio only if different than previous one (for seamless play)
-            if oldValue.backgroundAudioFilePath != taskNode.backgroundAudioFilePath {
-                backgroundAudioPlayer = nil
-                loadBackgroundAudio()
-            }
         }
     }
     
@@ -43,9 +37,6 @@ class TaskNodeTableViewController: UITableViewController {
         // Table view self-sizing height
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
-        
-        // Background audio
-        loadBackgroundAudio()
     }
     
     override func didReceiveMemoryWarning() {
@@ -54,15 +45,6 @@ class TaskNodeTableViewController: UITableViewController {
     }
     
     // MARK: - Custom
-    
-    func loadBackgroundAudio() {
-        if let backgroundAudopFilePath = taskNode.backgroundAudioFilePath {
-            backgroundAudioPlayer = try? AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: backgroundAudopFilePath))
-            backgroundAudioPlayer?.numberOfLoops = -1 // Endless loop
-            backgroundAudioPlayer?.prepareToPlay()
-            backgroundAudioPlayer?.play()
-        }
-    }
     
     func registerNibs() {
         let modules = taskNode.modules
