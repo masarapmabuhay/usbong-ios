@@ -180,10 +180,8 @@ class TreeViewController: UIViewController {
     // MARK: Voice-over
     func startVoiceOver() {
         if let currentTaskNode = tree?.currentTaskNode {
-            if currentTaskNode.audioFilePath != nil {
-                print(">>> Audio: \(currentTaskNode.audioFilePath!)")
-                startAudioSpeechInTaskNode(currentTaskNode)
-            } else {
+            // Attempt to play speech from audio file, if failed, resort to text-to-speech
+            if !startAudioSpeechInTaskNode(currentTaskNode) {
                 print(">>> Text-to-speech")
                 startTextToSpeechInTaskNode(currentTaskNode)
             }
@@ -211,19 +209,25 @@ class TreeViewController: UIViewController {
         }
     }
     
-    func startAudioSpeechInTaskNode(taskNode: TaskNode) {
+    func startAudioSpeechInTaskNode(taskNode: TaskNode) -> Bool {
         if let audioFilePath = taskNode.audioFilePath {
             do {
                 audioSpeechPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: audioFilePath))
             } catch let error as NSError {
                 print("Error loading file: \(error)")
+                return false
             }
-            audioSpeechPlayer = try? AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: audioFilePath))
-            audioSpeechPlayer?.prepareToPlay()
-            if audioSpeechPlayer?.play() ?? false {
+            
+            if let audioPlayer = try? AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: audioFilePath)) {
+                audioPlayer.prepareToPlay()
+                audioPlayer.play()
+                
+                audioSpeechPlayer = audioPlayer
                 print(">>> PLAYED!")
+                return true
             }
         }
+        return false
     }
     
     // MARK: Translation
