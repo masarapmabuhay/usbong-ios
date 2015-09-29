@@ -149,25 +149,37 @@ class TreeViewController: UIViewController {
     
     // MARK: - Custom
     
+    // MARK: Voice-over
     func startVoiceOver() {
-        if let audioFilePath = self.tree?.currentTaskNode?.audioFilePath {
-            print(">>> Audio: \(audioFilePath)")
-        } else {
-            print(">>> Text-to-speech")
-            if let currentTaskNode = tree?.currentTaskNode {
-                textToSpeechTaskNode(currentTaskNode)
+        if let currentTaskNode = tree?.currentTaskNode {
+            if currentTaskNode.audioFilePath != nil {
+                print(">>> Audio: \(currentTaskNode.audioFilePath!)")
+                startAudioSpeechInTaskNode(currentTaskNode)
+            } else {
+                print(">>> Text-to-speech")
+                startTextToSpeechInTaskNode(currentTaskNode)
             }
         }
+        
+//        if let audioFilePath = self.tree?.currentTaskNode?.audioFilePath {
+//            print(">>> Audio: \(audioFilePath)")
+//            startAudioSpeechInTaskNode(taskNode: TaskNode)
+//        } else {
+//            print(">>> Text-to-speech")
+//            if let currentTaskNode = tree?.currentTaskNode {
+//                startTextToSpeechInTaskNode(currentTaskNode)
+//            }
+//        }
     }
     
-    func textToSpeechTaskNode(taskNode: TaskNode) {
+    func startTextToSpeechInTaskNode(taskNode: TaskNode) {
         let modules = taskNode.modules
         for module in modules {
             if let textModule = module as? TextTaskNodeModule {
                 print("\(textModule.text)")
                 let utterance = AVSpeechUtterance(string: textModule.text)
                 
-                // Set voice with language
+                // TODO: Set voice with language
                 utterance.voice = AVSpeechSynthesisVoice(language: "en-EN")
                 
                 // Speak
@@ -175,12 +187,31 @@ class TreeViewController: UIViewController {
             }
         }
     }
-    
     func stopTextToSpeech() {
         if speechSynthezier.speaking {
             speechSynthezier.stopSpeakingAtBoundary(.Immediate)
         }
     }
+    
+    var audioSpeechPlayer: AVAudioPlayer?
+    func startAudioSpeechInTaskNode(taskNode: TaskNode) {
+        if let audioFilePath = taskNode.audioFilePath {
+            do {
+                audioSpeechPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: audioFilePath))
+            } catch let error as NSError {
+                print("Error loading file: \(error)")
+            }
+            audioSpeechPlayer = try? AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: audioFilePath))
+            audioSpeechPlayer?.prepareToPlay()
+            if audioSpeechPlayer?.play() ?? false {
+                print(">>> PLAYED!")
+            }
+        }
+    }
+    
+//    func startAudioSpeech
+    
+    // MARK: Translation
     
     func showChoosLanguageScreen() {
         print(">>> Show choose language screen")
