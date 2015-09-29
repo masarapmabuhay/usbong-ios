@@ -294,7 +294,6 @@
 			isa = PBXGroup;
 			children = (
 				DF45DAFA1BA926CF007BE6FE /* UsbongXMLEngine.swift */,
-				CF43218B1BB19A46008EE1CB /* UsbongTree.swift */,
 			);
 			name = UsbongEngine;
 			sourceTree = "<group>";
@@ -310,6 +309,7 @@
 		CFF436F71BB444CC0063379C /* Usbong */ = {
 			isa = PBXGroup;
 			children = (
+				CF43218B1BB19A46008EE1CB /* UsbongTree.swift */,
 				CFF436F61BB444C50063379C /* UsbongFileManager */,
 				CFF436F51BB444AB0063379C /* UsbongEngine */,
 			);

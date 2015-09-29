@@ -12,7 +12,11 @@ import SWXMLHash
 class UsbongTree {
     var name: String = ""
     
-    var language: String = "English"
+    var language: String = "English" {
+        didSet {
+            reloadTaskNodesForLanguage(language)
+        }
+    }
     
     weak var treeEngine: UsbongTreeEngine? {
         didSet {
@@ -82,6 +86,10 @@ class UsbongTree {
         }
         return false
     }
+    
+    func reloadTaskNodesForLanguage(language: String) {
+        print(">>> RELOADING TASKNODES...")
+    }
 }
 
 protocol UsbongTreeEngine: class {
@@ -89,4 +97,13 @@ protocol UsbongTreeEngine: class {
     
     func fetchStartingTaskNode() -> TaskNode?
     func fetchTaskNodeWithName(name: String) -> TaskNode?
+    func fetchTaskNodeWithName(name: String, andLanguage language: String) -> TaskNode?
+}
+
+// Default implementations
+extension UsbongTreeEngine {
+    // Default to fetch task node with base language only
+    func fetchTaskNodeWithName(name: String, andLanguage language: String) -> TaskNode? {
+        return fetchTaskNodeWithName(name)
+    }
 }
