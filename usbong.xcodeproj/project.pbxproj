@@ -427,7 +427,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
-				ORGANIZATIONNAME = "Joe Christopher Paul Amanse";
+				ORGANIZATIONNAME = "Usbong Social Systems, Inc.";
 				TargetAttributes = {
 					CFC97E461BA7CA6A0090F14F = {
 						CreatedOnToolsVersion = 7.0;
