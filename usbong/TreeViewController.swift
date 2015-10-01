@@ -26,7 +26,7 @@ import AVFoundation
 class TreeViewController: UIViewController {
     var treeZipURL: NSURL?
     
-    var treeGenerator: UsbongTaskNodeGenerator?
+    var taskNodeGenerator: UsbongTaskNodeGenerator?
     
     var taskNodeTableViewController = TaskNodeTableViewController()
     
@@ -44,13 +44,13 @@ class TreeViewController: UIViewController {
         // Unpack tree (place this on a background thread if noticeable lag occurs)
         if let zipURL = treeZipURL {
             if let treeRootURL = UsbongFileManager.defaultManager().unpackTreeToTemporaryDirectoryWithTreeURL(zipURL) {
-                treeGenerator = UsbongTaskNodeGeneratorXML(treeRootURL: treeRootURL)
+                taskNodeGenerator = UsbongTaskNodeGeneratorXML(treeRootURL: treeRootURL)
                 
-                navigationItem.title = treeGenerator?.title
+                navigationItem.title = taskNodeGenerator?.title
             }
         }
         
-        if let firstTaskNode = treeGenerator?.currentTaskNode {
+        if let firstTaskNode = taskNodeGenerator?.currentTaskNode {
             taskNodeTableViewController.taskNode = firstTaskNode
             
             addChildViewController(taskNodeTableViewController)
@@ -65,7 +65,7 @@ class TreeViewController: UIViewController {
             loadBackgroundAudio()
         }
         
-        if treeGenerator?.previousTaskNode == nil {
+        if taskNodeGenerator?.previousTaskNode == nil {
             backNextSegmentedControl.setTitle("Exit", forSegmentAtIndex: 0)
         }
     }
@@ -74,7 +74,7 @@ class TreeViewController: UIViewController {
         super.viewDidAppear(animated)
         
         // If no task nodes, show alert
-        if treeGenerator?.taskNodesCount ?? 0 == 0 {
+        if taskNodeGenerator?.taskNodesCount ?? 0 == 0 {
             print("No task nodes found!")
             
             let alertController = UIAlertController(title: "Invalid Tree", message: "This tree can't be opened by the app.", preferredStyle: .Alert)
@@ -106,23 +106,23 @@ class TreeViewController: UIViewController {
         // Before transition
         if sender.selectedSegmentIndex == 0 {
             // Previous
-            if treeGenerator?.previousTaskNode == nil {
+            if taskNodeGenerator?.previousTaskNode == nil {
                 dismissViewControllerAnimated(true, completion: nil)
             } else {
-                treeGenerator?.transitionToPreviousTaskNode()
+                taskNodeGenerator?.transitionToPreviousTaskNode()
             }
             
         } else {
             // Next transition
-            if treeGenerator?.currentTaskNode is EndStateTaskNode {
+            if taskNodeGenerator?.currentTaskNode is EndStateTaskNode {
                 dismissViewControllerAnimated(true, completion: nil)
             } else {
-                treeGenerator?.transitionToNextTaskNode()
+                taskNodeGenerator?.transitionToNextTaskNode()
             }
         }
         
         // Load task node it task node table view controller
-        if let currentTaskNode = treeGenerator?.currentTaskNode {
+        if let currentTaskNode = taskNodeGenerator?.currentTaskNode {
             let oldTaskNode = taskNodeTableViewController.taskNode
             taskNodeTableViewController.taskNode = currentTaskNode
             
@@ -135,14 +135,14 @@ class TreeViewController: UIViewController {
         
         // Finished transition
         // Change back button title to exit if there are no previous task nodes
-        if treeGenerator?.previousTaskNode == nil {
+        if taskNodeGenerator?.previousTaskNode == nil {
             sender.setTitle("Exit", forSegmentAtIndex: 0)
         } else {
             sender.setTitle("Back", forSegmentAtIndex: 0)
         }
         
         // Change next button title to exit if transitioned node is end state
-        if treeGenerator?.currentTaskNode is EndStateTaskNode {
+        if taskNodeGenerator?.currentTaskNode is EndStateTaskNode {
             sender.setTitle("Exit", forSegmentAtIndex: 1)
         } else {
             sender.setTitle("Next", forSegmentAtIndex: 1)
@@ -176,7 +176,7 @@ class TreeViewController: UIViewController {
     // MARK: Background Audio
     
     func loadBackgroundAudio() {
-        if let currentTaskNode = treeGenerator?.currentTaskNode {
+        if let currentTaskNode = taskNodeGenerator?.currentTaskNode {
             if let backgroundAudopFilePath = currentTaskNode.backgroundAudioFilePath {
                 if let audioPlayer = try? AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: backgroundAudopFilePath)) {
                     audioPlayer.numberOfLoops = -1 // Endless loop
@@ -192,7 +192,7 @@ class TreeViewController: UIViewController {
     
     // MARK: Voice-over
     func startVoiceOver() {
-        if let currentTaskNode = treeGenerator?.currentTaskNode {
+        if let currentTaskNode = taskNodeGenerator?.currentTaskNode {
             // Attempt to play speech from audio file, if failed, resort to text-to-speech
             if !startAudioSpeechInTaskNode(currentTaskNode) {
                 print(">>> Text-to-speech")
@@ -263,7 +263,9 @@ class TreeViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showLanguages" {
-            print(treeGenerator?.availableLanguages)
+            if let languagesVC = (segue.destinationViewController as? UINavigationController)?.topViewController as? LanguagesTableViewController {
+                languagesVC.taskNodeGenerator = taskNodeGenerator
+            }
         }
     }
 }
