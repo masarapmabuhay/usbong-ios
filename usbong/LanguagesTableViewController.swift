@@ -9,7 +9,8 @@
 import UIKit
 
 class LanguagesTableViewController: UITableViewController {
-
+    var taskNodeGenerator: UsbongTaskNodeGenerator?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,7 +25,13 @@ class LanguagesTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    // MARK: - Actions
+    
+    @IBAction func didPressCancel(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

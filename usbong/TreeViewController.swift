@@ -256,5 +256,14 @@ class TreeViewController: UIViewController {
     
     func showChoosLanguageScreen() {
         print(">>> Show choose language screen")
+        performSegueWithIdentifier("showLanguages", sender: nil)
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showLanguages" {
+            print(treeGenerator?.availableLanguages)
+        }
     }
 }

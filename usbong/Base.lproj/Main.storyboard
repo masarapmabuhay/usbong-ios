@@ -196,7 +196,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Select Language" id="twk-hl-UzY">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XpF-dE-fEu"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XpF-dE-fEu">
+                            <connections>
+                                <action selector="didPressCancel:" destination="K1l-xx-IvT" id="bpE-bD-q8w"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggx-a1-Ii4" userLabel="First Responder" sceneMemberID="firstResponder"/>
