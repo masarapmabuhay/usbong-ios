@@ -97,13 +97,13 @@ private struct UsbongXMLName {
     }
     func backgroundAudioPathUsingXMLURL(url: NSURL) -> String? {
         let audioURL = url.URLByAppendingPathComponent("audio")
-        let targetFileName = backgroundAudioFileName
+        let targetFileName = backgroundAudioFileName ?? ""
         
         // Finds files in audio/ with file name same to backgroundAudioFileName
         if let contents = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(audioURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants) {
             for content in contents {
                 if let fileName = content.URLByDeletingPathExtension?.lastPathComponent {
-                    if fileName == targetFileName {
+                    if fileName.compare(targetFileName, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) == .OrderedSame {
                         return content.path
                     }
                 }
@@ -129,13 +129,13 @@ private struct UsbongXMLName {
     func audioPathUsingXMLURL(url: NSURL) -> String? {
         let audioURL = url.URLByAppendingPathComponent("audio")
         let audioLanguageURL = audioURL.URLByAppendingPathComponent(language)
-        let targetFileName = audioFileName
+        let targetFileName = audioFileName ?? ""
         
         // Find files in audio/{language} with file name same to audioFileName
         if let contents = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(audioLanguageURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants) {
             for content in contents {
                 if let fileName = content.URLByDeletingPathExtension?.lastPathComponent {
-                    if fileName == targetFileName {
+                    if fileName.compare(targetFileName, options: NSStringCompareOptions.CaseInsensitiveSearch, range: nil, locale: nil) == .OrderedSame {
                         return content.path
                     }
                 }
