@@ -26,14 +26,14 @@ Check out the [Trello Board](https://trello.com/b/aHNqwHCu) for more detailed up
 ### Phase 2
 
 - [x] Background audio
-- [ ] Voice-over (Audio file and text-to-speech)
+- [x] Voice-over (Audio file and text-to-speech)
 - [ ] Translations
 - [ ] Hints
 
 ### Extras
 
 - [x] Smart unpacking of trees (used md5 hash to check for cached tree)
-- [ ] Clear cache of unpacked trees
+- [x] Clear cache of unpacked trees
 - [ ] Travis CI
 - [ ] Acknowledgements Page
 

@@ -95,13 +95,13 @@ class TreeViewController: UIViewController {
     }
     
     deinit {
-        stopTextToSpeech()
+        stopVoiceOver()
     }
     
     // MARK: - Actions
     
     @IBAction func didPressPreviousOrNext(sender: UISegmentedControl) {
-        stopTextToSpeech()
+        stopVoiceOver()
         
         // Before transition
         if sender.selectedSegmentIndex == 0 {
@@ -200,6 +200,10 @@ class TreeViewController: UIViewController {
             }
         }
     }
+    func stopVoiceOver() {
+        stopTextToSpeech()
+        stopAudioSpeech()
+    }
     
     func startTextToSpeechInTaskNode(taskNode: TaskNode) {
         let modules = taskNode.modules
@@ -225,22 +229,27 @@ class TreeViewController: UIViewController {
     func startAudioSpeechInTaskNode(taskNode: TaskNode) -> Bool {
         if let audioFilePath = taskNode.audioFilePath {
             do {
-                audioSpeechPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: audioFilePath))
-            } catch let error as NSError {
-                print("Error loading file: \(error)")
-                return false
-            }
-            
-            if let audioPlayer = try? AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: audioFilePath)) {
+                let audioPlayer = try AVAudioPlayer(contentsOfURL: NSURL(fileURLWithPath: audioFilePath))
+                
                 audioPlayer.prepareToPlay()
                 audioPlayer.play()
                 
                 audioSpeechPlayer = audioPlayer
                 print(">>> PLAYED!")
                 return true
+            } catch let error as NSError {
+                print("Error loading audio file: \(error)")
+                return false
             }
         }
         return false
+    }
+    func stopAudioSpeech() {
+        if let player = audioSpeechPlayer {
+            if player.playing {
+                player.stop()
+            }
+        }
     }
     
     // MARK: Translation
