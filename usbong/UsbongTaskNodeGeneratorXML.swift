@@ -298,7 +298,13 @@ public class UsbongTaskNodeGeneratorXML: UsbongTaskNodeGenerator {
     
     var currentLanguage: String = "English"
     var availableLanguages: [String] {
-        return fetchLanguages()
+        var languages = fetchLanguages()
+        // Add base language
+        if !languages.contains(baseLanguage) {
+            languages.append(baseLanguage)
+            languages.sortInPlace()
+        }
+        return languages
     }
     
     var taskNodesCount: Int {
