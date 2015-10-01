@@ -24,6 +24,7 @@ protocol UsbongTaskNodeGenerator {
     var title: String { get }
     var taskNodesCount: Int { get }
     var currentLanguage: String { get set }
+    var availableLanguages: [String] { get }
     
     var previousTaskNode: TaskNode? { get }
     var currentTaskNode: TaskNode? { get }

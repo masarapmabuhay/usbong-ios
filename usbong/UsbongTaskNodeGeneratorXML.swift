@@ -249,6 +249,41 @@ public class UsbongTaskNodeGeneratorXML: UsbongTaskNodeGenerator {
         }
     }
     
+    private func fetchLanguageXMLURLs() -> [NSURL]? {
+        let transURL = treeRootURL.URLByAppendingPathComponent("trans")
+        
+        // Fetch contents of trans directory
+        if let contents = try? NSFileManager.defaultManager().contentsOfDirectoryAtURL(transURL, includingPropertiesForKeys: nil, options: NSDirectoryEnumerationOptions.SkipsSubdirectoryDescendants) {
+            return contents
+        }
+        return nil
+    }
+    private func fetchLanguageXMLURLForLanguage(language: String) -> NSURL? {
+        if let urls = fetchLanguageXMLURLs() {
+            for url in urls {
+                // Check if file name is equal to language
+                let name = url.URLByDeletingPathExtension?.lastPathComponent ?? "Unknown"
+                if language == name {
+                    return url
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    func fetchLanguages() -> [String] {
+        var languages: [String] = []
+        if let urls = fetchLanguageXMLURLs() {
+            for url in urls {
+                // Get file name only
+                let name = url.URLByDeletingPathExtension?.lastPathComponent ?? "Unknown"
+                languages.append(name)
+            }
+        }
+        return languages
+    }
+    
     var nextTaskNodeName: String? {
         return currentTransitionInfo[currentTargetTransitionName]
     }
@@ -262,6 +297,9 @@ public class UsbongTaskNodeGeneratorXML: UsbongTaskNodeGenerator {
     // MARK: - UsbongTaskNodeGenerator
     
     var currentLanguage: String = "English"
+    var availableLanguages: [String] {
+        return fetchLanguages()
+    }
     
     var taskNodesCount: Int {
         return taskNodeNames.count
