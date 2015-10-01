@@ -1,5 +1,5 @@
 //
-//  UsbongTreeGeneratorXML.swift
+//  UsbongTaskNodeGeneratorXML.swift
 //  usbong
 //
 //  Created by Joe Amanse on 01/10/2015.
@@ -131,7 +131,7 @@ private struct UsbongXMLName {
     }
 }
 
-public class UsbongTreeGeneratorXML: UsbongTreeGenerator {
+public class UsbongTaskNodeGeneratorXML: UsbongTaskNodeGenerator {
     // MARK: - Properties
     let treeRootURL: NSURL
     let xmlURL: NSURL
@@ -145,6 +145,7 @@ public class UsbongTreeGeneratorXML: UsbongTreeGenerator {
     var baseLanguage: String = "English"
     
     var taskNodeNames: [String] = []
+    var title: String = "Unnamed"
     
     // MARK: Initializers
     init(treeRootURL: NSURL) {
@@ -158,25 +159,24 @@ public class UsbongTreeGeneratorXML: UsbongTreeGenerator {
         // Get language
         baseLanguage = processDefinition.element?.attributes["lang"] ?? baseLanguage
         
-        // Create tree
-        tree = UsbongTree()
-        
         // Set to "Unnamed" if fileName is black or contains spaces only
-        tree.name = fileName.stringByReplacingOccurrencesOfString(" ", withString: "").characters.count == 0 ? "Unnamed" : fileName
+        title = fileName.stringByReplacingOccurrencesOfString(" ", withString: "").characters.count == 0 ? "Unnamed" : fileName
         
         // Load starting task node
-        if let start = fetchStartingTaskNode() {
-            tree.taskNodes.append(start)
-        }
+        loadStartingTaskNode()
     }
     
     // MARK: - Fetching from XML
     
-    func fetchStartingTaskNode() -> TaskNode? {
+    private func loadStartingTaskNode() {
+        if let startName = fetchStartingTaskNodeName() {
+            taskNodeNames.append(startName)
+            fetchTransitionInfoFromTaskNodeName(startName)
+        }
+    }
+    private func fetchStartingTaskNodeName() -> String? {
         if let element = processDefinition[UsbongXMLIdentifier.startState][UsbongXMLIdentifier.transition].element {
-            if let name = element.attributes[UsbongXMLIdentifier.to] {
-                return fetchTaskNodeWithName(name)
-            }
+            return element.attributes[UsbongXMLIdentifier.to]
         }
         return nil
     }
@@ -205,20 +205,6 @@ public class UsbongTreeGeneratorXML: UsbongTreeGenerator {
             taskNode?.backgroundAudioFilePath = nameComponents.backgroundAudioPathUsingXMLURL(treeRootURL)
             taskNode?.audioFilePath = nameComponents.audioPathUsingXMLURL(treeRootURL)
             
-            // Fetch transitions elements (<transition></transition>). For each transition, add to TaskNode transitions dictionary property.
-//            let transitionElements = taskNodeElement[UsbongXMLIdentifier.transition].all
-//            for transitionElement in transitionElements {
-//                if let attributes = transitionElement.element?.attributes {
-//                    // Get values of attributes name and to, add to taskNode object
-//                    let name = attributes["name"] ?? "Any" // Default is Any if no name found
-////                    taskNode?.transitionNamesAndToTaskNodeNames[name] = attributes["to"] ?? ""
-//                    currentTransitionInfo[name] = attributes[UsbongXMLIdentifier.to] ?? ""
-//                }
-//            }
-//            
-//            print("Transitions:\n\(taskNode?.transitionNamesAndToTaskNodeNames)")
-//            
-//            print(try? processDefinition[UsbongXMLIdentifier.taskNode].withAttr(UsbongXMLIdentifier.name, name))
             return taskNode
         } else if let endStateElement = try? processDefinition[UsbongXMLIdentifier.endState].withAttr(UsbongXMLIdentifier.name, name) {
             // Find end-state node if task-node not found
@@ -236,7 +222,8 @@ public class UsbongTreeGeneratorXML: UsbongTreeGenerator {
                 if let attributes = transitionElement.element?.attributes {
                     // Get values of attributes name and to, add to taskNode object
                     let name = attributes["name"] ?? "Any" // Default is Any if no name found
-                    //                    taskNode?.transitionNamesAndToTaskNodeNames[name] = attributes["to"] ?? ""
+                    
+                    // Save transition info
                     currentTransitionInfo[name] = attributes[UsbongXMLIdentifier.to] ?? ""
                 }
             }
@@ -253,9 +240,8 @@ public class UsbongTreeGeneratorXML: UsbongTreeGenerator {
         return nil
     }
     
-    // MARK: - UsbongTreeGenerator
+    // MARK: - UsbongTaskNodeGenerator
     
-    private(set) var tree: UsbongTree = UsbongTree()
     var currentLanguage: String = "English"
     
     var taskNodesCount: Int {
@@ -263,28 +249,18 @@ public class UsbongTreeGeneratorXML: UsbongTreeGenerator {
     }
     
     var previousTaskNode: TaskNode? {
-//        let taskNodes = tree.taskNodes
-//        guard taskNodes.count > 1 else {
-//            return nil
-//        }
-//        return taskNodes[taskNodes.count - 2]
-        
         guard taskNodeNames.count > 1 else {
             return nil
         }
         return fetchTaskNodeWithName(taskNodeNames[taskNodeNames.count - 2])
     }
     var currentTaskNode: TaskNode? {
-//        return tree.taskNodes.last
-        
         if let name = taskNodeNames.last {
             return fetchTaskNodeWithName(name)
         }
         return nil
     }
     var nextTaskNode: TaskNode? {
-//        return nextTaskNodeWithTransitionName(currentTargetTransitionName)
-        
         if let name = nextTaskNodeName {
             return fetchTaskNodeWithName(name)
         }
@@ -292,12 +268,6 @@ public class UsbongTreeGeneratorXML: UsbongTreeGenerator {
     }
     
     func transitionToNextTaskNode() -> Bool {
-//        if let next = nextTaskNodeWithTransitionName(currentTargetTransitionName) {
-//            tree.taskNodes.append(next)
-//            return true
-//        }
-//        return false
-        
         if let taskNodeName = self.nextTaskNodeName {
             taskNodeNames.append(taskNodeName)
             
@@ -306,12 +276,6 @@ public class UsbongTreeGeneratorXML: UsbongTreeGenerator {
         return false
     }
     func transitionToPreviousTaskNode() -> Bool {
-//        if tree.taskNodes.count > 1 {
-//            tree.taskNodes.removeLast()
-//            return true
-//        }
-//        return false
-        
         if taskNodeNames.count > 1 {
             taskNodeNames.removeLast()
             
