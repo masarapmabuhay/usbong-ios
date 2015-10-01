@@ -26,7 +26,7 @@ class UsbongTree {
     }
     
     // Task Nodes
-    private(set) var taskNodes: [TaskNode] = []
+    var taskNodes: [TaskNode] = []
     var currentTaskNode: TaskNode? {
         return taskNodes.last
     }
@@ -98,6 +98,18 @@ protocol UsbongTreeEngine: class {
     func fetchStartingTaskNode() -> TaskNode?
     func fetchTaskNodeWithName(name: String) -> TaskNode?
     func fetchTaskNodeWithName(name: String, andLanguage language: String) -> TaskNode?
+}
+
+protocol UsbongTreeGenerator {
+    var tree: UsbongTree { get }
+    var currentLanguage: String { get set }
+    
+    var previousTaskNode: TaskNode? { get }
+    var currentTaskNode: TaskNode? { get }
+    var nextTaskNode: TaskNode? { get }
+    
+    func transitionToNextTaskNode() -> Bool
+    func transitionToPreviousTaskNode() -> Bool
 }
 
 // Default implementations
