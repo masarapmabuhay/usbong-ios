@@ -152,11 +152,56 @@
                         <outlet property="activityIndicatorView" destination="TfZ-wS-KGy" id="Tdb-rN-VNg"/>
                         <outlet property="backNextSegmentedControl" destination="Kbx-Gz-d6m" id="ouj-JO-ylE"/>
                         <outlet property="containerView" destination="SPF-Jn-pn3" id="fzn-gR-ikR"/>
+                        <segue destination="ylS-Vc-Cu1" kind="presentation" identifier="showLanguages" modalPresentationStyle="formSheet" id="x9d-Hf-eEZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kdX-42-DYE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2805" y="-640"/>
+        </scene>
+        <!--Select Language-->
+        <scene sceneID="S30-rt-Tx4">
+            <objects>
+                <tableViewController id="K1l-xx-IvT" customClass="LanguagesTableViewController" customModule="usbong" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="LNk-Rl-G4k">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="Sum-BI-FXp" style="IBUITableViewCellStyleDefault" id="mW2-3T-xBQ">
+                                <rect key="frame" x="0.0" y="72" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mW2-3T-xBQ" id="cp2-5y-tMv">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Language Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sum-BI-FXp">
+                                            <rect key="frame" x="15" y="0.0" width="570" height="43"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <animations/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="K1l-xx-IvT" id="onl-jz-YUM"/>
+                            <outlet property="delegate" destination="K1l-xx-IvT" id="jav-yC-Slj"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select Language" id="twk-hl-UzY">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="XpF-dE-fEu"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ggx-a1-Ii4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4227" y="-1378"/>
         </scene>
         <!--Community-->
         <scene sceneID="krc-C3-WlS">
@@ -356,6 +401,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xGZ-9M-Yui" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2140" y="-640"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="GbZ-dB-Je1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ylS-Vc-Cu1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VJT-Xe-SeF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="K1l-xx-IvT" kind="relationship" relationship="rootViewController" id="Vjf-e1-Xes"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uR9-Mh-vEI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3537" y="-1378"/>
         </scene>
     </scenes>
     <resources>

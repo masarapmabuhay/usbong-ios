@@ -36,6 +36,7 @@
 		CFC97E7B1BA7CAC10090F14F /* UsbongTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFC97E7A1BA7CAC10090F14F /* UsbongTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CFDDD21D1BBD4DA700574EB8 /* UsbongTaskNodeGeneratorXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDDD21C1BBD4DA700574EB8 /* UsbongTaskNodeGeneratorXML.swift */; settings = {ASSET_TAGS = (); }; };
 		CFDDD21F1BBD6AB500574EB8 /* UsbongTaskNodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDDD21E1BBD6AB500574EB8 /* UsbongTaskNodeGenerator.swift */; settings = {ASSET_TAGS = (); }; };
+		CFEA0BF81BBDF2C500A6668C /* LanguagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFEA0BF71BBDF2C500A6668C /* LanguagesTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CFF224F51BAA750200CA0FBD /* TaskNodeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF224F41BAA750200CA0FBD /* TaskNodeTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		CFF224F81BAA779D00CA0FBD /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFF224F61BAA779D00CA0FBD /* TextTableViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		CFF224F91BAA779D00CA0FBD /* TextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CFF224F71BAA779D00CA0FBD /* TextTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
@@ -118,6 +119,7 @@
 		CFC97E7A1BA7CAC10090F14F /* UsbongTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsbongTableViewController.swift; sourceTree = "<group>"; };
 		CFDDD21C1BBD4DA700574EB8 /* UsbongTaskNodeGeneratorXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsbongTaskNodeGeneratorXML.swift; sourceTree = "<group>"; };
 		CFDDD21E1BBD6AB500574EB8 /* UsbongTaskNodeGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsbongTaskNodeGenerator.swift; sourceTree = "<group>"; };
+		CFEA0BF71BBDF2C500A6668C /* LanguagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguagesTableViewController.swift; sourceTree = "<group>"; };
 		CFF224F41BAA750200CA0FBD /* TaskNodeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskNodeTableViewController.swift; sourceTree = "<group>"; };
 		CFF224F61BAA779D00CA0FBD /* TextTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		CFF224F71BAA779D00CA0FBD /* TextTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextTableViewCell.xib; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				CF3085741BA7CB4F00CBD8CF /* SettingsTableViewController.swift */,
 				DF60E85B1BA7F6EB0060BFF6 /* TreeViewController.swift */,
 				CFF224F41BAA750200CA0FBD /* TaskNodeTableViewController.swift */,
+				CFEA0BF71BBDF2C500A6668C /* LanguagesTableViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				CFC97E7B1BA7CAC10090F14F /* UsbongTableViewController.swift in Sources */,
 				CF6DC8FE1BB05772001A3D5B /* zip.c in Sources */,
 				CF62899F1BA8EC87005EC006 /* TextDisplayTaskNode.swift in Sources */,
+				CFEA0BF81BBDF2C500A6668C /* LanguagesTableViewController.swift in Sources */,
 				CF8993C71BB2DDB000C1A9A9 /* TaskNodeModule.swift in Sources */,
 				CF6289A31BA8ED96005EC006 /* TextImageDisplayTaskNode.swift in Sources */,
 			);
