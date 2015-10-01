@@ -36,8 +36,11 @@ private struct UsbongXMLName {
     static let audioIdentifier = "audioName"
     
     let components: [String]
-    init(name: String) {
+    let language: String
+    
+    init(name: String, language: String = "English") {
         self.components = name.componentsSeparatedByString("~")
+        self.language = language
     }
     
     var type: String {
@@ -46,7 +49,7 @@ private struct UsbongXMLName {
     
     var text: String {
         // Parse new line strings and convert it to actual new lines
-        return (components.last ?? "").stringByReplacingOccurrencesOfString("\\n", withString: "\n")
+        return components.last ?? ""
     }
     
     var imageFileName: String? {
@@ -125,7 +128,7 @@ private struct UsbongXMLName {
     }
     func audioPathUsingXMLURL(url: NSURL) -> String? {
         let audioURL = url.URLByAppendingPathComponent("audio")
-        let audioLanguageURL = audioURL.URLByAppendingPathComponent("English")
+        let audioLanguageURL = audioURL.URLByAppendingPathComponent(language)
         let targetFileName = audioFileName
         
         // Find files in audio/{language} with file name same to audioFileName
@@ -199,17 +202,21 @@ public class UsbongTaskNodeGeneratorXML: UsbongTaskNodeGenerator {
         // Find task-node element with attribute name value
         if let taskNodeElement = try? processDefinition[UsbongXMLIdentifier.taskNode].withAttr(UsbongXMLIdentifier.name, name) {
             print(taskNodeElement)
-            let nameComponents = UsbongXMLName(name: name)
+            let nameComponents = UsbongXMLName(name: name, language: currentLanguage)
             let type = nameComponents.type
+            
+            // Parse text
+            let parsedText = nameComponents.text.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
+            
             switch type {
             case TextDisplayTaskNode.type:
-                taskNode =  TextDisplayTaskNode(text: nameComponents.text)
+                taskNode =  TextDisplayTaskNode(text: parsedText)
             case ImageDisplayTaskNode.type:
                 taskNode =  ImageDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingTreeURL(treeRootURL) ?? "")
             case TextImageDisplayTaskNode.type:
-                taskNode = TextImageDisplayTaskNode(text: nameComponents.text, imageFilePath: nameComponents.imagePathUsingTreeURL(treeRootURL) ?? "")
+                taskNode = TextImageDisplayTaskNode(text: parsedText, imageFilePath: nameComponents.imagePathUsingTreeURL(treeRootURL) ?? "")
             case ImageTextDisplayTaskNode.type:
-                taskNode = ImageTextDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingTreeURL(treeRootURL) ?? "", text: nameComponents.text)
+                taskNode = ImageTextDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingTreeURL(treeRootURL) ?? "", text: parsedText)
             default:
                 taskNode = nil
             }
