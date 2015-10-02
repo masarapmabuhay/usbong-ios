@@ -227,7 +227,7 @@ class TreeViewController: UIViewController {
                 let utterance = AVSpeechUtterance(string: textModule.text)
                 
                 // TODO: Set voice with language
-                utterance.voice = AVSpeechSynthesisVoice(language: "en-EN")
+                utterance.voice = AVSpeechSynthesisVoice(language: taskNodeGenerator?.currentLanguageCode ?? "en-EN")
                 
                 // Speak
                 speechSynthezier.speakUtterance(utterance)
