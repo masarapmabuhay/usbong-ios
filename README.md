@@ -27,8 +27,7 @@ Check out the [Trello Board](https://trello.com/b/aHNqwHCu) for more detailed up
 
 - [x] Background audio
 - [x] Voice-over (Audio file and text-to-speech)
-- [ ] Translations
-- [ ] Hints
+- [x] Translations
 
 ### Extras
 
