@@ -9,7 +9,7 @@
 import UIKit
 
 class LanguagesTableViewController: UITableViewController {
-    var taskNodeGenerator: UsbongTaskNodeGenerator?
+    var treeViewController: TreeViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,17 +39,18 @@ class LanguagesTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return taskNodeGenerator?.availableLanguages.count ?? 0
+        return treeViewController?.taskNodeGenerator?.availableLanguages.count ?? 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
 
         // Configure the cell...
-        let language = taskNodeGenerator?.availableLanguages[indexPath.row]
+        let generator = treeViewController?.taskNodeGenerator
+        let language = generator?.availableLanguages[indexPath.row]
         cell.textLabel?.text = language
         
-        if taskNodeGenerator?.currentLanguage == language {
+        if generator?.currentLanguage == language {
             cell.accessoryType = .Checkmark
         } else {
             cell.accessoryType = .None
@@ -62,11 +63,14 @@ class LanguagesTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         // Set current language to selected language
-        if let selectedLanguage = taskNodeGenerator?.availableLanguages[indexPath.row] {
-            taskNodeGenerator?.currentLanguage = selectedLanguage
+        var generator = treeViewController?.taskNodeGenerator
+        if let selectedLanguage = generator?.availableLanguages[indexPath.row] {
+            generator?.currentLanguage = selectedLanguage
         }
         
         tableView.reloadData()
-        dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true) {
+            self.treeViewController?.reloadCurrentTaskNode()
+        }
     }
 }

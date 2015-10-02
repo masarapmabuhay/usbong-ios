@@ -122,16 +122,17 @@ class TreeViewController: UIViewController {
         }
         
         // Load task node it task node table view controller
-        if let currentTaskNode = taskNodeGenerator?.currentTaskNode {
-            let oldTaskNode = taskNodeTableViewController.taskNode
-            taskNodeTableViewController.taskNode = currentTaskNode
-            
-            // Background audio
-            if oldTaskNode.backgroundAudioFilePath != currentTaskNode.backgroundAudioFilePath {
-                backgroundAudioPlayer = nil
-                loadBackgroundAudio()
-            }
-        }
+//        if let currentTaskNode = taskNodeGenerator?.currentTaskNode {
+//            let oldTaskNode = taskNodeTableViewController.taskNode
+//            taskNodeTableViewController.taskNode = currentTaskNode
+//            
+//            // Background audio
+//            if oldTaskNode.backgroundAudioFilePath != currentTaskNode.backgroundAudioFilePath {
+//                backgroundAudioPlayer = nil
+//                loadBackgroundAudio()
+//            }
+//        }
+        reloadCurrentTaskNode()
         
         // Finished transition
         // Change back button title to exit if there are no previous task nodes
@@ -172,6 +173,19 @@ class TreeViewController: UIViewController {
     }
     
     // MARK: - Custom
+    
+    func reloadCurrentTaskNode() {
+        if let currentTaskNode = taskNodeGenerator?.currentTaskNode {
+            let oldTaskNode = taskNodeTableViewController.taskNode
+            taskNodeTableViewController.taskNode = currentTaskNode
+            
+            // Background audio
+            if oldTaskNode.backgroundAudioFilePath != currentTaskNode.backgroundAudioFilePath {
+                backgroundAudioPlayer = nil
+                loadBackgroundAudio()
+            }
+        }
+    }
     
     // MARK: Background Audio
     
@@ -264,7 +278,7 @@ class TreeViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showLanguages" {
             if let languagesVC = (segue.destinationViewController as? UINavigationController)?.topViewController as? LanguagesTableViewController {
-                languagesVC.taskNodeGenerator = taskNodeGenerator
+                languagesVC.treeViewController = self
             }
         }
     }
