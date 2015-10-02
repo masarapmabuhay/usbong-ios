@@ -182,7 +182,7 @@ class TreeViewController: UIViewController {
                     audioPlayer.numberOfLoops = -1 // Endless loop
                     audioPlayer.prepareToPlay()
                     audioPlayer.play()
-                    audioPlayer.volume = 0.8
+                    audioPlayer.volume = 0.3
                     
                     backgroundAudioPlayer = audioPlayer
                 }
