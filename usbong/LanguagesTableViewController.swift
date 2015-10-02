@@ -67,5 +67,6 @@ class LanguagesTableViewController: UITableViewController {
         }
         
         tableView.reloadData()
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
