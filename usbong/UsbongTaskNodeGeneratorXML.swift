@@ -29,6 +29,9 @@ private struct UsbongXMLIdentifier {
     static let transition = "transition"
     static let to = "to"
     static let name = "name"
+    
+    static let resources = "resources"
+    static let string = "string"
 }
 
 private struct UsbongXMLName {
@@ -200,8 +203,7 @@ public class UsbongTaskNodeGeneratorXML: UsbongTaskNodeGenerator {
         // task-node
         var taskNode: TaskNode?
         // Find task-node element with attribute name value
-        if let taskNodeElement = try? processDefinition[UsbongXMLIdentifier.taskNode].withAttr(UsbongXMLIdentifier.name, name) {
-            print(taskNodeElement)
+        if (try? processDefinition[UsbongXMLIdentifier.taskNode].withAttr(UsbongXMLIdentifier.name, name)) != nil {
             let nameComponents = UsbongXMLName(name: name, language: currentLanguage)
             let type = nameComponents.type
             
@@ -304,12 +306,25 @@ public class UsbongTaskNodeGeneratorXML: UsbongTaskNodeGenerator {
         
         var translatedText = text
         
+        // Fetch translation from XML
+        if let languageXMLURL = fetchLanguageXMLURLForLanguage(currentLanguage) {
+            let languageXML = SWXMLHash.parse(NSData(contentsOfURL: languageXMLURL) ?? NSData())
+            let resources = languageXML[UsbongXMLIdentifier.resources]
+            
+            if let stringElement = try? resources[UsbongXMLIdentifier.string].withAttr(UsbongXMLIdentifier.name, text) {
+                print(stringElement)
+                translatedText = stringElement.element?.text ?? text
+            }
+        }
+        
         return translatedText
     }
     
     func parseText(text: String) -> String {
+        var parsedText = text
+        
         // Parse new line strings
-        var parsedText = text.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
+        parsedText = parsedText.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
         
         return parsedText
     }
