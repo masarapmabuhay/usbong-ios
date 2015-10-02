@@ -205,18 +205,21 @@ public class UsbongTaskNodeGeneratorXML: UsbongTaskNodeGenerator {
             let nameComponents = UsbongXMLName(name: name, language: currentLanguage)
             let type = nameComponents.type
             
+            // Translate text if current language is not base language
+            let translatedText = currentLanguage != baseLanguage ? translateText(nameComponents.text) : nameComponents.text
+            
             // Parse text
-            let parsedText = nameComponents.text.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
+            let finalText = parseText(translatedText)
             
             switch type {
             case TextDisplayTaskNode.type:
-                taskNode =  TextDisplayTaskNode(text: parsedText)
+                taskNode =  TextDisplayTaskNode(text: finalText)
             case ImageDisplayTaskNode.type:
                 taskNode =  ImageDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingTreeURL(treeRootURL) ?? "")
             case TextImageDisplayTaskNode.type:
-                taskNode = TextImageDisplayTaskNode(text: parsedText, imageFilePath: nameComponents.imagePathUsingTreeURL(treeRootURL) ?? "")
+                taskNode = TextImageDisplayTaskNode(text: finalText, imageFilePath: nameComponents.imagePathUsingTreeURL(treeRootURL) ?? "")
             case ImageTextDisplayTaskNode.type:
-                taskNode = ImageTextDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingTreeURL(treeRootURL) ?? "", text: parsedText)
+                taskNode = ImageTextDisplayTaskNode(imageFilePath: nameComponents.imagePathUsingTreeURL(treeRootURL) ?? "", text: finalText)
             default:
                 taskNode = nil
             }
@@ -292,6 +295,23 @@ public class UsbongTaskNodeGeneratorXML: UsbongTaskNodeGenerator {
             return fetchTaskNodeWithName(taskNodeName)
         }
         return nil
+    }
+    
+    // MARK: - Translation and parsing
+    
+    func translateText(text: String) -> String {
+        print("Translate this: \(text)")
+        
+        var translatedText = text
+        
+        return translatedText
+    }
+    
+    func parseText(text: String) -> String {
+        // Parse new line strings
+        var parsedText = text.stringByReplacingOccurrencesOfString("\\n", withString: "\n")
+        
+        return parsedText
     }
     
     // MARK: - UsbongTaskNodeGenerator
